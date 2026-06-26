@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 import "./App.css";
 
 function App() {
@@ -80,7 +81,7 @@ function App() {
   return (
     <div className="chat-container">
       <div className="header">
-        <h2>AI Assistant</h2>
+       <h2>🧠 YMind AI</h2>
       </div>
 
       <div className="chat-window">
@@ -91,7 +92,7 @@ function App() {
               msg.role === "user" ? "user-message" : "assistant-message"
             }`}
           >
-            {msg.content}
+            <ReactMarkdown>{msg.content}</ReactMarkdown>
           </div>
         ))}
 
@@ -117,6 +118,13 @@ function App() {
           ➤
         </button>
       </div>
+      <footer className="footer">
+  <p>
+    Developed with <span className="heart">❤️</span> by{" "}
+    <span className="developer-name">Yajnadutta Mishra</span>
+  </p>
+  <span className="developer-role">React AI Developer</span>
+</footer>
     </div>
   );
 }
