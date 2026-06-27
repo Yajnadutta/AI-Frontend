@@ -4,6 +4,8 @@ import "./App.css";
 
 function App() {
   const [message, setMessage] = useState("");
+  const [listening, setListening] = useState(false);
+const recognitionRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -81,7 +83,106 @@ const currentTime = new Date().toLocaleTimeString([], {
   hour: "2-digit",
   minute: "2-digit",
 });
+const startListening = () => {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  if (!SpeechRecognition) {
+    alert("Speech Recognition is not supported in your browser.");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "en-US";
+  recognition.interimResults = true;
+  recognition.continuous = false;
+
+  recognition.onstart = () => {
+    setListening(true);
+  };
+
+  recognition.onresult = (event) => {
+    let transcript = "";
+
+    for (let i = 0; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+
+    setMessage(transcript);
+  };
+
+  recognition.onerror = (event) => {
+    console.error(event.error);
+    setListening(false);
+  };
+
+  recognition.onend = () => {
+    setListening(false);
+  };
+
+  recognition.start();
+
+  recognitionRef.current = recognition;
+};
+const speak = (text) => {
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  utterance.lang = "en-US";
+  utterance.rate = 1;
+  utterance.pitch = 1;
+
+  speechSynthesis.speak(utterance);
+};
+
+const sendVoiceMessage = async (voiceText) => {
+  if (!voiceText.trim()) return;
+
+  const userMessage = {
+    role: "user",
+    content: voiceText,
+  };
+
+  setMessages((prev) => [...prev, userMessage]);
+  setLoading(true);
+
+  try {
+    const response = await fetch(
+      "https://ai-backend-ddch.onrender.com/chat",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMessage],
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    const aiResponse =
+      data?.choices?.[0]?.message?.content ||
+      "No response";
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "assistant",
+        content: aiResponse,
+      },
+    ]);
+
+    speak(aiResponse);
+  } catch (err) {
+    console.log(err);
+  }
+
+  setLoading(false);
+};
   return (
     <div className="chat-container">
       <div className="header">
@@ -118,7 +219,12 @@ const currentTime = new Date().toLocaleTimeString([], {
           onKeyDown={handleKeyDown}
           rows={1}
         />
-
+<button
+  className={`mic-btn ${listening ? "active" : ""}`}
+  onClick={startListening}
+>
+  {listening ? "🎙️" : "🎙️"}
+</button>
         <button onClick={sendMessage} disabled={loading}>
           ➤
         </button>
