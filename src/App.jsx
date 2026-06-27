@@ -77,6 +77,10 @@ function App() {
       sendMessage();
     }
   };
+const currentTime = new Date().toLocaleTimeString([], {
+  hour: "2-digit",
+  minute: "2-digit",
+});
 
   return (
     <div className="chat-container">
@@ -93,11 +97,12 @@ function App() {
             }`}
           >
             <ReactMarkdown>{msg.content}</ReactMarkdown>
+            <span>{currentTime}</span>
           </div>
         ))}
 
         {loading && (
-          <div className="message assistant-message">
+          <div className="message assistant-message" style={{ padding: "14px 22px" }}>
             Thinking...
           </div>
         )}
