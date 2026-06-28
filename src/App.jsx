@@ -9,6 +9,12 @@ function App() {
 const [voiceText, setVoiceText] = useState("");
 const recognitionRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [theme, setTheme] = useState(() => {
+  return localStorage.getItem("theme") || "light";
+});
+useEffect(() => {
+  localStorage.setItem("theme", theme);
+}, [theme]);
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -66,7 +72,7 @@ const recognitionRef = useRef(null);
       "No response received";
 
     // Speak the AI response
-    speak(aiResponse);
+   // speak(aiResponse);
 
     // Add AI response to chat
     setMessages((prev) => [
@@ -101,6 +107,9 @@ const currentTime = new Date().toLocaleTimeString([], {
   hour: "2-digit",
   minute: "2-digit",
 });
+const toggleTheme = () => {
+  setTheme((prev) => (prev === "light" ? "dark" : "light"));
+};
 // const startListening = () => {
 //   const SpeechRecognition =
 //     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -258,7 +267,7 @@ console.log("Sending voice message:", updatedMessages);
     ]);
 
     // Speak AI response
-    speak(aiResponse);
+    //speak(aiResponse);
   } catch (err) {
     console.error("Voice API Error:", err);
 
@@ -274,9 +283,12 @@ console.log("Sending voice message:", updatedMessages);
   }
 };
   return (
-    <div className="chat-container">
+    <div className={`chat-container ${theme}`}>
       <div className="header">
        <h2>🧠 YMind AI</h2>
+        <button className="theme-btn" onClick={toggleTheme}>
+        {theme === "light" ? "🌙" : "☀️"}
+      </button>
       </div>
 
       <div className="chat-window">
@@ -288,6 +300,14 @@ console.log("Sending voice message:", updatedMessages);
             }`}
           >
             <ReactMarkdown>{msg.content}</ReactMarkdown>
+             {msg.role === "assistant" && (
+              <button
+                className="speak-btn"
+                onClick={() => speak(msg.content)}
+              >
+                🔊
+              </button>
+            )}
             <span>{currentTime}</span>
           </div>
         ))}

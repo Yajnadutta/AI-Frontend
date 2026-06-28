@@ -221,7 +221,7 @@ transform:translateY(-4px) scale(1.05);
 }
 .chat-window span {
   font-size: 12px;
-  color: #8b949e;
+  /* color: #8b949e; */
   float: right;
 }
 .input-container button:active{
@@ -374,6 +374,14 @@ color: #52525b;
 
 }
 @media (max-width: 768px) {
+  .input-container {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+    background: rgba(255, 255, 255, .05);
+    backdrop-filter: blur(18px);
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
   .input-container textarea {
     box-shadow: 0 2px 9px rgba(0, 0, 0, .25);
     flex: 1;
@@ -539,4 +547,105 @@ transform:scale(1);
 @keyframes fadeIn{
 from{opacity:0;}
 to{opacity:1;}
+}
+
+.theme-btn {
+  position: absolute;
+  right: 20px;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(10px);
+  transition: .3s;
+}
+
+.theme-btn:hover {
+  transform: rotate(180deg) scale(1.08);
+}
+.chat-container.light {
+  background: linear-gradient(135deg,#f8fafc,#f8fafc,#ffffff);
+  color: #111827;
+}
+
+.light .header {
+  background: rgba(255,255,255,.75);
+  color: #111827;
+}
+
+.light .assistant-message {
+  background: rgba(255,255,255,.8);
+  color: #111827;
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+.light .user-message {
+  background: linear-gradient(135deg,#10b981,#14b8a6);
+  color: white;
+}
+
+.light .input-container {
+  background: rgba(255,255,255,.7);
+}
+
+.light textarea {
+  background: rgba(255,255,255,.8);
+  color: #111827;
+}
+
+.light .footer {
+  background: rgba(255,255,255,.7);
+  color: #111827;
+}
+.chat-container.dark {
+  background: linear-gradient(135deg,#0f172a,#111827,#1e293b);
+  color: white;
+}
+
+.dark .header {
+  background: rgba(17,24,39,.85);
+}
+
+.dark .assistant-message {
+  background: rgba(255,255,255,.08);
+  color: white;
+}
+
+.dark .user-message {
+  background: linear-gradient(135deg,#10b981,#14b8a6);
+}
+.dark .user-message span {
+    font-size: 12px;
+    color: black !important;
+    float: right;
+}
+.dark .input-container {
+  background: rgba(17,24,39,.85);
+}
+
+.dark textarea {
+  background: rgba(255,255,255,.08);
+  color: white;
+}
+
+.dark .footer {
+  background: rgba(17,24,39,.85);
+}
+.speak-btn {
+  margin-top: -4px;
+  float: right;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.speak-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
 }
