@@ -7,6 +7,17 @@ function App() {
   const [listening, setListening] = useState(false);
   const [showVoiceModal, setShowVoiceModal] = useState(false);
 const [voiceText, setVoiceText] = useState("");
+const [copiedIndex, setCopiedIndex] = useState(null);
+
+const copyToClipboard = async (text, index) => {
+  await navigator.clipboard.writeText(text);
+
+  setCopiedIndex(index);
+
+  setTimeout(() => {
+    setCopiedIndex(null);
+  }, 2000);
+};
 const recognitionRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState(() => {
@@ -110,48 +121,6 @@ const currentTime = new Date().toLocaleTimeString([], {
 const toggleTheme = () => {
   setTheme((prev) => (prev === "light" ? "dark" : "light"));
 };
-// const startListening = () => {
-//   const SpeechRecognition =
-//     window.SpeechRecognition || window.webkitSpeechRecognition;
-
-//   if (!SpeechRecognition) {
-//     alert("Speech Recognition is not supported in your browser.");
-//     return;
-//   }
-
-//   const recognition = new SpeechRecognition();
-
-//   recognition.lang = "en-US";
-//   recognition.interimResults = true;
-//   recognition.continuous = false;
-
-//   recognition.onstart = () => {
-//     setListening(true);
-//   };
-
-//   recognition.onresult = (event) => {
-//     let transcript = "";
-
-//     for (let i = 0; i < event.results.length; i++) {
-//       transcript += event.results[i][0].transcript;
-//     }
-
-//     setMessage(transcript);
-//   };
-
-//   recognition.onerror = (event) => {
-//     console.error(event.error);
-//     setListening(false);
-//   };
-
-//   recognition.onend = () => {
-//     setListening(false);
-//   };
-
-//   recognition.start();
-
-//   recognitionRef.current = recognition;
-// };
 
 const startListening = () => {
   const SpeechRecognition =
@@ -287,7 +256,7 @@ console.log("Sending voice message:", updatedMessages);
       <div className="header">
        <h2>🧠 YMind AI</h2>
         <button className="theme-btn" onClick={toggleTheme}>
-        {theme === "light" ? "🌙" : "☀️"}
+        {theme === "light" ? <svg aria-label="Moon icon" width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M3 11.5066C3 16.7497 7.25034 21 12.4934 21C16.2209 21 19.4466 18.8518 21 15.7259C12.4934 15.7259 8.27411 11.5066 8.27411 3C5.14821 4.55344 3 7.77915 3 11.5066Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> : <svg aria-label="Sun icon" style={{color:"white"}} width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M22 12L23 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 2V1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 23V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20 20L19 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20 4L19 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 20L5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 4L5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M1 12L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>}
       </button>
       </div>
 
@@ -299,7 +268,16 @@ console.log("Sending voice message:", updatedMessages);
               msg.role === "user" ? "user-message" : "assistant-message"
             }`}
           >
+            {msg.role != "user"?    
+            <span
+          className="copy-btn"
+          onClick={() => copyToClipboard(msg.content, index)}
+        >
+          {copiedIndex === index ? "✅" : "📋"}
+        </span>:null}
+             
             <ReactMarkdown>{msg.content}</ReactMarkdown>
+               
              {msg.role === "assistant" && (
               <button
                 className="speak-btn"
