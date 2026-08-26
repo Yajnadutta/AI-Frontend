@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.main-header {
+  width: 100%;
+  height: 105px;
+  background: #ffffff;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1450px;
+  height: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* padding: 0 35px; */
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.orya-logo {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 235px;
+}
+
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.orya-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 235px;
+  min-width: 235px;
+
+  height: 100%;
+}
+
+.orya-logo-image {
+  display: block;
+
+  width: 210px;
+  height: auto;
+
+  max-height: 85px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 32px;
+
+  height: 100%;
+}
+
+.header-nav > a,
+.dropdown-title {
+  color: #111111;
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.header-nav > a:hover,
+.dropdown-title:hover {
+  color: #16823e;
+}
+
+
+/* =========================================
+   DROPDOWN
+========================================= */
+
+.nav-dropdown {
+  position: relative;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdown-title span {
+  font-size: 14px;
+  margin-top:-0.5em;
+}
+
+
+/* Dropdown menu */
+
+.dropdown-menu {
+  position: absolute;
+
+  top: 78px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  min-width: 220px;
+
+  background: #ffffff;
+
+  border-radius: 4px;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.15);
+
+  padding: 10px 0;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translate(-50%, 10px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+
+  transform: translate(-50%, 0);
+}
+
+.dropdown-menu a {
+  display: block;
+
+  padding: 11px 18px;
+
+  color: #222222;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+  background: #f1f8ed;
+
+  color: #16823e;
+}
+
+
+/* =========================================
+   RIGHT SIDE
+========================================= */
+
+.header-right {
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+
+  margin-left: 25px;
+}
+
+
+/* =========================================
+   CART
+========================================= */
+
+.cart-icon {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+}
+
+.cart-symbol {
+  font-size: 28px;
+}
+
+.cart-count {
+  position: absolute;
+
+  top: -9px;
+  right: -10px;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  background: #00833e;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   DEALER BUTTON
+========================================= */
+
+.dealer-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0px 9px;
+    background: #087c38;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.dealer-button:hover {
+  background: #055f2b;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   MOBILE MENU BUTTON
+========================================= */
+
+.mobile-menu-button {
+  display: none;
+
+  border: none;
+
+  background: transparent;
+
+  font-size: 30px;
+
+  cursor: pointer;
+
+  color: #087c38;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1200px) {
+
+  .header-container {
+    padding: 0 20px;
+  }
+
+  .orya-logo {
+  width: 190px;
+  min-width: 190px;
+}
+
+.orya-logo-image {
+  width: 175px;
+  max-height: 70px;
+}
+
+  .header-nav {
+    gap: 18px;
+  }
+
+  .header-nav > a,
+  .dropdown-title {
+    font-size: 14px;
+  }
+
+  .header-right {
+    gap: 15px;
+  }
+
+  .dealer-button {
+    padding: 0 18px;
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .main-header {
+    height: 85px;
+  }
+
+  .header-container {
+    padding: 0 20px;
+  }
+
+  .orya-logo {
+  width: auto;
+  min-width: auto;
+}
+
+.orya-logo-image {
+  width: 150px;
+  max-height: 65px;
+}
+
+
+  .mobile-menu-button {
+    display: block;
+            padding-right: 0.6em;
+  }
+
+
+  .header-nav {
+    position: absolute;
+
+    top: 85px;
+    left: 0;
+
+    width: 100%;
+
+    height: auto;
+
+    background: #ffffff;
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 0;
+
+    padding: 15px 20px;
+
+    box-shadow:
+      0 5px 15px rgba(0, 0, 0, 0.12);
+  }
+
+  .header-nav.mobile-active {
+    display: flex;
+  }
+
+
+  .header-nav > a,
+  .dropdown-title {
+    width: 100%;
+
+    padding: 14px 5px;
+
+    font-size: 16px;
+  }
+
+
+  .nav-dropdown {
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+  }
+
+
+  .dropdown-menu {
+    position: static;
+
+    transform: none;
+
+    width: 100%;
+
+    min-width: auto;
+
+    box-shadow: none;
+
+    padding: 0 0 0 15px;
+
+    display: none;
+
+    opacity: 1;
+
+    visibility: visible;
+  }
+
+  .nav-dropdown:hover .dropdown-menu {
+    display: block;
+
+    transform: none;
+  }
+
+  .dropdown-menu a {
+    padding: 10px;
+  }
+
+
+  .dealer-button {
+    display: none;
+  }
+
+  .header-right {
+    margin-left: auto;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+  .main-header {
+    height: 75px;
+  }
+
+  .header-container {
+    padding: 0 15px;
+  }
+.orya-logo-image {
+  width: 125px;
+  max-height: 55px;
+}
+
+  .cart-symbol {
+    font-size: 24px;
+  }
+
+  .mobile-menu-button {
+    font-size: 26px;
+  }
+}
