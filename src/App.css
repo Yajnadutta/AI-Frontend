@@ -683,3 +683,72 @@ to{opacity:1;}
     margin: 3px 0px 2px 3px;
     cursor: pointer;
 }
+.glow-container {
+
+    --mouse-angle:0deg;
+
+    position:relative;
+    display:inline-flex;
+
+    padding:2px;
+
+    border-radius:100px;
+
+    overflow:hidden;
+}
+
+.glow{
+
+    position:absolute;
+    inset:-30%;
+
+    background:
+        conic-gradient(
+            from var(--mouse-angle),
+            #34A853,
+            #FFD314,
+            #FF4641,
+            #3186ff,
+            #34A853
+        );
+
+    filter:blur(22px);
+
+    animation:spin 3s linear infinite;
+}
+
+.ai-btn{
+
+    position:relative;
+
+    z-index:2;
+
+    border:none;
+
+    background:#111;
+
+    color:white;
+
+    padding:14px 28px;
+
+    border-radius:100px;
+
+    font-size:16px;
+
+    cursor:pointer;
+}
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}

@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import "./App.css";
-
+import micIcon from "./assets/mic.svg";
+import GlowButton from "./GlowButton";
 function App() {
   const [message, setMessage] = useState("");
   const [listening, setListening] = useState(false);
@@ -104,7 +105,7 @@ useEffect(() => {
       },
     ]);
   } finally {
-    setLoading(false);
+    // setLoading(false);
   }
 };
 
@@ -248,7 +249,7 @@ console.log("Sending voice message:", updatedMessages);
       },
     ]);
   } finally {
-    setLoading(false);
+    // setLoading(false);
   }
 };
   return (
@@ -291,9 +292,10 @@ console.log("Sending voice message:", updatedMessages);
         ))}
 
         {loading && (
-          <div className="message assistant-message" style={{ padding: "14px 22px" }}>
-            Thinking...
-          </div>
+          // <div className="message assistant-message" style={{ padding: "14px 22px" }}>
+          //   Thinking...
+          // </div>
+          <GlowButton/>
         )}
 
         <div ref={messagesEndRef} />
@@ -311,7 +313,8 @@ console.log("Sending voice message:", updatedMessages);
   className={`mic-btn ${listening ? "active" : ""}`}
   onClick={startListening}
 >
-  {listening ? "🎙️" : "🎙️"}
+  {/* {listening ? "🎙️" : "🎙️"} */}
+  <img src={micIcon} />
 </button>
 
         <button onClick={sendMessage} disabled={loading}>
@@ -323,7 +326,7 @@ console.log("Sending voice message:", updatedMessages);
     <div className="voice-modal">
 
       <div className="voice-animation">
-        🎙️
+        <img src={micIcon} />
       </div>
 
       <h2>Listening...</h2>
