@@ -18,16 +18,7 @@ const Header = () => {
                     className="orya-logo-image"
                 />
                 </Link>
-        {/* <Link to="/" className="orya-logo">
-          <div className="logo-main">
-            <span className="logo-o">O</span>
-            <span>RYA</span>
-          </div>
-
-          <div className="logo-subtitle">
-            BIO-SOLUTIONS
-          </div>
-        </Link> */}
+       
 
 
         {/* ================= DESKTOP NAVIGATION ================= */}
@@ -40,8 +31,7 @@ const Header = () => {
           <Link to="/about" onClick={() => setMobileMenu(false)}>
             About ORYA
           </Link>
-
-
+         
           {/* PRODUCTS DROPDOWN */}
           <div className="nav-dropdown">
             <span className="dropdown-title">
@@ -49,9 +39,7 @@ const Header = () => {
             </span>
 
             <div className="dropdown-menu">
-              <Link to="/products">
-                All Products
-              </Link>
+              
 
               <Link to="/products/packaging">
                 Sustainable Packaging
@@ -62,7 +50,7 @@ const Header = () => {
               </Link>
 
               <Link to="/products/agri-waste">
-                Agri-Waste Products
+                Special Collection
               </Link>
             </div>
           </div>
@@ -75,16 +63,29 @@ const Header = () => {
             </span>
 
             <div className="dropdown-menu">
-              <Link to="/solutions/business">
-                Business Solutions
+              <Link to="/solutions/hotels">
+                Hotels
               </Link>
 
-              <Link to="/solutions/sourcing">
-                Sustainable Sourcing
+              <Link to="/solutions/hospitality">
+                Hospitality
               </Link>
 
-              <Link to="/solutions/value-chain">
-                Value Chain
+              <Link to="/solutions/restaurant-hotels-catering">
+                Restaurants & Hotels Catering
+              </Link>
+
+              <Link to="/solutions/retail-ecommerce">
+                Retail & E-commerce
+              </Link>
+              <Link to="/solutions/corporates-institutions">
+               Corporates & Institutions
+              </Link>
+               <Link to="/solutions/bulk-wholesale">
+               Bulk & Wholesale
+              </Link>
+              <Link to="/solutions/custom-solutions">
+               Custom Solutions
               </Link>
             </div>
           </div>
@@ -94,9 +95,9 @@ const Header = () => {
             Sustainability
           </Link>
 
-          <Link to="/value-chain" onClick={() => setMobileMenu(false)}>
+          {/* <Link to="/value-chain" onClick={() => setMobileMenu(false)}>
             Value Chain
-          </Link>
+          </Link>  */}
 
 
           {/* RESOURCES DROPDOWN */}
@@ -107,7 +108,11 @@ const Header = () => {
 
             <div className="dropdown-menu">
               <Link to="/resources/blog">
-                Blog
+                Blog & Insights 
+              </Link>
+
+              <Link to="/resources/product-catalogue">
+                Product Catalogue
               </Link>
 
               <Link to="/resources/downloads">
@@ -140,7 +145,7 @@ const Header = () => {
 
           {/* DEALER BUTTON */}
           <Link to="/dealer" className="dealer-button">
-            Become a Dealer
+            Become a Partner
           </Link>
 
 

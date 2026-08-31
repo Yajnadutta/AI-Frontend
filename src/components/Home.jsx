@@ -15,35 +15,114 @@ import Slide1 from "../assets/slide1.jpeg";
 import Slide2 from "../assets/slide2.jpeg";
 import Slide3 from "../assets/slide3.jpeg";
 import Slide4 from "../assets/slide4.jpeg";
+import WhoWeAreImage from "../assets/who-we-are.PNG";
 import AnimatedSection from "../components/AnimatedSection";
-const Home = () => {
-  const heroSlides = [
-    {
-      image: Slide1,
-      title: "Sustainable Solutions for a Better Tomorrow",
-      description:
-        "From agricultural resources to sustainable products — connecting responsible sourcing, circular materials, sustainable packaging and natural food.",
-    },
-    {
-      image: Slide2,
-      title: "From Nature to Responsible Consumption",
-      description:
-        "Building sustainable value chains through natural resources, responsible sourcing and eco-friendly products.",
-    },
-    {
-      image: Slide3,
-      title: "Building a Greener Future",
-      description:
-        "Sustainable packaging and natural food solutions designed for businesses and communities.",
-    },
-    {
-      image: Slide4,
-      title: "Building a Greener Future",
-      description:
-        "Sustainable packaging and natural food solutions designed for businesses and communities.",
-    },
-  ];
+import {
+  Leaf,
+  Recycle,
+  Sprout,
+  Wheat,
+  Package,
+  PackagePlus,
+} from "lucide-react";
 
+
+const Home = () => {
+  // const heroSlides = [
+  //   {
+  //     image: Slide1,
+  //     title: "Sustainable Solutions For a Better Planet",
+  //     description:
+  //       "Eco-friendly alternatives to plastic using bagasse, bamboo, banana fibre,coconut and other biodegradable materials.",
+  //   },
+  //   {
+  //     image: Slide2,
+  //     title: "Sustainable Hydration Without Plastic",
+  //     description:
+  //       "Discover thoughtfully designed alternatives to conventional plastic bottles using bamboo and natural materials, paper-based solutions and emerging plant-based materials.",
+  //   },
+  //   {
+  //     image: Slide3,
+  //     title: "From Nature, Crafted for a Sustainable Tomorrow.",
+  //     description:
+  //       "Transforming renewable and agricultural resources into useful, responsible products while supporting a more circular economy.",
+  //   },
+  //   {
+  //     image: Slide4,
+  //     title: "Natural Food",
+  //     description:
+  //       "Traditional and natural foods sourced responsibly and presented with sustainable packaging. ",
+  //   },
+  // ];
+const heroSlides = [
+  {
+    image: Slide1,
+    title: "Sustainable Solutions for a Better Tomorrow",
+    description:
+      "From agricultural resources to sustainable products — connecting responsible sourcing, circular materials, sustainable packaging and natural food.",
+    categoryId: "plastic-alternatives",
+  },
+  {
+    image: Slide2,
+    title: "From Nature to Responsible Consumption",
+    description:
+      "Building sustainable value chains through natural resources, responsible sourcing and eco-friendly products.",
+    categoryId: "bottles",
+  },
+  {
+    image: Slide3,
+    title: "Building a Greener Future",
+    description:
+      "Sustainable packaging and natural food solutions designed for businesses and communities.",
+    categoryId: "circular-materials",
+  },
+  {
+    image: Slide4,
+    title: "Building a Greener Future",
+    description:
+      "Sustainable packaging and natural food solutions designed for businesses and communities.",
+    categoryId: "natural-food",
+  },
+];
+const product_categories = [
+  {
+    id: "plastic-alternatives",
+    highlights: [
+      { icon: Recycle, text: "Plastic Alternatives" },
+      { icon: Recycle, text: "Compostable Products" },
+      { icon: Sprout, text: "Biodegradable Materials" },
+      { icon: Wheat, text: "Renewable Resources" },
+    ],
+  },
+  {
+    id: "bottles",
+    highlights: [
+      { icon: Package, text: "Bamboo / Natural-Material Bottles" },
+      { icon: PackagePlus, text: "Paper Bottles" },
+      { icon: Recycle, text: "Corn / Plant-Based Bottles" },
+      { icon: Sprout, text: "Plastic-Free Alternatives" },
+    ],
+  },
+  {
+    id: "circular-materials",
+    highlights: [
+      { icon: Sprout, text: "Bamboo Products" },
+      { icon: Leaf, text: "Banana Fibre" },
+      { icon: Package, text: "Coconut Products" },
+      { icon: Recycle, text: "Circular Materials" },
+    ],
+  },
+  {
+    id: "natural-food",
+    highlights: [
+      { icon: Leaf, text: "Keonjhar Badi" },
+      { icon: Wheat, text: "Spices" },
+      { icon: Wheat, text: "Millets" },
+      { icon: Package, text: "Dry Foods" },
+      { icon: Package, text: "Traditional Products" },
+    ],
+  },
+];
   const categories = [
     {
       title: "Sustainable Packaging",
@@ -168,9 +247,20 @@ const Home = () => {
 
                 <div className="hero-content">
 
-                  <p className="hero-small-title">
-                    Sustainable Packaging • Natural Food • Circular Value Chains
-                  </p>
+               <div className="hero-highlights">
+  {product_categories
+    .find((category) => category.id === slide.categoryId)
+    ?.highlights.map((item, index) => {
+      const Icon = item.icon;
+
+      return (
+        <div className="hero-highlight" key={index}>
+          <Icon size={22} strokeWidth={1.8} />
+          <span>{item.text}</span>
+        </div>
+      );
+    })}
+</div>
 
                   <h1>{slide.title}</h1>
 
@@ -215,9 +305,127 @@ const Home = () => {
 
       </section>
 
+{/* ================= WHO WE ARE ================= */}
 
+<AnimatedSection
+  as="section"
+  className="who-we-are-section"
+  animation="fade-up"
+>
+ <section class="who-we-are-section">
+ 
+  <div class="who-we-are-container">
+ 
+    <div class="who-we-are-content">
+ 
+      <div class="who-we-are-label">
+        <span class="who-leaf">&#127811;</span>
+        <span>WHO WE ARE</span>
+      </div>
+ 
+      <span class="who-we-are-title">
+        Connecting Nature,
+        <br />
+        Innovation &amp; Opportunity
+      </span>
+ 
+      <p>
+        ORYA BIO-SOLUTIONS is a sustainability-focused enterprise working
+        across sustainable packaging, natural food, circular/agri-waste
+        products and responsible sourcing.
+      </p>
+ 
+      <p>
+        We connect nature, innovation and agriculture to create practical
+        solutions that reduce dependence on conventional plastic and
+        build stronger sustainable value chains.
+      </p>
+ 
+      <div class="who-we-are-features">
+ 
+        <div class="who-feature">
+          <div class="who-feature-icon">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M16 18h22l10 8v22H16z" />
+              <path d="M16 18l10 8h22" />
+              <path d="M26 26v22" />
+              <path d="M48 26v22" />
+              <path d="M42 38h8" />
+              <path d="M46 34v8" />
+            </svg>
+          </div>
+          <span>Sustainable<br />Packaging</span>
+        </div>
+ 
+        <div class="who-feature">
+          <div class="who-feature-icon">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 48V28" />
+              <path d="M32 38c-10-1-16-7-15-16 9 0 15 5 15 16z" />
+              <path d="M32 43c10-1 16-7 15-16-9 0-15 5-15 16z" />
+              <circle cx="32" cy="20" r="4" />
+              <path d="M32 7v5M22 10l3 4M42 10l-3 4" />
+            </svg>
+          </div>
+          <span>Natural<br />Food</span>
+        </div>
+ 
+        <div class="who-feature">
+          <div class="who-feature-icon">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <circle cx="32" cy="32" r="20" />
+              <path d="M32 18c7 5 7 11 0 14-7-3-7-9 0-14z" />
+              <path d="M18 32c5-7 11-7 14 0-3 7-9 7-14 0z" />
+              <path d="M32 46c-7-5-7-11 0-14 7 3 7 9 0 14z" />
+              <path d="M46 32c-5 7-11 7-14 0 3-7 9-7 14 0z" />
+            </svg>
+          </div>
+          <span>Circular<br />Products</span>
+        </div>
+ 
+        <div class="who-feature">
+          <div class="who-feature-icon">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 49V25" />
+              <path d="M32 34c-9-1-14-6-14-14 9 0 14 5 14 14z" />
+              <path d="M32 29c9-1 14-6 14-14-9 0-14 5-14 14z" />
+              <path d="M20 49h24" />
+              <path d="M24 49c0-8 3-13 8-17" />
+              <path d="M40 49c0-8-3-13-8-17" />
+            </svg>
+          </div>
+          <span>Agriculture &amp;<br />Value Chain</span>
+        </div>
+ 
+        <div class="who-feature">
+          <div class="who-feature-icon">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M48 14C31 15 19 23 18 39c11 2 22-4 30-25z" />
+              <path d="M18 48c7-11 14-18 25-25" />
+              <path d="M29 38l-1-8" />
+              <path d="M37 30l-7-1" />
+            </svg>
+          </div>
+          <span>Responsible<br />Sourcing</span>
+        </div>
+ 
+      </div>
+    </div>
+ 
+    <div class="who-we-are-image">
+      <img
+        src={WhoWeAreImage}
+        alt="ORYA sustainable agriculture"
+      />
+    </div>
+ 
+  </div>
+ 
+</section>
+ 
+</AnimatedSection>
       {/* ================= WHAT ORYA DOES ================= */}
-<AnimatedSection as="section" className="section" animation="fade-up">
+{/* <AnimatedSection as="section" className="section" animation="fade-up">
  <section className="section">
 
         <div className="section-heading">
@@ -301,7 +509,7 @@ const Home = () => {
         </div>
 
       </section>
-</AnimatedSection>
+</AnimatedSection> */}
      
 
 
@@ -310,15 +518,17 @@ const Home = () => {
  <section className="value-chain-section">
 
         <div className="section-heading">
-          <span>🍃</span>
+          <span className="leaf">🍃</span>
           <h2>Our Circular Value Chain</h2>
-          <span>🍃</span>
-
-          <p>
+          <span className="leaf">🍃</span>
+     <br/>
+          {/* <p>
             From Farm & Nature to Responsible Consumption
-          </p>
+          </p> */}
         </div>
-
+<p className="chain-bottom" style={{ marginTop: '-25px' }}>
+          🍃 From Farm & Nature to Responsible Consumption 🍃
+        </p>
         <div className="value-chain">
 
           {valueChain.map((item, index) => (
@@ -419,9 +629,9 @@ const Home = () => {
  <section className="section">
 
         <div className="section-heading">
-          <span>🍃</span>
+          <span className="leaf">🍃</span>
           <h2>Our Product Categories</h2>
-          <span>🍃</span>
+          <span className="leaf">🍃</span>
         </div>
 
 
@@ -465,9 +675,9 @@ const Home = () => {
  <section className="why-section">
 
         <div className="section-heading">
-          <span>🍃</span>
+          <span className="leaf">🍃</span>
           <h2>Why Choose ORYA?</h2>
-          <span>🍃</span>
+          <span className="leaf">🍃</span>
         </div>
 
         <div className="why-grid">
@@ -511,7 +721,11 @@ const Home = () => {
 
       {/* ================= ABOUT ================= */}
     <section className="about-section">
-
+     <div className="section-heading">
+  <span className="leaf">🍃</span>
+  <h2>Certificate</h2>
+  <span className="leaf">🍃</span>
+</div>
         <div className="about-image">
 
           <img
