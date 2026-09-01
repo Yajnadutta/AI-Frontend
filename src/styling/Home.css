@@ -214,15 +214,15 @@ html, body {
     object-position: center; */
   }
 
-  /* .hero-highlights {
+  .hero-highlights {
     display: none !important;
-  } */
+  }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .hero-slide {
-    aspect-ratio: 4 / 4;   /* fixed: was "4. / 4" (invalid) */
+    aspect-ratio: 8 / 4;   /* fixed: was "4. / 4" (invalid) */
   }
 
   .hero-image {
@@ -244,7 +244,7 @@ html, body {
   }
 
   .hero-content {
-    justify-content: flex-end;
+    justify-content: flex-start;
     margin: 0 6% 40px;
     max-width: 100%;
   }
@@ -273,7 +273,7 @@ html, body {
 /* Small phones (iPhone SE, small Samsung ~360-400px) */
 @media (max-width: 400px) {
   .hero-slide {
-    aspect-ratio: 3 / 5;
+    aspect-ratio: 8 / 5;
   }
 
   .hero-highlight {
