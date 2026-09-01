@@ -214,9 +214,7 @@ html, body {
     object-position: center; */
   }
 
-  .hero-highlights {
-    display: none !important;
-  }
+  
 }
 
 /* Mobile */
@@ -233,7 +231,9 @@ html, body {
     object-fit: cover;
     object-position: center; */
   }
-
+/* .hero-highlights {
+    display: none !important;
+  } */
   .hero-overlay {
     background: linear-gradient(
       180deg,
@@ -272,6 +272,9 @@ html, body {
 
 /* Small phones (iPhone SE, small Samsung ~360-400px) */
 @media (max-width: 400px) {
+  .hero-highlights {
+    display: none !important;
+  }
   .hero-slide {
     aspect-ratio: 8 / 5;
   }
