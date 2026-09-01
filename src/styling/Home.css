@@ -182,55 +182,58 @@ html, body {
 }
 
 /* Tablet */
+/* Tablet */
 @media (max-width: 992px) {
   .hero-slide {
     aspect-ratio: 5.8 / 3;
   }
+
   .hero-content h1 {
-  font-size: 16px;
-  line-height: 1.2;
-  /* margin: 12px 0; */
-}
-.hero-description {
-  font-size: 11px;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .hero-description {
+    font-size: 11px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
   .hero-content {
     max-width: 100%;
     margin-left: 6%;
     margin-right: 6%;
   }
-  
-  .hero-image {
-  position: absolute;
-  inset: 0;
-   width: 100%;
-   height: fit-content;
-  /* height: 100%;
-  object-fit: cover;
-  object-position: center;*/ 
 
-  } 
-  .hero-highlights {
-    display:none !important;
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    /* height: 100%;
+    object-fit: cover;
+    object-position: center; */
   }
+
+  /* .hero-highlights {
+    display: none !important;
+  } */
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .hero-slide {
-    aspect-ratio: 4. / 4;   /* taller box so image + text both fit */
+    aspect-ratio: 4 / 4;   /* fixed: was "4. / 4" (invalid) */
   }
-.hero-image {
-  position: absolute;
-  inset: 0;
-  /* width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;*/
 
-  } 
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    /* height: 100%;
+    object-fit: cover;
+    object-position: center; */
+  }
+
   .hero-overlay {
     background: linear-gradient(
       180deg,
@@ -240,33 +243,25 @@ html, body {
     );
   }
 
-  /* .hero-content {
+  .hero-content {
     justify-content: flex-end;
-     margin: 0 6% 40px; 
+    margin: 0 6% 40px;
     max-width: 100%;
-  } */
-
-  /* .hero-buttons {
-    flex-direction: column;
-    align-items: stretch;
   }
 
-  .hero-buttons .btn {
-    width: 100%;
-    text-align: center;
-  } */.hero-buttons {
+  .hero-buttons {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;      /* force single line, no wrapping */
+    flex-wrap: nowrap;
     gap: 6px;
     align-items: stretch;
     width: 100%;
   }
 
   .hero-buttons .btn {
-    flex: 1 1 0;             /* equal width, allowed to shrink */
-    width: auto;             /* overrides any earlier width:100% */
-    min-width: 0;             /* lets long text shrink instead of forcing overflow */
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
     text-align: center;
     white-space: nowrap;
     padding: 9px 4px;
@@ -275,7 +270,7 @@ html, body {
   }
 }
 
-/* Small phones */
+/* Small phones (iPhone SE, small Samsung ~360-400px) */
 @media (max-width: 400px) {
   .hero-slide {
     aspect-ratio: 3 / 5;
@@ -285,14 +280,29 @@ html, body {
     font-size: 12px;
     padding: 5px 8px;
   }
-}
-@media (max-width: 380px) {
+
   .hero-buttons .btn {
     font-size: 10px;
     padding: 8px 3px;
   }
 }
 
+/* Very small phones (iPhone SE at 320-375px, small Samsung ~360px) */
+@media (max-width: 380px) {
+  .hero-buttons .btn {
+    font-size: 9.5px;
+    padding: 7px 2px;
+  }
+
+  .hero-content h1 {
+    font-size: 14px;
+  }
+
+  .hero-description {
+    font-size: 10px;
+    margin-bottom: 14px;
+  }
+}
 /* ============ NAVIGATION ARROWS ============ */
 
 /* Base (desktop) sizing */
