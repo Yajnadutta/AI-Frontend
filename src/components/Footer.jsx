@@ -61,10 +61,10 @@ const Footer = () => {
           <Link to="/">Home</Link>
           <Link to="/about">About ORYA</Link>
           <Link to="/products">Products</Link>
-          <Link to="/solutions">Solutions</Link>
-          <Link to="/sustainability">Sustainability</Link>
-          <Link to="/value-chain">Value Chain</Link>
-          <Link to="/resources">Resources</Link>
+          <Link to="/solutions">Solutions</Link> 
+          <Link to="/sustainability">Sustainability</Link> 
+          {/* <Link to="/value-chain">Value Chain</Link> */}
+         <Link to="/resources">Resources</Link>
           <Link to="/contact">Contact</Link>
 
         </div>
@@ -87,7 +87,7 @@ const Footer = () => {
             Agri-Waste Products
           </Link>
 
-          <Link to="/products/biodegradable-bags">
+          {/* <Link to="/products/biodegradable-bags">
             Biodegradable Bags
           </Link>
 
@@ -97,10 +97,10 @@ const Footer = () => {
 
           <Link to="/products/bagasse">
             Bagasse Products
-          </Link>
+          </Link> */}
 
-          <Link to="/products/spices-millets">
-            Spices & Millets
+          <Link to="/products/sustainable-sourcing">
+            Sustainable Sourcing
           </Link>
 
         </div>
@@ -115,9 +115,9 @@ const Footer = () => {
             Bulk Orders
           </Link>
 
-          <Link to="/dealer">
+          {/* <Link to="/dealer">
             Dealer Enquiry
-          </Link>
+          </Link> */}
 
           <Link to="/wholesale">
             Wholesale

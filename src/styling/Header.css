@@ -478,3 +478,51 @@
     font-size: 26px;
   }
 }
+/* =========================================
+   ACTIVE / SELECTED NAV LINK
+========================================= */
+
+.header-nav > a,
+.dropdown-title {
+  position: relative;
+  padding-bottom: 4px; /* room for the underline */
+}
+
+.header-nav > a.nav-active,
+.dropdown-title.nav-active {
+  color: #16823e;
+}
+
+.header-nav > a.nav-active::after,
+.dropdown-title.nav-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: #16823e;
+  border-radius: 2px;
+}
+
+/* dropdown submenu items */
+.dropdown-menu a.nav-active {
+  color: #16823e;
+  background: #f1f8ed;
+  font-weight: 600;
+}
+
+/* ---- mobile: underline doesn't fit well full-width, use left border instead ---- */
+@media (max-width: 900px) {
+  .header-nav > a.nav-active,
+  .dropdown-title.nav-active {
+    border-left: 3px solid #16823e;
+    padding-left: 10px;
+    background: #f1f8ed;
+  }
+
+  .header-nav > a.nav-active::after,
+  .dropdown-title.nav-active::after {
+    display: none; /* underline looks odd on mobile full-width rows */
+  }
+}

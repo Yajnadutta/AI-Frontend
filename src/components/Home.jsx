@@ -15,6 +15,10 @@ import Slide1 from "../assets/slide1.jpeg";
 import Slide2 from "../assets/slide2.jpeg";
 import Slide3 from "../assets/slide3.jpeg";
 import Slide4 from "../assets/slide4.jpeg";
+import Certification_01 from "../assets/Certification_01.jpeg";
+import Certification_02 from "../assets/Certification_02.jpeg";
+import Certification_03 from "../assets/Certification_03.jpeg";
+import Certification_04 from "../assets/Certification_04.jpeg";
 import WhoWeAreImage from "../assets/who-we-are.PNG";
 import AnimatedSection from "../components/AnimatedSection";
 import {
@@ -57,30 +61,30 @@ const Home = () => {
 const heroSlides = [
   {
     image: Slide1,
-    title: "Sustainable Solutions for a Better Tomorrow",
+    title: "Sustainable Solutions for a Better Planet",
     description:
-      "From agricultural resources to sustainable products — connecting responsible sourcing, circular materials, sustainable packaging and natural food.",
+      "Eco-friendly alternatives to plastic using bagasse, bamboo, banana fibre,coconut and other biodegradable materials.",
     categoryId: "plastic-alternatives",
   },
   {
     image: Slide2,
-    title: "From Nature to Responsible Consumption",
+    title: "Sustainable Hydration Without Plastic.",
     description:
-      "Building sustainable value chains through natural resources, responsible sourcing and eco-friendly products.",
+      "Discover thoughtfully designed alternatives to conventional plastic bottles using bamboo and natural materials, paper-based solutions and emerging plant-based materials.",
     categoryId: "bottles",
   },
   {
     image: Slide3,
-    title: "Building a Greener Future",
+    title: "From Nature, Crafted for a Sustainable Tomorrow.",
     description:
-      "Sustainable packaging and natural food solutions designed for businesses and communities.",
+      "Transforming renewable and agricultural resources into useful, responsible products while supporting a more circular economy.",
     categoryId: "circular-materials",
   },
   {
     image: Slide4,
-    title: "Building a Greener Future",
+    title: "Natural Food Pure. Wholesome. Authentic.",
     description:
-      "Sustainable packaging and natural food solutions designed for businesses and communities.",
+      "Traditional and natural foods sourced responsibly and presented with sustainable packaging.",
     categoryId: "natural-food",
   },
 ];
@@ -122,6 +126,12 @@ const product_categories = [
       { icon: Package, text: "Traditional Products" },
     ],
   },
+];
+const certificates = [
+  { id: 1, image: Certification_01, alt: "Certification 1" },
+  { id: 2, image: Certification_02, alt: "Certification 2" },
+  { id: 3, image: Certification_03, alt: "Certification 3" },
+  { id: 4, image: Certification_04, alt: "Certification 4" },
 ];
   const categories = [
     {
@@ -218,7 +228,7 @@ const product_categories = [
 
       {/* ================= HERO CAROUSEL ================= */}
 
-      <section className="hero-section">
+      {/* <section className="hero-section">
 
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}
@@ -303,11 +313,74 @@ const product_categories = [
           ))}
         </Swiper>
 
-      </section>
+      </section> */}
+      <section className="hero-section">
+  <Swiper
+    modules={[Autoplay, Pagination, Navigation]}
+    spaceBetween={0}
+    slidesPerView={1}
+    navigation
+    pagination={{ clickable: true }}
+    autoplay={{ delay: 4000, disableOnInteraction: false }}
+    loop={true}
+    className="hero-swiper"
+  >
+    {heroSlides.map((slide, index) => (
+      <SwiperSlide key={index}>
+        <div className="hero-slide">
+          <img
+            src={slide.image}
+            alt={slide.title}
+            className="hero-image"
+          />
+
+          <div className="hero-overlay"></div>
+
+          <div className="hero-content">
+            <div className="hero-highlights">
+              {product_categories
+                .find((category) => category.id === slide.categoryId)
+                ?.highlights.map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <div className="hero-highlight" key={i}>
+                      <Icon size={22} strokeWidth={1.8} />
+                      <span>{item.text}</span>
+                    </div>
+                  );
+                })}
+            </div>
+
+            <h1>{slide.title}</h1>
+
+            <p className="hero-description">{slide.description}</p>
+
+            <div className="hero-buttons">
+              <Link to="/products" className="btn btn-primary">
+                Explore Products
+              </Link>
+              <Link to="/partner" className="btn btn-outline">
+                Request a Quote
+              </Link>
+              <a
+                href="https://wa.me/917809903359"
+                className="btn btn-whatsapp"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
+</section>
 
 {/* ================= WHO WE ARE ================= */}
 
-<AnimatedSection
+{/* <AnimatedSection
   as="section"
   className="who-we-are-section"
   animation="fade-up"
@@ -423,9 +496,9 @@ const product_categories = [
  
 </section>
  
-</AnimatedSection>
+</AnimatedSection> */}
       {/* ================= WHAT ORYA DOES ================= */}
-{/* <AnimatedSection as="section" className="section" animation="fade-up">
+<AnimatedSection as="section" className="section" animation="fade-up">
  <section className="section">
 
         <div className="section-heading">
@@ -433,11 +506,11 @@ const product_categories = [
           <h2>What ORYA Does</h2>
           <span>🍃</span>
 
-          <p>
+         
+        </div>
+ <p className="chain-bottom" style={{ marginTop: '-25px' }}>
             One platform. Two connected worlds.
           </p>
-        </div>
-
         <div className="what-orya">
 
           <div className="what-card packaging-card">
@@ -509,7 +582,7 @@ const product_categories = [
         </div>
 
       </section>
-</AnimatedSection> */}
+</AnimatedSection>
      
 
 
@@ -719,73 +792,29 @@ const product_categories = [
      
 
 
-      {/* ================= ABOUT ================= */}
-    <section className="about-section">
-     <div className="section-heading">
-  <span className="leaf">🍃</span>
-  <h2>Certificate</h2>
-  <span className="leaf">🍃</span>
-</div>
-        <div className="about-image">
+      {/* ================= Certificate ================= */}
+<section className="certificate-section">
+  <div className="section-heading" style={{ marginBottom: "10px",marginTop: "30px" }}>
+    <span className="leaf">🍃</span>
+    <h2>Certificate</h2>
+    <span className="leaf">🍃</span>
+  </div>
 
-          <img
-            src={Slide1}
-            alt="ORYA"
-          />
-
+  <div className="marquee-wrap">
+    <div className="marquee-track">
+      {certificates.map((cert) => (
+        <div className="certificate-card" key={`a-${cert.id}`}>
+          <img src={cert.image} alt={cert.alt} loading="lazy" />
         </div>
-
-        <div className="about-content">
-
-          <h2>About ORYA</h2>
-
-          <h3>Building a Greener Value Chain</h3>
-
-          <p>
-            ORYA BIO-SOLUTIONS is a sustainability-driven enterprise
-            focused on sustainable packaging, natural food and circular
-            solutions.
-          </p>
-
-          <p>
-            We connect agriculture, natural resources, responsible
-            sourcing and modern innovation to build a better future for
-            people and the planet.
-          </p>
-
-          <Link to="/about" className="btn btn-primary">
-            Know More About ORYA
-          </Link>
-
+      ))}
+      {certificates.map((cert) => (
+        <div className="certificate-card" key={`b-${cert.id}`}>
+          <img src={cert.image} alt={cert.alt} loading="lazy" />
         </div>
-
-
-        <div className="values-list">
-
-          <div>
-            💡
-            <span>Innovation</span>
-          </div>
-
-          <div>
-            🌱
-            <span>Sustainability</span>
-          </div>
-
-          <div>
-            🤝
-            <span>Integrity</span>
-          </div>
-
-          <div>
-            ⭐
-            <span>Quality</span>
-          </div>
-
-        </div>
-
-      </section>
-
+      ))}
+    </div>
+  </div>
+</section>
 
   
 
@@ -801,7 +830,7 @@ const product_categories = [
 
         <div className="dealer-text">
 
-          <h2>Become a Dealer / Partner</h2>
+          <h2>Become a Partner</h2>
 
           <p>
             Join ORYA's growing network and be a part of the
@@ -822,7 +851,7 @@ const product_categories = [
         <div className="dealer-buttons">
 
           <Link to="/dealer" className="btn btn-primary">
-            Become a Dealer
+            Become a Partner
           </Link>
 
           <a
