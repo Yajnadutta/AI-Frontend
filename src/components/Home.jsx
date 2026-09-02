@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import "../styling/Home.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import BusinessBanner from "../components/BusinessBanner";
 import Slide1 from "../assets/slide1.jpeg";
 import Slide2 from "../assets/slide2.jpeg";
 import Slide3 from "../assets/slide3.jpeg";
@@ -19,6 +20,8 @@ import Certification_01 from "../assets/Certification_01.jpeg";
 import Certification_02 from "../assets/Certification_02.jpeg";
 import Certification_03 from "../assets/Certification_03.jpeg";
 import Certification_04 from "../assets/Certification_04.jpeg";
+import Orya_Does_Logo from "../assets/orya-does-logo.png";
+import oryaProducts from "../assets/orya-products.png";
 import WhoWeAreImage from "../assets/who-we-are.PNG";
 import AnimatedSection from "../components/AnimatedSection";
 import {
@@ -29,6 +32,7 @@ import {
   Package,
   PackagePlus,
 } from "lucide-react";
+import DealerBanner from "./DealerBanner";
 
 
 const Home = () => {
@@ -337,7 +341,12 @@ const certificates = [
           <div className="hero-overlay"></div>
 
           <div className="hero-content">
-            <div className="hero-highlights">
+            
+
+            <h1>{slide.title}</h1>
+
+            <p className="hero-description">{slide.description}</p>
+<div className="hero-highlights">
               {product_categories
                 .find((category) => category.id === slide.categoryId)
                 ?.highlights.map((item, i) => {
@@ -350,17 +359,9 @@ const certificates = [
                   );
                 })}
             </div>
-
-            <h1>{slide.title}</h1>
-
-            <p className="hero-description">{slide.description}</p>
-
             <div className="hero-buttons">
               <Link to="/products" className="btn btn-primary">
                 Explore Products
-              </Link>
-              <Link to="/partner" className="btn btn-outline">
-                Request a Quote
               </Link>
               <a
                 href="https://wa.me/917809903359"
@@ -370,6 +371,9 @@ const certificates = [
               >
                 Chat on WhatsApp
               </a>
+               <Link to="/partner" className="btn btn-outline">
+                Request a Quote
+              </Link>
             </div>
           </div>
         </div>
@@ -546,8 +550,9 @@ const certificates = [
 
 
           <div className="orya-logo-circle">
-            <span>ORYA</span>
-            <small>BIO-SOLUTIONS</small>
+            <img src={Orya_Does_Logo} alt="ORYA Does" />
+            {/* <span>ORYA</span>
+            <small>BIO-SOLUTIONS</small> */}
           </div>
 
 
@@ -643,7 +648,7 @@ const certificates = [
 
 
       {/* ================= BUSINESS ================= */}
-<AnimatedSection as="section" className="business-section" animation="fade-left">
+{/* <AnimatedSection as="section" className="business-section" animation="fade-left">
 
    <section className="business-section">
 
@@ -693,9 +698,9 @@ const certificates = [
         </div>
 
       </section>
-</AnimatedSection>
+</AnimatedSection> */}
    
-
+<BusinessBanner/>
 
       {/* ================= PRODUCT CATEGORIES ================= */}
 
@@ -817,12 +822,50 @@ const certificates = [
 </section>
 
   
+    {/* ================= Certificate ================= */}
+<section className="certificate-section">
+  <div className="section-heading" style={{ marginBottom: "10px",marginTop: "30px" }}>
+    <span className="leaf">🍃</span>
+    <h2>About ORYA</h2>
+    <span className="leaf">🍃</span>
+  </div>
 
+  <section className="about-orya">
+      <div className="about-orya__image-wrap">
+        <img
+          src={oryaProducts}
+          alt="ORYA sustainable packaging products including bowls, containers and bottles"
+          className="about-orya__image"
+        />
+      </div>
+ 
+      <div className="about-orya__content">
+        <h2 className="about-orya__title">Building a Greener Value Chain</h2>
+ 
+        <p className="about-orya__paragraph">
+          ORYA BIO-SOLUTIONS is a sustainability-driven enterprise focused on
+          sustainable packaging, natural food and circular solutions.
+        </p>
+ 
+        <p className="about-orya__paragraph">
+          We connect agriculture, natural resources, responsible sourcing and
+          modern innovation to build a better future for people and the
+          planet.
+        </p>
+        <p className="about-orya__paragraph">
+          Every product we make is designed to return to the earth, not sit in it. From farm by-products to your table and back to the soil — that's the cycle we're building.
+        </p>
+        <p className="about-orya__paragraph">
+         Our packaging is made from natural fibres like bagasse, areca leaf and bamboo — fully biodegradable, compostable, and free from plastic lining. Every piece is built to perform like conventional packaging, without the environmental cost.
+        </p>
+      </div>
+    </section>
+</section>
 
       {/* ================= DEALER ================= */}
-<AnimatedSection as="section" className="dealer-section" animation="fade-up">
+{/* <AnimatedSection as="section" className="dealer-section" animation="fade-up"> */}
 
-   <section className="dealer-section">
+   {/* <section className="dealer-section">
 
         <div className="dealer-icon">
           👥
@@ -865,8 +908,11 @@ const certificates = [
 
         </div>
 
-      </section>
-</AnimatedSection>
+      </section> */}
+<DealerBanner/>
+
+
+{/* </AnimatedSection> */}
    
         {/* ================= FOOTER ================= */}
 

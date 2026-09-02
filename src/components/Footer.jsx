@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styling/Footer.css";
 
-import oryaLogo from "../assets/orya-logo.jpeg";
+import oryaLogo from "../assets/footer-logo.png";
 
 const Footer = () => {
   return (
@@ -146,9 +146,8 @@ const Footer = () => {
             </span>
 
             <p>
-              252/2002 DCR Bhawan, N-Complex public sec.,
-              <br />
-              Near Airport, Naranpur, Keonjhar -
+             
+              Naranpur, Keonjhar -
               758014,
               <br />
               Odisha, India
