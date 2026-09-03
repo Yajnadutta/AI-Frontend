@@ -8,22 +8,21 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import "../styling/Home.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import BusinessBanner from "../components/BusinessBanner";
-import Slide1 from "../assets/slide1.jpeg";
-import Slide2 from "../assets/slide2.jpeg";
-import Slide3 from "../assets/slide3.jpeg";
-import Slide4 from "../assets/slide4.jpeg";
-import Certification_01 from "../assets/Certification_01.jpeg";
-import Certification_02 from "../assets/Certification_02.jpeg";
-import Certification_03 from "../assets/Certification_03.jpeg";
-import Certification_04 from "../assets/Certification_04.jpeg";
-import Orya_Does_Logo from "../assets/orya-does-logo.png";
-import oryaProducts from "../assets/orya-products.png";
-import WhoWeAreImage from "../assets/who-we-are.PNG";
-import AnimatedSection from "../components/AnimatedSection";
+import "../../styling/Home.css";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import BusinessBanner from "../../components/home/BusinessBanner";
+import Slide1 from "../../assets/slide1.jpeg";
+import Slide2 from "../../assets/slide2.jpeg";
+import Slide3 from "../../assets/slide3.jpeg";
+import Slide4 from "../../assets/slide4.jpeg";
+import Certification_01 from "../../assets/Certification_01.jpeg";
+import Certification_02 from "../../assets/Certification_02.jpeg";
+import Certification_03 from "../../assets/Certification_03.jpeg";
+import Certification_04 from "../../assets/Certification_04.jpeg";
+import Orya_Does_Logo from "../../assets/orya-does-logo.png";
+import oryaProducts from "../../assets/orya-products.png";
+import AnimatedSection from "../../components/home/AnimatedSection";
 import {
   Leaf,
   Recycle,

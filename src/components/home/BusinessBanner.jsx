@@ -8,8 +8,8 @@ import {
   Landmark,
   Store,
 } from "lucide-react";
-import "../styling/BusinessBanner.css";
-import productImg from "../assets/product.png";
+import "../../styling/BusinessBanner.css";
+import productImg from "../../assets/product.png";
 
 const CATEGORIES = [
   { label: "Hotels", Icon: Building2 },

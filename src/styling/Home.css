@@ -469,10 +469,10 @@ html, body {
   margin: 0;
 }
 
-.leaf {
+/* .leaf {
   font-size: 22px;
   line-height: 1;
-}
+} */
 
 .section-heading p {
   margin: 5px 0 0;
@@ -835,6 +835,7 @@ html, body {
   max-width: 1200px;
 
   margin: auto;
+  overflow: auto;
 }
 
 .chain-item {

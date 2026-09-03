@@ -1,10 +1,10 @@
 import React from "react";
-import "../styling/DealerBanner.css";
+import "../../styling/DealerBanner.css";
 
 // Replace these with your actual asset paths
-import leafLeft from "../assets/leaf-left.png";
-import leafRight from "../assets/leaf-right.png";
-import peopleIcon from "../assets/people-icon.png";
+import leafLeft from "../../assets/leaf-left.png";
+import leafRight from "../../assets/leaf-right.png";
+import peopleIcon from "../../assets/people-icon.png";
 
 const benefits = [
   "Attractive Dealer Benefits",
@@ -16,7 +16,7 @@ const benefits = [
 export default function DealerBanner({
   onBecomeDealer,
   whatsappNumber = "911234567890",
-  whatsappMessage = "Hi, I'm interested in becoming an ORYA dealer/partner.",
+  whatsappMessage = "Hi, I'm interested in becoming an ORYA partner.",
 }) {
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     whatsappMessage
@@ -47,7 +47,7 @@ export default function DealerBanner({
             aria-hidden="true"
           />
           <div>
-            <h2 className="dealer-banner__title">Become a Dealer / Partner</h2>
+            <h2 className="dealer-banner__title">Become a Partner</h2>
             <p className="dealer-banner__subtitle">
               Join ORYA&apos;s growing network and be a part of the
               sustainable revolution.
@@ -78,7 +78,7 @@ export default function DealerBanner({
             className="dealer-banner__btn dealer-banner__btn--solid"
             onClick={onBecomeDealer}
           >
-            Become a Dealer
+            Become a Partner
           </button>
           <a
             href={whatsappHref}

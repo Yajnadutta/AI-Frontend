@@ -8,17 +8,23 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import "../styling/Home.css";
-import "../styling/About.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Certification_01 from "../assets/Certification_01.jpeg";
-import Certification_02 from "../assets/Certification_02.jpeg";
-import Certification_03 from "../assets/Certification_03.jpeg";
-import Certification_04 from "../assets/Certification_04.jpeg";
-import WhoWeAreImage from "../assets/who-we-are.PNG";
-import AnimatedSection from "../components/AnimatedSection";
-import AboutBanner from "../assets/about-banner.PNG";
+import "../../styling/Home.css";
+import "../../styling/About.css";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import WhatWeDo from "../../components/about/WhatWeDo";
+import BusinessPillars from "../../components/about/BusinessPillars";
+import Ourapproach from "../../components/about/Ourapproach";
+import Futureoforya from "../../components/about/Futureoforya";
+import VisionMission from "../../components/about/VisionMission";
+import CTABanner from "../../components/about/CTABanner";
+import Certification_01 from "../../assets/Certification_01.jpeg";
+import Certification_02 from "../../assets/Certification_02.jpeg";
+import Certification_03 from "../../assets/Certification_03.jpeg";
+import Certification_04 from "../../assets/Certification_04.jpeg";
+import WhoWeAreImage from "../../assets/who-we-are.PNG";
+import AnimatedSection from "../../components/home/AnimatedSection";
+import AboutBanner from "../../assets/about-banner.PNG";
 
 const About = () => {
 
@@ -99,21 +105,8 @@ const categories = [
       image: "https://images.pexels.com/photos/38384711/pexels-photo-38384711.jpeg",
       description: "Responsibly sourced for a better tomorrow.",
     },
-    // {
-    //   title: "Agriculture & Value Chain",
-    //   image: Slide1,
-    //   description: "Connecting farmers to markets and beyond.",
-    // },
   ];
-  const businessTypes = [
-    "Hotels",
-    "Restaurants",
-    "Catering",
-    "Retail",
-    "Corporates",
-    "Institutions",
-    "Food Businesses",
-  ];
+
 
   return (
     <div className="home">
@@ -265,7 +258,12 @@ We connect agriculture, natural resources, responsible sourcing and modern innov
  
 </AnimatedSection>
 
-     
+     {/* ================= WHAT WE DO ================= */}
+     <AnimatedSection as="section" className="value-chain-section" animation="fade-up">
+ <WhatWeDo />
+
+     </AnimatedSection>
+    
 
 
       {/* ================= CIRCULAR VALUE CHAIN ================= */}
@@ -277,9 +275,6 @@ We connect agriculture, natural resources, responsible sourcing and modern innov
           <h2>Our Circular Value Chain</h2>
           <span className="leaf">🍃</span>
      <br/>
-          {/* <p>
-            From Farm & Nature to Responsible Consumption
-          </p> */}
         </div>
 <p className="chain-bottom" style={{ marginTop: '-25px' }}>
           🍃 From Farm & Nature to Responsible Consumption 🍃
@@ -321,157 +316,17 @@ We connect agriculture, natural resources, responsible sourcing and modern innov
       </section>
 
 </AnimatedSection>
-     
+     {/* ================= OUR BUSINESS PILLARS ================= */}
+     <AnimatedSection as="section" className="value-chain-section" animation="fade-up">
+   <BusinessPillars/>
+     </AnimatedSection>
 
 
-      {/* ================= BUSINESS ================= */}
-<AnimatedSection as="section" className="business-section" animation="fade-left">
+      {/* ================= VISION & MISSION ================= */}
+      <AnimatedSection as="section" className="value-chain-section" animation="fade-up">
+     <VisionMission/>
+      </AnimatedSection>
 
-   <section className="business-section">
-
-        <div className="business-content">
-
-          <div className="business-left">
-
-            <h2>For Businesses</h2>
-
-            <p>
-              Sustainable solutions for every need
-            </p>
-
-            <div className="business-types">
-
-              {businessTypes.map((type, index) => (
-                <div className="business-type" key={index}>
-
-                  <div className="business-icon">
-                    {["🏨", "🍴", "☕", "🛒", "🏢", "🏛️", "🌱"][index]}
-                  </div>
-
-                  <span>{type}</span>
-
-                </div>
-              ))}
-
-            </div>
-
-          </div>
-
-
-          <div className="business-right">
-
-            <h3>Bulk Enquiries & Business Orders</h3>
-
-            <p>
-              Partner with ORYA for quality, sustainable and reliable solutions.
-            </p>
-
-            <Link to="/contact" className="business-btn">
-              Request an Enquiry
-            </Link>
-
-          </div>
-
-        </div>
-
-      </section>
-</AnimatedSection>
-   
-
-
-      {/* ================= PRODUCT CATEGORIES ================= */}
-
- <section className="section">
-
-        <div className="section-heading">
-          <span className="leaf">🍃</span>
-          <h2>Our Product Categories</h2>
-          <span className="leaf">🍃</span>
-        </div>
-
-
-        <div className="category-grid">
-
-          {categories.map((category, index) => (
-
-            <div className="category-card" key={index}>
-
-              <img
-                src={category.image}
-                alt={category.title}
-              />
-
-              <div className="category-content">
-
-                <h3>{category.title}</h3>
-
-                <p>{category.description}</p>
-
-                <Link to="/products">
-                  Explore →
-                </Link>
-
-              </div>
-
-            </div>
-
-          ))}
-
-        </div>
-
-      </section>
-
-     
-
-
-      {/* ================= WHY CHOOSE ORYA ================= */}
-
-
- <section className="why-section">
-
-        <div className="section-heading">
-          <span className="leaf">🍃</span>
-          <h2>Why Choose ORYA?</h2>
-          <span className="leaf">🍃</span>
-        </div>
-
-        <div className="why-grid">
-
-          <div className="why-item">
-            <span>🌿</span>
-            <strong>100%</strong>
-            <p>Eco-friendly Products</p>
-          </div>
-
-          <div className="why-item">
-            <span>👥</span>
-            <strong>1000+</strong>
-            <p>Happy Customers</p>
-          </div>
-
-          <div className="why-item">
-            <span>📦</span>
-            <strong>50+</strong>
-            <p>Products & Solutions</p>
-          </div>
-
-          <div className="why-item">
-            <span>🚚</span>
-            <strong>Pan India</strong>
-            <p>Delivery Network</p>
-          </div>
-
-          <div className="why-item">
-            <span>🌍</span>
-            <strong>Sustainable</strong>
-            <p>Impact for a Better Planet</p>
-          </div>
-
-        </div>
-
-      </section>
-
-     
 
 
       {/* ================= Certificate ================= */}
@@ -498,58 +353,19 @@ We connect agriculture, natural resources, responsible sourcing and modern innov
   </div>
 </section>
 
-  
+<AnimatedSection as="section" className="value-chain-section" animation="fade-up">
+<Ourapproach/> 
 
-
-      {/* ================= DEALER ================= */}
-<AnimatedSection as="section" className="dealer-section" animation="fade-up">
-
-   <section className="dealer-section">
-
-        <div className="dealer-icon">
-          👥
-        </div>
-
-        <div className="dealer-text">
-
-          <h2>Become a Partner</h2>
-
-          <p>
-            Join ORYA's growing network and be a part of the
-            sustainable revolution.
-          </p>
-
-        </div>
-
-        <div className="dealer-benefits">
-
-          <span>✓ Attractive Dealer Benefits</span>
-          <span>✓ Wide Product Range</span>
-          <span>✓ Growing Market Demand</span>
-          <span>✓ Marketing & Support</span>
-
-        </div>
-
-        <div className="dealer-buttons">
-
-          <Link to="/dealer" className="btn btn-primary">
-            Become a Partner
-          </Link>
-
-          <a
-            href="https://wa.me/917809903359"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-outline"
-          >
-            WhatsApp
-          </a>
-
-        </div>
-
-      </section>
 </AnimatedSection>
-   
+
+<AnimatedSection as="section" className="value-chain-section" animation="fade-up">
+<Futureoforya/> 
+</AnimatedSection>
+
+<CTABanner/>
+
+
+
         {/* ================= FOOTER ================= */}
 
             <Footer />

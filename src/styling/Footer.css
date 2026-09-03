@@ -59,7 +59,7 @@
   max-height: 90px;
 
   object-fit: contain;
-
+    margin-left: -9px;
   display: block;
 }
 
