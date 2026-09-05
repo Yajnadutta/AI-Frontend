@@ -11,15 +11,7 @@ import "../../styling/About.css";
 import "../../styling/sustainability.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import BusinessPillars from "../../components/about/BusinessPillars";
-import Ourapproach from "../../components/about/Ourapproach";
-import Futureoforya from "../../components/about/Futureoforya";
-import VisionMission from "../../components/about/VisionMission";
-import CTABanner from "../../components/about/CTABanner";
-import Certification_01 from "../../assets/Certification_01.jpeg";
-import Certification_02 from "../../assets/Certification_02.jpeg";
-import Certification_03 from "../../assets/Certification_03.jpeg";
-import Certification_04 from "../../assets/Certification_04.jpeg";
+import better_choice_banner from "../../assets/better_choice_banner.jpg";
 import AnimatedSection from "../../components/home/AnimatedSection";
 import SustainabilityBanner from "../../assets/sustainability_banner.png";
 import SeedlingImage from "../../assets/seedling-growth.png";
@@ -27,6 +19,21 @@ import SugarcaneImage from "../../assets/material_01.png";
 import BagasseImage from "../../assets/material_02.png";
 import PackagingImage from "../../assets/material_03.png";
 import IngredientsImage from "../../assets/what-we-do-card2.png";
+import packagingImage from "../../assets/packaging.png";
+import foodImage from "../../assets/food.png";
+import circular_future from "../../assets/circular_future.jpg";
+import { ArrowRight,
+   Lightbulb, 
+  RefreshCw, 
+  Leaf, 
+  Trash2, 
+  Globe ,
+ CheckCircle2, 
+  Globe2, 
+  UtensilsCrossed, 
+  TreePine, 
+  FileText
+} from "lucide-react";
 const STEPS = [
   {
     id: "sugarcane",
@@ -117,13 +124,6 @@ const FEATURES = [
   },
 ];
 
-
-const certificates = [
-  { id: 1, image: Certification_01, alt: "Certification 1" },
-  { id: 2, image: Certification_02, alt: "Certification 2" },
-  { id: 3, image: Certification_03, alt: "Certification 3" },
-  { id: 4, image: Certification_04, alt: "Certification 4" },
-];
  const PRINCIPLES = [
   {
     id: "materials",
@@ -450,53 +450,333 @@ const certificates = [
     </section>
 
 </AnimatedSection>
-     {/* ================= OUR BUSINESS PILLARS ================= */}
-     <AnimatedSection as="section" className="value-chain-section" animation="fade-up">
-   <BusinessPillars/>
+     {/* ================= Two Paths. One Sustainable Vision. ================= */}
+     <AnimatedSection as="section" animation="fade-up">
+    <section className="two-paths-section">
+
+      {/* Heading */}
+      <div className="two-paths-header">
+        <h2>
+          Two Paths. One Sustainable Vision.
+        </h2>
+
+        <p>
+          Different products. A shared commitment to a more responsible future.
+        </p>
+      </div>
+
+
+      {/* Two Cards */}
+      <div className="two-paths-grid">
+
+        {/* LEFT - PACKAGING */}
+        <div className="path-card packaging-card">
+
+          <div className="path-content">
+            <h3>
+              Sustainable
+              <br />
+              Packaging
+            </h3>
+
+            <p>
+              Practical alternatives to conventional packaging,
+              selected to support responsible material use and
+              waste reduction.
+            </p>
+
+            <a href="/products" className="path-button green-button">
+              <span>Explore Packaging</span>
+              <ArrowRight size={19} />
+            </a>
+          </div>
+
+          <div className="path-image-wrapper">
+            <img
+              src={packagingImage}
+              alt="Sustainable Packaging"
+              className="path-image"
+            />
+          </div>
+
+        </div>
+
+
+        {/* RIGHT - FOOD */}
+        <div className="path-card food-card">
+
+          <div className="path-content">
+            <h3>
+              Natural Dry
+              <br />
+              Food Products
+            </h3>
+
+            <p>
+              Thoughtfully selected natural products with an emphasis
+              on quality, responsible sourcing and a more conscious
+              approach to everyday consumption.
+            </p>
+
+            <a href="/products" className="path-button brown-button">
+              <span>Explore Natural Products</span>
+              <ArrowRight size={19} />
+            </a>
+          </div>
+
+          <div className="path-image-wrapper">
+            <img
+              src={foodImage}
+              alt="Natural Dry Food Products"
+              className="path-image"
+            />
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
      </AnimatedSection>
 
 
-      {/* ================= VISION & MISSION ================= */}
-      <AnimatedSection as="section" className="value-chain-section" animation="fade-up">
-     <VisionMission/>
+      {/* ================= CIRCULAR ECONOMY ================= */}
+      <AnimatedSection as="section"  animation="fade-up">
+      <div className="dashboard-container">
+      
+      {/* LEFT SECTION: CIRCULAR ECONOMY */}
+      <section className="dashboard-section section-left">
+        <span className="section-tagline">CIRCULAR ECONOMY</span>
+        <h2 className="section-title">Moving from Linear to Circular</h2>
+        <p className="section-description">
+          Sustainability doesn't end when a product is sold. We believe better solutions consider what happens before, during and after use.
+        </p>
+          <img
+              src={circular_future}
+              alt="Circular Future"
+              style={{ width: "100%"}}
+              
+            />
+      </section>
+
+      {/* RIGHT SECTION: SUSTAINABILITY CRITERIA & PRIORITIES */}
+      <section className="dashboard-section section-right">
+        <span className="section-tagline">KNOW THE DIFFERENCE</span>
+        <h2 className="section-title">Sustainability Starts with the Right Choice</h2>
+
+        {/* Choice Grid */}
+        <div className="choices-grid">
+          <div className="choice-card">
+            <div className="choice-icon-wrapper"><RefreshCw size={28} className="lucide-green" /></div>
+            <h3>Recyclable</h3>
+            <p>Designed to enter an appropriate recycling stream where collection and processing systems exist.</p>
+          </div>
+
+          <div className="choice-card">
+            <div className="choice-icon-wrapper"><Leaf size={28} className="lucide-green" /></div>
+            <h3>Biodegradable</h3>
+            <p>A material characteristic that describes biological breakdown under specified conditions; it should not automatically be interpreted as compostable.</p>
+          </div>
+
+          <div className="choice-card">
+            <div className="choice-icon-wrapper"><Leaf size={28} className="lucide-green rotated" /></div>
+            <h3>Compostable</h3>
+            <p>Designed to break down under defined composting conditions and standards.</p>
+          </div>
+        </div>
+
+        {/* Priorities Section */}
+        <div className="priorities-wrapper">
+          <h3 className="priorities-title">Our Sustainability Priorities</h3>
+          <div className="priorities-grid">
+            <div className="priority-item">
+              <div className="priority-icon"><Leaf size={20} /></div>
+              <p>Responsible Material Selection</p>
+            </div>
+            <div className="priority-item">
+              <div className="priority-icon"><Trash2 size={20} /></div>
+              <p>Waste Reduction</p>
+            </div>
+            <div className="priority-item">
+              <div className="priority-icon"><RefreshCw size={20} /></div>
+              <p>Circularity</p>
+            </div>
+            <div className="priority-item">
+              <div className="priority-icon"><Globe size={20} /></div>
+              <p>Lower Environmental Impact</p>
+            </div>
+            <div className="priority-item">
+              <div className="priority-icon"><Lightbulb size={20} /></div>
+              <p>Innovation</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
       </AnimatedSection>
 
 
 
-      {/* ================= Certificate ================= */}
-<section className="certificate-section">
-  <div className="section-heading" style={{ marginBottom: "10px",marginTop: "30px" }}>
-    <span className="leaf">🍃</span>
-    <h2>Certificate</h2>
-    <span className="leaf">🍃</span>
-  </div>
+      {/* ================= Sustainability You Can Verify ================= */}
+<AnimatedSection as="section"  animation="fade-up">
+<div className="verify-container">
+      
+      {/* LEFT SECTION: VERIFICATION & CERTIFICATIONS */}
+      <section className="verify-section left-panel">
+        <h2 className="verify-title">Sustainability You Can Verify</h2>
+        <p className="verify-subtitle">
+          We believe environmental claims should be supported by evidence. Wherever applicable, 
+          we work with products supported by relevant certifications, test reports and supplier documentation.
+        </p>
 
-  <div className="marquee-wrap">
-    <div className="marquee-track">
-      {certificates.map((cert) => (
-        <div className="certificate-card" key={`a-${cert.id}`}>
-          <img src={cert.image} alt={cert.alt} loading="lazy" />
+        <div className="cards-row">
+          {/* Card 1 */}
+          <div className="cert-card">
+            <div className="cert-icon-container circle-frame">
+              <CheckCircle2 size={32} className="icon-green" />
+            </div>
+            <span className="cert-label font-bold">CPCB</span>
+            <span className="cert-sublabel">Compliant</span>
+            <span className="cert-context">(where applicable)</span>
+          </div>
+
+          {/* Card 2 */}
+          <div className="cert-card">
+            <div className="cert-icon-container">
+              <Globe2 size={40} className="icon-blue" />
+            </div>
+            <span className="cert-label font-bold">ISO</span>
+            <span className="cert-sublabel">Standards</span>
+            <span className="cert-context">(where applicable)</span>
+          </div>
+
+          {/* Card 3 */}
+          <div className="cert-card">
+            <div className="cert-icon-container">
+              <UtensilsCrossed size={36} className="icon-dark" />
+            </div>
+            <span className="cert-label font-bold">Food Contact</span>
+            <span className="cert-sublabel">Safe Materials</span>
+          </div>
+
+          {/* Card 4 */}
+          <div className="cert-card">
+            <div className="cert-icon-container">
+              <TreePine size={38} className="icon-green-dark" />
+            </div>
+            <span className="cert-label font-bold">FSC</span>
+            <span className="cert-sublabel">Responsible Sourcing</span>
+            <span className="cert-context">(where applicable)</span>
+          </div>
+
+          {/* Card 5 */}
+          <div className="cert-card">
+            <div className="cert-icon-container">
+              <FileText size={36} className="icon-dark" />
+            </div>
+            <span className="cert-label font-bold">Test Reports</span>
+            <span className="cert-sublabel">& Documentation</span>
+          </div>
         </div>
-      ))}
-      {certificates.map((cert) => (
-        <div className="certificate-card" key={`b-${cert.id}`}>
-          <img src={cert.image} alt={cert.alt} loading="lazy" />
+      </section>
+
+      {/* RIGHT SECTION: UN SUSTAINABLE DEVELOPMENT GOALS */}
+      <section className="verify-section right-panel">
+        <h2 className="verify-title">Contributing to the Sustainable Development Goals</h2>
+        <p className="verify-subtitle">Our solutions can contribute to:</p>
+
+        <div className="sdg-grid">
+          {/* SDG 12 */}
+          <div className="sdg-block sdg-12">
+            <div className="sdg-header">
+              <span className="sdg-number">12</span>
+              <span className="sdg-text">RESPONSIBLE CONSUMPTION AND PRODUCTION</span>
+            </div>
+            <div className="sdg-graphic">
+              {/* Infinity loop / circular design simulation */}
+              <div className="infinity-loop">🔄</div>
+            </div>
+          </div>
+
+          {/* SDG 13 */}
+          <div className="sdg-block sdg-13">
+            <div className="sdg-header">
+              <span className="sdg-number">13</span>
+              <span className="sdg-text">CLIMATE ACTION</span>
+            </div>
+            <div className="sdg-graphic">
+              <div className="climate-globe">🌍</div>
+            </div>
+          </div>
+
+          {/* SDG 14 */}
+          <div className="sdg-block sdg-14">
+            <div className="sdg-header">
+              <span className="sdg-number">14</span>
+              <span className="sdg-text">LIFE BELOW WATER</span>
+            </div>
+            <div className="sdg-graphic">
+              <div className="water-waves">〰️〰️</div>
+              <div className="fish-icon">🐟</div>
+            </div>
+          </div>
+
+          {/* SDG 15 */}
+          <div className="sdg-block sdg-15">
+            <div className="sdg-header">
+              <span className="sdg-number">15</span>
+              <span className="sdg-text">LIFE ON LAND</span>
+            </div>
+            <div className="sdg-graphic">
+              <div className="land-tree">🌳</div>
+              <div className="birds-fly">🕊️</div>
+            </div>
+          </div>
         </div>
-      ))}
+      </section>
+
     </div>
-  </div>
-</section>
-
-<AnimatedSection as="section" className="value-chain-section" animation="fade-up">
-<Ourapproach/> 
 
 </AnimatedSection>
-
-<AnimatedSection as="section" className="value-chain-section" animation="fade-up">
-<Futureoforya/> 
+      {/* ================= Our promise ================= */}
+<AnimatedSection as="section"  animation="fade-up">
+ <section className="promise-banner" style={{ backgroundImage: `url(${better_choice_banner})` }}>
+      <div className="promise-banner-overlay" />
+ 
+      <div className="promise-banner-inner">
+        <div className="promise-banner-copy">
+          <p className="promise-banner-eyebrow">Our promise</p>
+          <h1 className="promise-banner-heading">
+            Better choices. Thoughtfully made. Responsibly delivered.
+          </h1>
+          <p className="promise-banner-body">
+            We don&apos;t believe sustainability is about claiming perfection.
+            It is about making better choices, asking better questions,
+            improving continuously and being transparent about what our
+            products can &mdash; and cannot &mdash; claim. That&apos;s the
+            standard we want ORYA to stand for.
+          </p>
+        </div>
+ 
+        <div className="promise-banner-card">
+          <h2 className="card-heading">Ready to make a better choice?</h2>
+          <p className="card-body">
+            Explore sustainable solutions for your business, home or
+            organisation.
+          </p>
+          <div className="card-actions">
+            <a href="#solutions" className="btn btn-solid">
+              Explore solutions <ArrowRight size={16} strokeWidth={2} />
+            </a>
+            <a href="#quote" className="btn btn-outline">
+              Request a quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 </AnimatedSection>
-
-<CTABanner/>
 
 
 
