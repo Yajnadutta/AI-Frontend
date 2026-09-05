@@ -1,0 +1,571 @@
+/* ===========================================================
+   Sustainability Hero Banner
+   Namespaced with "orya-sustainability-hero" (BEM-style) so it
+   never collides with other page styles.
+   =========================================================== */
+
+.orya-sustainability-hero {
+  --orya-green-dark: #173f2e;
+  --orya-green-mid: #2f6b3f;
+  --orya-cream: #faf8f3;
+  --orya-line: rgba(255, 255, 255, 0.6);
+
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+
+  min-height: clamp(460px, 62vw, 620px);
+  display: flex;
+  align-items: center;
+}
+
+/* Background photo -------------------------------------------------- */
+.orya-sustainability-hero__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Legibility scrim, lighter on the right where the product shot sits */
+.orya-sustainability-hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    rgba(250, 248, 243, 0.94) 0%,
+    rgba(250, 248, 243, 0.85) 34%,
+    rgba(250, 248, 243, 0.35) 58%,
+    rgba(250, 248, 243, 0) 78%
+  );
+}
+
+/* Content column ------------------------------------------------------ */
+.orya-sustainability-hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 3.5rem) clamp(1.25rem, 5vw, 3.5rem);
+  box-sizing: border-box;
+}
+
+.orya-sustainability-hero__content > * {
+  max-width: 560px;
+}
+
+.orya-sustainability-hero__title {
+  margin: 0 0 1.1rem;
+  color: var(--orya-green-dark);
+  font-weight: 700;
+  line-height: 1.1;
+  font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+  letter-spacing: -0.01em;
+}
+
+.orya-sustainability-hero__lead {
+  margin: 0 0 0.9rem;
+  color: #1f241f;
+  font-weight: 500;
+  font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+  line-height: 1.6;
+}
+
+.orya-sustainability-hero__description {
+  margin: 0 0 1.75rem;
+  color: #4a4a4a;
+  font-size: clamp(0.88rem, 1.4vw, 1rem);
+  line-height: 1.65;
+}
+
+/* Buttons -------------------------------------------------------------- */
+.orya-sustainability-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.orya-sustainability-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.orya-sustainability-hero__btn:hover {
+  transform: translateY(-2px);
+}
+
+.orya-sustainability-hero__btn--primary {
+  background: var(--orya-green-dark);
+  color: #ffffff;
+  border: 1px solid var(--orya-green-dark);
+}
+
+.orya-sustainability-hero__btn--primary:hover {
+  background: #0f2e21;
+}
+
+.orya-sustainability-hero__btn--ghost {
+  background: transparent;
+  color: var(--orya-green-dark);
+  border: 1px solid var(--orya-green-dark);
+}
+
+.orya-sustainability-hero__btn--ghost:hover {
+  background: rgba(23, 63, 46, 0.08);
+}
+
+.orya-sustainability-hero__btn-icon {
+  flex-shrink: 0;
+}
+
+/* Meta row (People / Products / A Healthier Planet) --------------------- */
+.orya-sustainability-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.orya-sustainability-hero__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--orya-green-dark);
+  font-weight: 600;
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+}
+
+.orya-sustainability-hero__meta-item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ===========================================================
+   Responsive breakpoints
+   =========================================================== */
+
+/* Small phones: image can't sit side-by-side with text anymore,
+   so darken the scrim evenly and stack everything full-width */
+@media (max-width: 560px) {
+  .orya-sustainability-hero {
+    min-height: 560px;
+    align-items: flex-start;
+    padding-top: 1rem;
+  }
+
+  .orya-sustainability-hero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(250, 248, 243, 0.97) 0%,
+      rgba(250, 248, 243, 0.93) 45%,
+      rgba(250, 248, 243, 0.55) 100%
+    );
+  }
+
+  .orya-sustainability-hero__content > * {
+    max-width: 100%;
+  }
+
+  .orya-sustainability-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orya-sustainability-hero__btn {
+    justify-content: center;
+  }
+
+  .orya-sustainability-hero__meta {
+    gap: 1rem 1.25rem;
+  }
+}
+
+/* Tablets */
+@media (min-width: 561px) and (max-width: 1024px) {
+  .orya-sustainability-hero__content > * {
+    max-width: 70%;
+  }
+}
+
+/* Large desktops */
+@media (min-width: 1440px) {
+  .orya-sustainability-hero {
+    min-height: 660px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orya-sustainability-hero * {
+    transition: none !important;
+  }
+}
+
+/* ===========================================================
+   Resources Section — "Rethinking the Way We Use Resources"
+   Text and cards sit directly on top of the photo.
+   Namespaced with "orya-resources" (BEM-style).
+   =========================================================== */
+
+.orya-resources {
+  --orya-green-dark: #173f2e;
+  --orya-green-mid: #2f6b3f;
+  --orya-line: #e2e2d8;
+  --orya-muted: #4a4a4a;
+  --orya-ink: #1f241f;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: clamp(520px, 62vw, 760px);
+  display: flex;
+  align-items: center;
+}
+
+/* Background photo -----------------------------------------------------
+   object-position keeps the seedling itself (left side of the source
+   photo) fully in frame and uncovered by the scrim. */
+.orya-resources__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  z-index: 0;
+}
+
+/* Legibility scrim: clear over the plant on the left, solid white
+   over the text column on the right */
+.orya-resources__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    260deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.55) 32%,
+    rgba(255, 255, 255, 0.92) 52%,
+    rgba(255, 255, 255, 0.97) 100%
+  );
+}
+
+/* Content column ---------------------------------------------------------
+   pushed to the right side of the section, over the whitened area,
+   so the plant on the left stays fully visible */
+.orya-resources__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3.5rem);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.orya-resources__inner {
+  width: 100%;
+  max-width: 620px;
+}
+
+.orya-resources__eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--orya-green-mid);
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1vw, 0.78rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.orya-resources__title {
+  margin: 0 0 1rem;
+  color: var(--orya-green-dark);
+  font-weight: 700;
+  line-height: 1.15;
+  font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+}
+
+.orya-resources__text {
+  margin: 0 0 0.85rem;
+  color: var(--orya-muted);
+  font-size: clamp(0.9rem, 1.3vw, 1.02rem);
+  line-height: 1.65;
+}
+
+.orya-resources__text:last-of-type {
+  margin-bottom: 2rem;
+}
+
+/* Feature cards, floating on the photo ------------------------------------ */
+.orya-resources__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.orya-resources__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 30px rgba(23, 63, 46, 0.08);
+}
+
+.orya-resources__card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--orya-green-dark);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.orya-resources__card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.orya-resources__card-title {
+  margin: 0 0 0.4rem;
+  color: var(--orya-green-dark);
+  font-size: clamp(0.94rem, 1.2vw, 1.02rem);
+  font-weight: 700;
+}
+
+.orya-resources__card-text {
+  margin: 0;
+  color: var(--orya-muted);
+  font-size: clamp(0.8rem, 1.05vw, 0.88rem);
+  line-height: 1.55;
+}
+
+/* ===========================================================
+   Responsive breakpoints
+   =========================================================== */
+
+/* Tablets: give the text column more room and drop cards to 2-across */
+@media (max-width: 1024px) {
+  .orya-resources__inner {
+    max-width: 100%;
+  }
+
+  .orya-resources__scrim {
+    background: linear-gradient(
+      260deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.6) 20%,
+      rgba(255, 255, 255, 0.95) 42%,
+      rgba(255, 255, 255, 0.98) 100%
+    );
+  }
+
+  .orya-resources__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 460px;
+  }
+}
+
+/* Small tablets / large phones: there's no room for text to sit
+   over a clear part of the photo, so drop the overlay and stack
+   a normal image above normal-flow content instead */
+@media (max-width: 768px) {
+  .orya-resources {
+    display: block;
+    min-height: unset;
+    background: #f6f4ec;
+  }
+
+  .orya-resources__media {
+    position: static;
+    display: block;
+    width: 100%;
+    height: 240px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .orya-resources__scrim {
+    display: none;
+  }
+
+  .orya-resources__content {
+    position: static;
+    padding-top: 1.75rem;
+  }
+
+  .orya-resources__title,
+  .orya-resources__text {
+    max-width: 100%;
+  }
+}
+
+/* Phones: single-column cards */
+@media (max-width: 520px) {
+  .orya-resources__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .orya-resources__card {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orya-resources * {
+    transition: none !important;
+  }
+}
+/* ===========================================================
+   Approach Section — "Sustainability by Design"
+   Namespaced with "orya-approach" (BEM-style).
+   =========================================================== */
+
+.orya-approach {
+  --orya-green-dark: #173f2e;
+  --orya-green-mid: #2f6b3f;
+  --orya-bg: #fbfaf7;
+  --orya-line: #e7e5dc;
+  --orya-muted: #4a4a4a;
+
+  background: var(--orya-bg);
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 3.5rem);
+  box-sizing: border-box;
+}
+
+/* Intro / heading ----------------------------------------------------- */
+.orya-approach__intro {
+  max-width: 720px;
+  margin: 0 auto clamp(2rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.orya-approach__eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--orya-green-mid);
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1vw, 0.78rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.orya-approach__title {
+  margin: 0 0 0.75rem;
+  color: var(--orya-green-dark);
+  font-weight: 700;
+  line-height: 1.15;
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+}
+
+.orya-approach__subtitle {
+  margin: 0;
+  color: var(--orya-muted);
+  font-size: clamp(0.9rem, 1.3vw, 1.02rem);
+  line-height: 1.6;
+}
+
+/* Card grid -------------------------------------------------------------- */
+.orya-approach__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.orya-approach__card {
+  background: #ffffff;
+  border: 1px solid var(--orya-line);
+  border-radius: 14px;
+  padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1.1rem, 2vw, 1.5rem);
+  text-align: left;
+}
+
+.orya-approach__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 1rem;
+  color: var(--orya-green-dark);
+}
+
+.orya-approach__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.orya-approach__card-title {
+  margin: 0 0 0.6rem;
+  color: var(--orya-green-dark);
+  font-size: clamp(0.98rem, 1.3vw, 1.08rem);
+  font-weight: 700;
+}
+
+.orya-approach__card-text {
+  margin: 0;
+  color: var(--orya-muted);
+  font-size: clamp(0.83rem, 1.05vw, 0.9rem);
+  line-height: 1.6;
+}
+
+.orya-approach__card-text strong {
+  color: var(--orya-ink, #1f241f);
+  font-weight: 700;
+}
+
+/* ===========================================================
+   Responsive breakpoints
+   =========================================================== */
+
+/* Tablets: 2x2 grid */
+@media (max-width: 960px) {
+  .orya-approach__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Phones: single column */
+@media (max-width: 560px) {
+  .orya-approach__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .orya-approach__intro {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orya-approach * {
+    transition: none !important;
+  }
+}
