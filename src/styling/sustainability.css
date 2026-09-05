@@ -261,12 +261,7 @@
   inset: 0;
   z-index: 1;
   background: linear-gradient(
-    260deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.55) 32%,
-    rgba(255, 255, 255, 0.92) 52%,
-    rgba(255, 255, 255, 0.97) 100%
-  );
+120deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.55) 100%, rgba(255, 255, 255, 0.92) 70%, rgba(255, 255, 255, 0.97) 100%)
 }
 
 /* Content column ---------------------------------------------------------
@@ -276,7 +271,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3.5rem);
   display: flex;
@@ -379,12 +374,7 @@
 
   .orya-resources__scrim {
     background: linear-gradient(
-      260deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.6) 20%,
-      rgba(255, 255, 255, 0.95) 42%,
-      rgba(255, 255, 255, 0.98) 100%
-    );
+120deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.55) 100%, rgba(255, 255, 255, 0.92) 70%, rgba(255, 255, 255, 0.97) 100%)
   }
 
   .orya-resources__cards {
@@ -568,4 +558,178 @@
   .orya-approach * {
     transition: none !important;
   }
+}
+/* ===========================================================
+   Material Story Section — "From Nature-Inspired Materials
+   to Everyday Solutions"
+   Namespaced with "orya-material-story" (BEM-style).
+   =========================================================== */
+
+.orya-material-story {
+  --orya-green-dark: #173f2e;
+  --orya-green-mid: #2f6b3f;
+  --orya-bg: #fbfaf7;
+  --orya-muted: #4a4a4a;
+  --orya-ink: #1f241f;
+
+  background: var(--orya-bg);
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 3.5rem);
+  box-sizing: border-box;
+}
+
+/* Intro / heading ------------------------------------------------------- */
+.orya-material-story__intro {
+  max-width: 760px;
+  margin: 0 auto clamp(2rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.orya-material-story__eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--orya-green-mid);
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1vw, 0.78rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.orya-material-story__title {
+  margin: 0 0 0.75rem;
+  color: var(--orya-green-dark);
+  font-weight: 700;
+  line-height: 1.15;
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+}
+
+.orya-material-story__subtitle {
+  margin: 0;
+  color: var(--orya-muted);
+  font-size: clamp(0.88rem, 1.25vw, 1rem);
+  line-height: 1.6;
+}
+
+.orya-material-story__subtitle strong {
+  color: var(--orya-ink);
+  font-weight: 700;
+}
+
+/* Steps row -------------------------------------------------------------- */
+.orya-material-story__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.orya-material-story__step {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: left;
+}
+
+.orya-material-story__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  margin-bottom: 0.85rem;
+}
+
+.orya-material-story__step-title {
+  margin: 0 0 0.25rem;
+  color: var(--orya-green-dark);
+  font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+  font-weight: 700;
+}
+
+.orya-material-story__step-caption {
+  margin: 0;
+  color: var(--orya-muted);
+  font-size: clamp(0.78rem, 1vw, 0.86rem);
+  line-height: 1.5;
+}
+
+/* Arrow between steps ------------------------------------------------------ */
+.orya-material-story__arrow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orya-green-mid);
+  transition: transform 0.2s ease;
+}
+
+.orya-material-story__arrow svg {
+  width: clamp(18px, 2vw, 24px);
+  height: clamp(18px, 2vw, 24px);
+}
+
+/* ===========================================================
+   Responsive breakpoints
+   =========================================================== */
+
+/* Tablets: wrap to a 2x2 grid; the left-to-right arrows no longer
+   make sense once items wrap, so they're hidden here */
+@media (max-width: 900px) {
+  .orya-material-story__row {
+    flex-wrap: wrap;
+  }
+
+  .orya-material-story__step {
+    flex: 1 1 calc(50% - 0.75rem);
+  }
+
+  .orya-material-story__arrow {
+    display: none;
+  }
+}
+
+/* Phones: single column, arrows come back rotated to point downward
+   between each stacked step */
+@media (max-width: 560px) {
+  .orya-material-story__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orya-material-story__step {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .orya-material-story__arrow {
+    display: flex;
+    transform: rotate(90deg);
+    margin: 0.25rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orya-material-story * {
+    transition: none !important;
+  }
+}
+
+
+/* Add transition to the step so both the lift and shadow animate smoothly */
+.orya-material-story__step {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 12px;
+  text-align: center;
+    padding-bottom: 15px;
+}
+
+.orya-material-story__step:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(23, 63, 46, 0.12);
+}
+
+
+
+/* Keep the zoomed image from spilling outside the rounded corners */
+.orya-material-story__step {
+  overflow: hidden;
 }

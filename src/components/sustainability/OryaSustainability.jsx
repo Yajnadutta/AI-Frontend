@@ -11,7 +11,6 @@ import "../../styling/About.css";
 import "../../styling/sustainability.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import WhatWeDo from "../../components/about/WhatWeDo";
 import BusinessPillars from "../../components/about/BusinessPillars";
 import Ourapproach from "../../components/about/Ourapproach";
 import Futureoforya from "../../components/about/Futureoforya";
@@ -21,10 +20,54 @@ import Certification_01 from "../../assets/Certification_01.jpeg";
 import Certification_02 from "../../assets/Certification_02.jpeg";
 import Certification_03 from "../../assets/Certification_03.jpeg";
 import Certification_04 from "../../assets/Certification_04.jpeg";
-import WhoWeAreImage from "../../assets/who-we-are.PNG";
 import AnimatedSection from "../../components/home/AnimatedSection";
 import SustainabilityBanner from "../../assets/sustainability_banner.png";
 import SeedlingImage from "../../assets/seedling-growth.png";
+import SugarcaneImage from "../../assets/material_01.png";
+import BagasseImage from "../../assets/material_02.png";
+import PackagingImage from "../../assets/material_03.png";
+import IngredientsImage from "../../assets/what-we-do-card2.png";
+const STEPS = [
+  {
+    id: "sugarcane",
+    image: SugarcaneImage,
+    alt: "Freshly cut sugarcane stalks",
+    title: "Sugarcane",
+    caption: "A renewable resource",
+  },
+  {
+    id: "bagasse",
+    image: BagasseImage,
+    alt: "Bagasse fibre after sugarcane processing",
+    title: "Bagasse",
+    caption: "Transformed into useful materials",
+  },
+  {
+    id: "packaging",
+    image: PackagingImage,
+    alt: "Sustainable bagasse packaging containers",
+    title: "Sustainable Packaging",
+    caption: "For everyday use",
+  },
+  {
+    id: "ingredients",
+    image: IngredientsImage,
+    alt: "Bowls of natural dry food ingredients",
+    title: "Natural Ingredients",
+    caption: "Thoughtful choices for a better tomorrow",
+  },
+];
+ 
+function StepArrow() {
+  return (
+    <div className="orya-material-story__arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="4" y1="12" x2="20" y2="12" />
+        <polyline points="13 5 20 12 13 19" />
+      </svg>
+    </div>
+  );
+}
 const OrySustainabilityPage = () => {
 
 const FEATURES = [
@@ -73,6 +116,8 @@ const FEATURES = [
     ),
   },
 ];
+
+
 const certificates = [
   { id: 1, image: Certification_01, alt: "Certification 1" },
   { id: 2, image: Certification_02, alt: "Certification 2" },
@@ -369,54 +414,40 @@ const certificates = [
     
 
 
-      {/* ================= CIRCULAR VALUE CHAIN ================= */}
-<AnimatedSection as="section" className="value-chain-section" animation="fade-up">
- <section className="value-chain-section">
-
-        <div className="section-heading">
-          <span className="leaf">🍃</span>
-          <h2>Our Circular Value Chain</h2>
-          <span className="leaf">🍃</span>
-     <br/>
-        </div>
-<p className="chain-bottom" style={{ marginTop: '-25px' }}>
-          🍃 From Farm & Nature to Responsible Consumption 🍃
+      {/* ================= OUR MATERIAL STORY ================= */}
+<AnimatedSection as="section" animation="fade-up">
+<section className="orya-material-story">
+      <div className="orya-material-story__intro">
+        <p className="orya-material-story__eyebrow">Our Material Story</p>
+        <h2 className="orya-material-story__title">
+          From Nature-Inspired Materials to Everyday Solutions
+        </h2>
+        <p className="orya-material-story__subtitle">
+          We carefully select <strong>products and materials based</strong> on
+          their intended application, environmental attributes,{" "}
+          <strong>performance and available certification</strong> or
+          supporting documentation.
         </p>
-        <div className="value-chain">
-
-          {valueChain.map((item, index) => (
-            <React.Fragment key={index}>
-
-              <div className="chain-item">
-
-                <div className="chain-icon">
-                  {item.icon}
-                </div>
-
-                <strong>{item.title}</strong>
-
-                {item.subtitle && (
-                  <span>{item.subtitle}</span>
-                )}
-
-              </div>
-
-              {index < valueChain.length - 1 && (
-                <div className="chain-arrow">
-                  →
-                </div>
-              )}
-
-            </React.Fragment>
-          ))}
-
-        </div>
-
-        <p className="chain-bottom">
-          🍃 Creating value from agricultural resources and returning goodness to the planet. 🍃
-        </p>
-
-      </section>
+      </div>
+ 
+      <div className="orya-material-story__row">
+        {STEPS.map((step, index) => (
+          <React.Fragment key={step.id}>
+            <div className="orya-material-story__step">
+              <img
+                src={step.image}
+                alt={step.alt}
+                className="orya-material-story__image"
+              />
+              <h3 className="orya-material-story__step-title">{step.title}</h3>
+              <p className="orya-material-story__step-caption">{step.caption}</p>
+            </div>
+ 
+            {index < STEPS.length - 1 && <StepArrow />}
+          </React.Fragment>
+        ))}
+      </div>
+    </section>
 
 </AnimatedSection>
      {/* ================= OUR BUSINESS PILLARS ================= */}
