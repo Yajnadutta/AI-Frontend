@@ -10,6 +10,10 @@ const Header = () => {
   // helper: is current path inside this section (for dropdown parents)
   const isSectionActive = (prefix) => location.pathname.startsWith(prefix);
 
+  // helper: is this Resources anchor the one currently in view (path + hash match)
+  const isResourceAnchorActive = (hash) =>
+    location.pathname === "/resources" && location.hash === hash;
+
   return (
     <header className="main-header">
       <div className="header-container">
@@ -94,6 +98,14 @@ const Header = () => {
           </NavLink>
 
           {/* RESOURCES DROPDOWN */}
+          {/*
+            These four items all live as sections on the single /resources
+            page (see Resources.jsx), so they link to in-page anchors
+            (/resources#id) instead of separate routes. ScrollToHashElement
+            (rendered inside Resources.jsx) handles the actual scrolling,
+            including when you're already on /resources and just switching
+            anchors.
+          */}
           <div className="nav-dropdown">
             <span
               className={`dropdown-title ${isSectionActive("/resources") ? "nav-active" : ""}`}
@@ -102,18 +114,34 @@ const Header = () => {
             </span>
 
             <div className="dropdown-menu">
-              <NavLink to="/resources/blog" className={({ isActive }) => (isActive ? "nav-active" : "")}>
+              <Link
+                to="/resources#blog-insights"
+                className={isResourceAnchorActive("#blog-insights") ? "nav-active" : ""}
+                onClick={() => setMobileMenu(false)}
+              >
                 Blog & Insights
-              </NavLink>
-              <NavLink to="/resources/product-catalogue" className={({ isActive }) => (isActive ? "nav-active" : "")}>
+              </Link>
+              <Link
+                to="/resources#product-catalogue"
+                className={isResourceAnchorActive("#product-catalogue") ? "nav-active" : ""}
+                onClick={() => setMobileMenu(false)}
+              >
                 Product Catalogue
-              </NavLink>
-              <NavLink to="/resources/downloads" className={({ isActive }) => (isActive ? "nav-active" : "")}>
+              </Link>
+              <Link
+                to="/resources#downloads"
+                className={isResourceAnchorActive("#downloads") ? "nav-active" : ""}
+                onClick={() => setMobileMenu(false)}
+              >
                 Downloads
-              </NavLink>
-              <NavLink to="/resources/faqs" className={({ isActive }) => (isActive ? "nav-active" : "")}>
+              </Link>
+              <Link
+                to="/resources#faqs"
+                className={isResourceAnchorActive("#faqs") ? "nav-active" : ""}
+                onClick={() => setMobileMenu(false)}
+              >
                 FAQs
-              </NavLink>
+              </Link>
             </div>
           </div>
 
