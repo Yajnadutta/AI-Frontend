@@ -47,7 +47,7 @@ const Header = () => {
             About ORYA
           </NavLink>
 
-          {/* PRODUCTS DROPDOWN */}
+         
           <div className="nav-dropdown">
             <span
               className={`dropdown-title ${isSectionActive("/products") ? "nav-active" : ""}`}
@@ -56,12 +56,21 @@ const Header = () => {
             </span>
           </div>
 
-          {/* SOLUTIONS DROPDOWN */}
-          <div className="nav-dropdown">
+     
+
+          <NavLink
+                to="/solutions"
+                className={({ isActive }) => (isActive ? "nav-active" : "")}
+                onClick={() => setMobileMenu(false)}
+              >
+                Solutions
+              </NavLink>
+          {/* <div className="nav-dropdown">
             <span
               className={`dropdown-title ${isSectionActive("/solutions") ? "nav-active" : ""}`}
             >
-              Solutions <span>⌄</span>
+              Solutions 
+              <span>⌄</span> 
             </span>
 
             <div className="dropdown-menu">
@@ -86,8 +95,8 @@ const Header = () => {
               <NavLink to="/solutions/custom-solutions" className={({ isActive }) => (isActive ? "nav-active" : "")}>
                 Custom Solutions
               </NavLink>
-            </div>
-          </div>
+            </div> 
+          </div> */}
 
           <NavLink
             to="/sustainability"

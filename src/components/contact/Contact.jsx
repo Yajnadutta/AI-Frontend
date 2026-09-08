@@ -25,11 +25,11 @@ import { ArrowRight,
   Clock, Navigation
 } from "lucide-react";
 
- const MAP_EMBED_SRC =
-  "https://maps.google.com/maps?q=ORYA%20Bio-Solutions%2C%20Keonjhar%2C%20Odisha&t=&z=13&ie=UTF8&iwloc=&output=embed";
- 
+const MAP_EMBED_SRC =
+  "https://maps.google.com/maps?q=Das+Bhawan,+near+Gonasika+Public+School,+Naranpur,+Ghutukesari,+Odisha+758014&t=&z=15&ie=UTF8&iwloc=&output=embed";
+
 const DIRECTIONS_URL =
-  "https://www.google.com/maps/dir/?api=1&destination=ORYA+Bio-Solutions,+Keonjhar,+Odisha";
+  "https://www.google.com/maps/dir/?api=1&destination=Das+Bhawan,+near+Gonasika+Public+School,+Naranpur,+Ghutukesari,+Odisha+758014&destination_place_id=ChIJ0Wm7DQD9Hjor0jV0KtCTM5Vk";
  
 const WHATSAPP_URL = "https://wa.me/917809903359";
 

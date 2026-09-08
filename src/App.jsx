@@ -7,6 +7,7 @@ import OrySustainabilityPage from "./components/sustainability/OryaSustainabilit
 import Contact from "./components/contact/Contact";
 import Resources from "./components/resources/Resources";
 import ScrollToTop from "./components/ScrollToTop";
+import Solutions from "./components/solutions/Solutions";
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/resources" element={<Resources />} />
+         <Route path="/solutions" element={<Solutions />} />
       </Routes>
     </BrowserRouter>
   );
