@@ -94,14 +94,43 @@ const [form, setForm] = useState(initialForm);
     return true;
   };
  
-  const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
  
-    // Replace with your actual submit call (API / email service etc.)
-    toast.success("Enquiry submitted. Our team will get back to you soon.");
-    setForm(initialForm);
+    // This is your live background form-response endpoint URL
+    const GOOGLE_FORM_URL = "https://google.com";
+ 
+    // Constructing form data payload mapped precisely to your Google Form IDs
+    const formData = new FormData();
+    formData.append("entry.1467024921", form.fullName);     // Full Name
+    formData.append("entry.1814728445", form.company);      // Company / Organisation
+    formData.append("entry.1608265540", form.email);        // Email Address
+    formData.append("entry.969023858", form.phone);         // Phone / WhatsApp
+    formData.append("entry.745799675", form.enquiryType);   // Select Enquiry Type
+    formData.append("entry.1148051182", form.product);      // Product / Requirement
+    formData.append("entry.479365014", form.quantity);      // Approx. Quantity
+    formData.append("entry.2075020123", form.location);     // City / State / Country
+    formData.append("entry.26380700", form.message);        // Message / Requirement Details
+
+    try {
+      // Dispatches the data to Google Forms in the background
+      await fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+ 
+      // Success toast triggers without shifting your UI pages
+      toast.success("Enquiry submitted. Our team will get back to you soon.");
+      setForm(initialForm);
+      
+    } catch (error) {
+      console.error("Submission failed:", error);
+      toast.error("Something went wrong. Please try again later.");
+    }
   };
+
  
 
 const features = [
