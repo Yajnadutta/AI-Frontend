@@ -39,6 +39,7 @@ const ENQUIRY_TYPES = [
   "Dealer / Partnership",
   "Export Enquiry",
   "Future Business Opportunities",
+  "Other"
 ];
  
 const initialForm = {
@@ -102,24 +103,70 @@ const validate = () => {
   }
   return true;
 };
-const handleSubmit = async (e) => {
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   if (!validate()) return;
+
+//   setIsSubmitting(true);
+
+//   const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfG6lDpK5Qr8q4UqgW36YzyZUJOxmrhLU-qfd0Z4IgutaItzw/formResponse";
+
+//   const formData = new FormData();
+//   formData.append("entry.1467024921", form.fullName);
+//   formData.append("entry.1814728445", form.company);
+//   formData.append("entry.1608265540", form.email);
+//   formData.append("entry.969023858", form.phone.replace(/\D/g, ""));
+//   formData.append("entry.745799675", form.enquiryType);
+//   formData.append("entry.1148051182", form.product);
+//   formData.append("entry.479365014", form.quantity);
+//   formData.append("entry.2075020123", form.location);
+//   formData.append("entry.26380700", form.message);
+
+//   try {
+//     await fetch(GOOGLE_FORM_URL, {
+//       method: "POST",
+//       mode: "no-cors",
+//       body: formData
+//     });
+
+//     Swal.fire({
+//       icon: "success",
+//       title: "Enquiry Submitted!",
+//       text: "Our team will get back to you soon.",
+//       confirmButtonColor: "#2e7d32", // adjust to your brand green
+//     });
+//     setForm(initialForm);
+
+//   } catch (error) {
+//     console.error("Submission failed:", error);
+//     Swal.fire({
+//       icon: "error",
+//       title: "Something went wrong",
+//       text: "Please try again later.",
+//     });
+//   } finally {
+//     setIsSubmitting(false);
+//   }
+// };
+
+ const handleSubmit = async (e) => {
   e.preventDefault();
   if (!validate()) return;
 
   setIsSubmitting(true);
 
-  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfG6lDpK5Qr8q4UqgW36YzyZUJOxmrhLU-qfd0Z4IgutaItzw/formResponse";
+  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScDBQQOP34Ke_V-8PmmlqXu5SlmJWXd-o7gj0gPCAOtjUJjYQ/formResponse";
 
   const formData = new FormData();
-  formData.append("entry.1467024921", form.fullName);
-  formData.append("entry.1814728445", form.company);
-  formData.append("entry.1608265540", form.email);
-  formData.append("entry.969023858", form.phone.replace(/\D/g, ""));
-  formData.append("entry.745799675", form.enquiryType);
-  formData.append("entry.1148051182", form.product);
-  formData.append("entry.479365014", form.quantity);
-  formData.append("entry.2075020123", form.location);
-  formData.append("entry.26380700", form.message);
+  formData.append("entry.539132353", form.fullName);                    // Full Name
+  formData.append("entry.342220112", form.company);                     // Company / Organisation
+  formData.append("entry.453823105", form.email);                       // Email Address
+  formData.append("entry.1559344573", form.phone.replace(/\D/g, ""));   // Phone / WhatsApp
+  formData.append("entry.1584500390", form.enquiryType);                // Select Enquiry Type
+  formData.append("entry.364938392", form.product);                     // Product / Requirement
+  formData.append("entry.2064261096", form.quantity);                   // Approx. Quantity
+  formData.append("entry.1273580849", form.location);                   // City / State / Country
+  formData.append("entry.422898722", form.message);                     // Message / Requirement Details
 
   try {
     await fetch(GOOGLE_FORM_URL, {
@@ -130,7 +177,7 @@ const handleSubmit = async (e) => {
 
     Swal.fire({
       icon: "success",
-      title: "Enquiry Submitted!",
+      title: "Thank you for your enquiry!",
       text: "Our team will get back to you soon.",
       confirmButtonColor: "#2e7d32", // adjust to your brand green
     });
@@ -147,8 +194,6 @@ const handleSubmit = async (e) => {
     setIsSubmitting(false);
   }
 };
-
- 
 
 const features = [
   { icon: Leaf, label: "Sustainable Solutions" },
@@ -436,7 +481,7 @@ const opportunities = [
               />
  
               <textarea
-                placeholder="Message / Requirement Details *"
+                placeholder="Share specific sizes, custom branding, or schedule needs...Max 500 characters*"
                 value={form.message}
                 onChange={handleChange("message")}
                 className="form-input form-textarea"
