@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import "../styling/Header.css";
+import { useCart } from "../components/context/CartContext";
 import oryaLogo from "../assets/orya-logo.jpeg";
 
 const Header = () => {
-  const [mobileMenu, setMobileMenu] = useState(false);
+ const [mobileMenu, setMobileMenu] = useState(false);
   const location = useLocation();
+  const { cartCount } = useCart();
 
   // helper: is current path inside this section (for dropdown parents)
   const isSectionActive = (prefix) => location.pathname.startsWith(prefix);
@@ -48,13 +50,13 @@ const Header = () => {
           </NavLink>
 
          
-          <div className="nav-dropdown">
-            <span
-              className={`dropdown-title ${isSectionActive("/products") ? "nav-active" : ""}`}
-            >
-              Products
-            </span>
-          </div>
+         <NavLink
+                to="/products"
+                className={({ isActive }) => (isActive ? "nav-active" : "")}
+                onClick={() => setMobileMenu(false)}
+              >
+                Products
+              </NavLink>
 
      
 
@@ -166,9 +168,9 @@ const Header = () => {
 
         {/* ================= RIGHT SIDE ================= */}
         <div className="header-right">
-          <Link to="/cart" className="cart-icon">
+         <Link to="/cart" className="cart-icon">
             <span className="cart-symbol">🛒</span>
-            <span className="cart-count">0</span>
+            <span className="cart-count">{cartCount}</span>
           </Link>
 
           <Link to="/dealer" className="dealer-button">
