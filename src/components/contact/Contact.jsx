@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -70,75 +70,79 @@ const handleChange = (field) => (e) => {
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[6-9]\d{9}$/; // exactly 10 digits, Indian mobile format
 const quantityPattern = /^\d+(\.\d+)?$/; // numeric only, decimals allowed
- const validate = () => {
+const validate = () => {
   if (!form.fullName.trim()) {
-    toast.error("Please enter your full name.");
+    Swal.fire({ icon: "warning", title: "Missing Name", text: "Please enter your full name." });
     return false;
   }
   if (!form.email.trim() || !emailPattern.test(form.email.trim())) {
-    toast.error("Please enter a valid email address.");
+    Swal.fire({ icon: "warning", title: "Invalid Email", text: "Please enter a valid email address." });
     return false;
   }
-  const cleanedPhone = form.phone.replace(/\D/g, ""); // strip non-digits
+  const cleanedPhone = form.phone.replace(/\D/g, "");
   if (!cleanedPhone || !phonePattern.test(cleanedPhone)) {
-    toast.error("Please enter a valid 10-digit mobile number.");
+    Swal.fire({ icon: "warning", title: "Invalid Phone", text: "Please enter a valid 10-digit mobile number." });
     return false;
   }
   if (!form.enquiryType) {
-    toast.error("Please select an enquiry type.");
+    Swal.fire({ icon: "warning", title: "Missing Enquiry Type", text: "Please select an enquiry type." });
     return false;
   }
   if (!form.product.trim()) {
-    toast.error("Please tell us the product or requirement.");
+    Swal.fire({ icon: "warning", title: "Missing Requirement", text: "Please tell us the product or requirement." });
     return false;
   }
   if (form.quantity.trim() && !quantityPattern.test(form.quantity.trim())) {
-    toast.error("Quantity must be a number.");
+    Swal.fire({ icon: "warning", title: "Invalid Quantity", text: "Quantity must be a number." });
     return false;
   }
   if (!form.message.trim()) {
-    toast.error("Please add a message with your requirement details.");
+    Swal.fire({ icon: "warning", title: "Missing Message", text: "Please add a message with your requirement details." });
     return false;
   }
   return true;
 };
- 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   if (!validate()) return;
 
   setIsSubmitting(true);
 
-  // This is your live background form-response endpoint URL
   const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfG6lDpK5Qr8q4UqgW36YzyZUJOxmrhLU-qfd0Z4IgutaItzw/formResponse";
 
-  // Constructing form data payload mapped precisely to your Google Form IDs
   const formData = new FormData();
-  formData.append("entry.1467024921", form.fullName);     // Full Name
-  formData.append("entry.1814728445", form.company);      // Company / Organisation
-  formData.append("entry.1608265540", form.email);        // Email Address
-  formData.append("entry.969023858", form.phone.replace(/\D/g, "")); // Phone / WhatsApp
-  formData.append("entry.745799675", form.enquiryType);   // Select Enquiry Type
-  formData.append("entry.1148051182", form.product);      // Product / Requirement
-  formData.append("entry.479365014", form.quantity);      // Approx. Quantity
-  formData.append("entry.2075020123", form.location);     // City / State / Country
-  formData.append("entry.26380700", form.message);        // Message / Requirement Details
+  formData.append("entry.1467024921", form.fullName);
+  formData.append("entry.1814728445", form.company);
+  formData.append("entry.1608265540", form.email);
+  formData.append("entry.969023858", form.phone.replace(/\D/g, ""));
+  formData.append("entry.745799675", form.enquiryType);
+  formData.append("entry.1148051182", form.product);
+  formData.append("entry.479365014", form.quantity);
+  formData.append("entry.2075020123", form.location);
+  formData.append("entry.26380700", form.message);
 
   try {
-    // Dispatches the data to Google Forms in the background
     await fetch(GOOGLE_FORM_URL, {
       method: "POST",
       mode: "no-cors",
       body: formData
     });
 
-    // Success toast triggers without shifting your UI pages
-    toast.success("Enquiry submitted. Our team will get back to you soon.");
+    Swal.fire({
+      icon: "success",
+      title: "Enquiry Submitted!",
+      text: "Our team will get back to you soon.",
+      confirmButtonColor: "#2e7d32", // adjust to your brand green
+    });
     setForm(initialForm);
 
   } catch (error) {
     console.error("Submission failed:", error);
-    toast.error("Something went wrong. Please try again later.");
+    Swal.fire({
+      icon: "error",
+      title: "Something went wrong",
+      text: "Please try again later.",
+    });
   } finally {
     setIsSubmitting(false);
   }
@@ -272,7 +276,7 @@ const opportunities = [
      {/* ================= Connect with ORYA ================= */}
      <AnimatedSection as="section" animation="fade-up">
   <section className="contact-section">
-      <ToastContainer position="top-right" autoClose={3500} />
+     
  
       <div className="contact-grid">
         {/* left: connect info */}
