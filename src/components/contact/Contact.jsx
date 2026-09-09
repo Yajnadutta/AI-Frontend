@@ -53,83 +53,96 @@ const initialForm = {
   message: "",
 };
  
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const phonePattern = /^[+\d][\d\s-]{6,}$/;
+// const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// const phonePattern = /^[+\d][\d\s-]{6,}$/;
 const Contact = ( {
   mapSrc = MAP_EMBED_SRC,
   directionsUrl = DIRECTIONS_URL,
   whatsappUrl = WHATSAPP_URL,
 }) => {
 const [form, setForm] = useState(initialForm);
- 
-  const handleChange = (field) => (e) => {
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
-  };
- 
-  const validate = () => {
-    if (!form.fullName.trim()) {
-      toast.error("Please enter your full name.");
-      return false;
-    }
-    if (!form.email.trim() || !emailPattern.test(form.email.trim())) {
-      toast.error("Please enter a valid email address.");
-      return false;
-    }
-    if (!form.phone.trim() || !phonePattern.test(form.phone.trim())) {
-      toast.error("Please enter a valid phone / WhatsApp number.");
-      return false;
-    }
-    if (!form.enquiryType) {
-      toast.error("Please select an enquiry type.");
-      return false;
-    }
-    if (!form.product.trim()) {
-      toast.error("Please tell us the product or requirement.");
-      return false;
-    }
-    if (!form.message.trim()) {
-      toast.error("Please add a message with your requirement details.");
-      return false;
-    }
-    return true;
-  };
- 
-   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) return;
- 
-    // This is your live background form-response endpoint URL
-    const GOOGLE_FORM_URL = "https://google.com";
- 
-    // Constructing form data payload mapped precisely to your Google Form IDs
-    const formData = new FormData();
-    formData.append("entry.1467024921", form.fullName);     // Full Name
-    formData.append("entry.1814728445", form.company);      // Company / Organisation
-    formData.append("entry.1608265540", form.email);        // Email Address
-    formData.append("entry.969023858", form.phone);         // Phone / WhatsApp
-    formData.append("entry.745799675", form.enquiryType);   // Select Enquiry Type
-    formData.append("entry.1148051182", form.product);      // Product / Requirement
-    formData.append("entry.479365014", form.quantity);      // Approx. Quantity
-    formData.append("entry.2075020123", form.location);     // City / State / Country
-    formData.append("entry.26380700", form.message);        // Message / Requirement Details
+const [isSubmitting, setIsSubmitting] = useState(false);
 
-    try {
-      // Dispatches the data to Google Forms in the background
-      await fetch(GOOGLE_FORM_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData
-      });
+const handleChange = (field) => (e) => {
+  setForm((prev) => ({ ...prev, [field]: e.target.value }));
+};
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phonePattern = /^[6-9]\d{9}$/; // exactly 10 digits, Indian mobile format
+const quantityPattern = /^\d+(\.\d+)?$/; // numeric only, decimals allowed
+ const validate = () => {
+  if (!form.fullName.trim()) {
+    toast.error("Please enter your full name.");
+    return false;
+  }
+  if (!form.email.trim() || !emailPattern.test(form.email.trim())) {
+    toast.error("Please enter a valid email address.");
+    return false;
+  }
+  const cleanedPhone = form.phone.replace(/\D/g, ""); // strip non-digits
+  if (!cleanedPhone || !phonePattern.test(cleanedPhone)) {
+    toast.error("Please enter a valid 10-digit mobile number.");
+    return false;
+  }
+  if (!form.enquiryType) {
+    toast.error("Please select an enquiry type.");
+    return false;
+  }
+  if (!form.product.trim()) {
+    toast.error("Please tell us the product or requirement.");
+    return false;
+  }
+  if (form.quantity.trim() && !quantityPattern.test(form.quantity.trim())) {
+    toast.error("Quantity must be a number.");
+    return false;
+  }
+  if (!form.message.trim()) {
+    toast.error("Please add a message with your requirement details.");
+    return false;
+  }
+  return true;
+};
  
-      // Success toast triggers without shifting your UI pages
-      toast.success("Enquiry submitted. Our team will get back to you soon.");
-      setForm(initialForm);
-      
-    } catch (error) {
-      console.error("Submission failed:", error);
-      toast.error("Something went wrong. Please try again later.");
-    }
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  setIsSubmitting(true);
+
+  // This is your live background form-response endpoint URL
+  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfG6lDpK5Qr8q4UqgW36YzyZUJOxmrhLU-qfd0Z4IgutaItzw/formResponse";
+
+  // Constructing form data payload mapped precisely to your Google Form IDs
+  const formData = new FormData();
+  formData.append("entry.1467024921", form.fullName);     // Full Name
+  formData.append("entry.1814728445", form.company);      // Company / Organisation
+  formData.append("entry.1608265540", form.email);        // Email Address
+  formData.append("entry.969023858", form.phone.replace(/\D/g, "")); // Phone / WhatsApp
+  formData.append("entry.745799675", form.enquiryType);   // Select Enquiry Type
+  formData.append("entry.1148051182", form.product);      // Product / Requirement
+  formData.append("entry.479365014", form.quantity);      // Approx. Quantity
+  formData.append("entry.2075020123", form.location);     // City / State / Country
+  formData.append("entry.26380700", form.message);        // Message / Requirement Details
+
+  try {
+    // Dispatches the data to Google Forms in the background
+    await fetch(GOOGLE_FORM_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    });
+
+    // Success toast triggers without shifting your UI pages
+    toast.success("Enquiry submitted. Our team will get back to you soon.");
+    setForm(initialForm);
+
+  } catch (error) {
+    console.error("Submission failed:", error);
+    toast.error("Something went wrong. Please try again later.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
  
 
@@ -365,13 +378,17 @@ const opportunities = [
                 onChange={handleChange("email")}
                 className="form-input"
               />
-              <input
-                type="tel"
-                placeholder="Phone / WhatsApp *"
-                value={form.phone}
-                onChange={handleChange("phone")}
-                className="form-input"
-              />
+             <input
+              type="tel"
+              placeholder="Phone / WhatsApp *"
+              value={form.phone}
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                setForm((prev) => ({ ...prev, phone: val }));
+              }}
+              className="form-input"
+              maxLength={10}
+            />
  
               <select
                 value={form.enquiryType}
@@ -393,13 +410,19 @@ const opportunities = [
                 className="form-input"
               />
  
-              <input
-                type="text"
-                placeholder="Approx. Quantity"
-                value={form.quantity}
-                onChange={handleChange("quantity")}
-                className="form-input"
-              />
+             <input
+              type="text"
+              inputMode="numeric"
+              placeholder="Approx. Quantity"
+              value={form.quantity}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val === "" || /^\d*\.?\d*$/.test(val)) {
+                  setForm((prev) => ({ ...prev, quantity: val }));
+                }
+              }}
+              className="form-input"
+            />
               <input
                 type="text"
                 placeholder="City / State / Country"
@@ -417,9 +440,18 @@ const opportunities = [
               />
             </div>
  
-            <button type="submit" className="submit-btn">
-              Submit Enquiry <ArrowRight size={16} strokeWidth={2} />
-            </button>
+           <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <span className="spinner" aria-hidden="true" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    Submit Enquiry <ArrowRight size={16} strokeWidth={2} />
+                  </>
+                )}
+              </button>
           </form>
         </div>
       </div>
