@@ -1920,11 +1920,17 @@ Thank you.
           message
         )}`;
 
-      window.open(
-        whatsappUrl,
-        "_blank"
-      );
-
+    //   window.open(
+    //     whatsappUrl,
+    //     "_blank"
+    //   );
+        const whatsappLink = document.createElement("a");
+        whatsappLink.href = whatsappUrl;
+        whatsappLink.target = "_blank";
+        whatsappLink.rel = "noopener noreferrer";
+        document.body.appendChild(whatsappLink);
+        whatsappLink.click();
+        document.body.removeChild(whatsappLink);
       // =====================================================
       // USER MESSAGE
       // =====================================================
