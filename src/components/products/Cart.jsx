@@ -1162,6 +1162,7 @@
 // export default Cart;
 
 
+
 import React, { useMemo, useState } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
@@ -1170,6 +1171,12 @@ import { useCart } from "../../components/context/CartContext";
 
 import "../../styling/Home.css";
 import "../../styling/products.css";
+
+// =====================================================
+// WHATSAPP NUMBER
+// =====================================================
+
+const WHATSAPP_URL = "https://wa.me/917809903359";
 
 const Cart = () => {
   const {
@@ -1182,9 +1189,9 @@ const Cart = () => {
 
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // -----------------------------------------
+  // =====================================================
   // CUSTOMER FORM
-  // -----------------------------------------
+  // =====================================================
 
   const [showCustomerForm, setShowCustomerForm] = useState(false);
 
@@ -1195,9 +1202,9 @@ const Cart = () => {
     place: "",
   });
 
-  // -----------------------------------------
-  // CALCULATE TOTAL
-  // -----------------------------------------
+  // =====================================================
+  // CALCULATE SUBTOTAL
+  // =====================================================
 
   const subtotal = useMemo(() => {
     return items.reduce((total, item) => {
@@ -1208,13 +1215,17 @@ const Cart = () => {
     }, 0);
   }, [items]);
 
+  // =====================================================
+  // DELIVERY
+  // =====================================================
+
   const deliveryCharge = subtotal > 0 ? 0 : 0;
 
   const total = subtotal + deliveryCharge;
 
-  // -----------------------------------------
+  // =====================================================
   // CUSTOMER INPUT
-  // -----------------------------------------
+  // =====================================================
 
   const handleCustomerChange = (e) => {
     const { name, value } = e.target;
@@ -1225,9 +1236,9 @@ const Cart = () => {
     }));
   };
 
-  // -----------------------------------------
+  // =====================================================
   // OPEN CUSTOMER FORM
-  // -----------------------------------------
+  // =====================================================
 
   const handleProceedClick = () => {
     if (!items.length) {
@@ -1237,9 +1248,9 @@ const Cart = () => {
     setShowCustomerForm(true);
   };
 
-  // -----------------------------------------
+  // =====================================================
   // GENERATE BILL IMAGE
-  // -----------------------------------------
+  // =====================================================
 
   const generateBillImage = async () => {
     const canvas = document.createElement("canvas");
@@ -1264,9 +1275,9 @@ const Cart = () => {
     canvas.width = width;
     canvas.height = height;
 
-    // -----------------------------------------
+    // =====================================================
     // BACKGROUND
-    // -----------------------------------------
+    // =====================================================
 
     ctx.fillStyle = "#f5f8f5";
 
@@ -1277,9 +1288,9 @@ const Cart = () => {
       height
     );
 
-    // -----------------------------------------
+    // =====================================================
     // WHITE BILL
-    // -----------------------------------------
+    // =====================================================
 
     ctx.fillStyle = "#ffffff";
 
@@ -1290,9 +1301,9 @@ const Cart = () => {
       height - 60
     );
 
-    // -----------------------------------------
+    // =====================================================
     // HEADER
-    // -----------------------------------------
+    // =====================================================
 
     ctx.fillStyle = "#08752f";
 
@@ -1332,14 +1343,16 @@ const Cart = () => {
     ctx.font = "16px Arial";
 
     ctx.fillText(
-      `Date: ${new Date().toLocaleDateString("en-IN")}`,
+      `Date: ${new Date().toLocaleDateString(
+        "en-IN"
+      )}`,
       730,
       115
     );
 
-    // -----------------------------------------
+    // =====================================================
     // CUSTOMER DETAILS
-    // -----------------------------------------
+    // =====================================================
 
     let y = 215;
 
@@ -1385,9 +1398,9 @@ const Cart = () => {
       y
     );
 
-    // -----------------------------------------
+    // =====================================================
     // DIVIDER
-    // -----------------------------------------
+    // =====================================================
 
     y += 45;
 
@@ -1403,9 +1416,9 @@ const Cart = () => {
 
     ctx.stroke();
 
-    // -----------------------------------------
+    // =====================================================
     // PRODUCT HEADER
-    // -----------------------------------------
+    // =====================================================
 
     y += 45;
 
@@ -1437,9 +1450,9 @@ const Cart = () => {
       y
     );
 
-    // -----------------------------------------
+    // =====================================================
     // PRODUCTS
-    // -----------------------------------------
+    // =====================================================
 
     y += 45;
 
@@ -1499,9 +1512,9 @@ const Cart = () => {
       y += rowHeight;
     });
 
-    // -----------------------------------------
+    // =====================================================
     // SUMMARY
-    // -----------------------------------------
+    // =====================================================
 
     y += 20;
 
@@ -1575,9 +1588,9 @@ const Cart = () => {
       y
     );
 
-    // -----------------------------------------
+    // =====================================================
     // FOOTER
-    // -----------------------------------------
+    // =====================================================
 
     ctx.fillStyle = "#777777";
 
@@ -1598,9 +1611,9 @@ const Cart = () => {
     return canvas;
   };
 
-  // -----------------------------------------
+  // =====================================================
   // DOWNLOAD BILL
-  // -----------------------------------------
+  // =====================================================
 
   const downloadBill = async () => {
     if (!customer.fullName.trim()) {
@@ -1608,68 +1621,160 @@ const Cart = () => {
       return;
     }
 
-    const canvas = await generateBillImage();
+    try {
+      const canvas =
+        await generateBillImage();
 
-    const image = canvas.toDataURL("image/png");
+      const image =
+        canvas.toDataURL("image/png");
 
-    const link = document.createElement("a");
+      const link =
+        document.createElement("a");
 
-    link.href = image;
+      link.href = image;
 
-    link.download = `ORYA-Order-${Date.now()}.png`;
+      link.download =
+        `ORYA-Order-${Date.now()}.png`;
 
-    link.click();
+      document.body.appendChild(link);
+
+      link.click();
+
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error(
+        "Bill download failed:",
+        error
+      );
+
+      alert(
+        "Unable to download bill."
+      );
+    }
   };
 
-  // -----------------------------------------
+  // =====================================================
+  // CREATE WHATSAPP MESSAGE
+  // =====================================================
+
+  const createWhatsAppMessage = () => {
+    const orderLines = items
+      .map((item) => {
+        const qty =
+          Number(item.qty) || 0;
+
+        const price =
+          Number(item.price) || 0;
+
+        const itemTotal =
+          qty * price;
+
+        return (
+          `• ${item.name}\n` +
+          `  Quantity: ${qty}\n` +
+          `  Price: ₹${price.toFixed(2)}\n` +
+          `  Amount: ₹${itemTotal.toFixed(2)}`
+        );
+      })
+      .join("\n\n");
+
+    return `
+Hello ORYA,
+
+I would like to place an order.
+
+CUSTOMER DETAILS
+-------------------------
+Name: ${customer.fullName}
+Mobile: ${customer.mobile}
+Email: ${customer.email}
+Place: ${customer.place}
+
+ORDER DETAILS
+-------------------------
+${orderLines}
+
+-------------------------
+Subtotal: ₹${subtotal.toFixed(2)}
+Delivery: ${
+      deliveryCharge === 0
+        ? "FREE"
+        : `₹${deliveryCharge.toFixed(2)}`
+    }
+Total: ₹${total.toFixed(2)}
+-------------------------
+
+I have attached the ORYA order bill image.
+
+Please confirm my order.
+
+Thank you.
+    `.trim();
+  };
+
+  // =====================================================
   // PROCEED TO ORDER
-  // -----------------------------------------
+  // =====================================================
 
   const proceedToOrder = async (e) => {
     e.preventDefault();
 
-    // -----------------------------------------
+    // =====================================================
     // VALIDATION
-    // -----------------------------------------
+    // =====================================================
 
     if (!customer.fullName.trim()) {
-      alert("Please enter your full name.");
+      alert(
+        "Please enter your full name."
+      );
       return;
     }
 
     if (!customer.mobile.trim()) {
-      alert("Please enter your mobile number.");
+      alert(
+        "Please enter your mobile number."
+      );
       return;
     }
 
-    if (!/^[0-9]{10}$/.test(customer.mobile.trim())) {
-      alert("Please enter a valid 10 digit mobile number.");
+    if (
+      !/^[0-9]{10}$/.test(
+        customer.mobile.trim()
+      )
+    ) {
+      alert(
+        "Please enter a valid 10 digit mobile number."
+      );
       return;
     }
 
     if (!customer.email.trim()) {
-      alert("Please enter your email address.");
+      alert(
+        "Please enter your email address."
+      );
       return;
     }
 
     if (!customer.place.trim()) {
-      alert("Please enter your place.");
+      alert(
+        "Please enter your place."
+      );
       return;
     }
 
     try {
       setIsGenerating(true);
 
-      // -----------------------------------------
+      // =====================================================
       // GENERATE BILL
-      // -----------------------------------------
+      // =====================================================
 
       const canvas =
         await generateBillImage();
 
-      // -----------------------------------------
+      // =====================================================
       // CONVERT CANVAS TO BLOB
-      // -----------------------------------------
+      // =====================================================
 
       const blob =
         await new Promise((resolve) => {
@@ -1685,9 +1790,9 @@ const Cart = () => {
         );
       }
 
-      // -----------------------------------------
+      // =====================================================
       // CREATE IMAGE FILE
-      // -----------------------------------------
+      // =====================================================
 
       const file = new File(
         [blob],
@@ -1697,9 +1802,25 @@ const Cart = () => {
         }
       );
 
-      // -----------------------------------------
-      // MOBILE / NATIVE SHARE
-      // -----------------------------------------
+      // =====================================================
+      // WHATSAPP MESSAGE
+      // =====================================================
+
+      const message =
+        createWhatsAppMessage();
+
+      // =====================================================
+      // MOBILE SHARE
+      // =====================================================
+      //
+      // On supported mobile browsers:
+      //
+      // Image + text will be shared.
+      //
+      // User can select WhatsApp and then
+      // choose your ORYA WhatsApp number.
+      //
+      // =====================================================
 
       if (
         navigator.share &&
@@ -1711,15 +1832,17 @@ const Cart = () => {
         try {
           await navigator.share({
             title: "ORYA Order Bill",
+            text: message,
             files: [file],
           });
 
-          // Successfully opened/completed sharing
           setShowCustomerForm(false);
+
         } catch (shareError) {
-          // User cancelled share
+
           if (
-            shareError.name === "AbortError"
+            shareError.name ===
+            "AbortError"
           ) {
             console.log(
               "User cancelled sharing."
@@ -1732,12 +1855,16 @@ const Cart = () => {
         return;
       }
 
-      // -----------------------------------------
+      // =====================================================
       // DESKTOP FALLBACK
-      // -----------------------------------------
+      // =====================================================
 
       const imageData =
         canvas.toDataURL("image/png");
+
+      // -----------------------------------------------------
+      // DOWNLOAD BILL IMAGE
+      // -----------------------------------------------------
 
       const link =
         document.createElement("a");
@@ -1753,42 +1880,54 @@ const Cart = () => {
 
       document.body.removeChild(link);
 
-      // -----------------------------------------
-      // OPEN WHATSAPP WEB
-      // -----------------------------------------
+      // =====================================================
+      // OPEN SPECIFIC WHATSAPP NUMBER
+      // =====================================================
+
+      const whatsappLink =
+        `${WHATSAPP_URL}?text=${encodeURIComponent(
+          message
+        )}`;
 
       window.open(
-        "https://web.whatsapp.com/",
+        whatsappLink,
         "_blank"
       );
 
+      // =====================================================
+      // INFORMATION
+      // =====================================================
+
       alert(
-        "Your bill image has been downloaded. WhatsApp Web will open. Please attach the downloaded ORYA bill image and send it."
+        "Your ORYA bill has been downloaded. WhatsApp has been opened with the order details. Please attach the downloaded bill image and send it."
       );
 
       setShowCustomerForm(false);
 
     } catch (error) {
+
       console.error(
         "Order generation failed:",
         error
       );
 
       if (
-        error.name !== "AbortError"
+        error.name !==
+        "AbortError"
       ) {
         alert(
           "Unable to generate order. Please try again."
         );
       }
+
     } finally {
       setIsGenerating(false);
     }
   };
 
-  // -----------------------------------------
+  // =====================================================
   // UI
-  // -----------------------------------------
+  // =====================================================
 
   return (
     <div className="home">
@@ -1799,7 +1938,9 @@ const Cart = () => {
 
         <div className="orya-cart-container">
 
-          {/* PAGE HEADING */}
+          {/* =================================================
+              PAGE HEADING
+          ================================================= */}
 
           <div className="orya-cart-heading">
 
@@ -1832,7 +1973,9 @@ const Cart = () => {
 
           </div>
 
-          {/* EMPTY CART */}
+          {/* =================================================
+              EMPTY CART
+          ================================================= */}
 
           {items.length === 0 ? (
 
@@ -1890,18 +2033,22 @@ const Cart = () => {
 
             <div className="orya-cart-layout">
 
-              {/* CART ITEMS */}
+              {/* =================================================
+                  CART ITEMS
+              ================================================= */}
 
               <section className="orya-cart-items">
 
                 <div className="orya-cart-items-header">
 
                   <h2>
+
                     Cart Items
 
                     <span>
                       {items.length}
                     </span>
+
                   </h2>
 
                   <button
@@ -1969,7 +2116,8 @@ const Cart = () => {
                         </h3>
 
                         <p>
-                          ₹{price.toFixed(2)}
+                          ₹
+                          {price.toFixed(2)}
 
                           <span>
                             {" "}
@@ -2076,7 +2224,9 @@ const Cart = () => {
 
               </section>
 
-              {/* SUMMARY */}
+              {/* =================================================
+                  ORDER SUMMARY
+              ================================================= */}
 
               <aside className="orya-order-summary">
 
@@ -2099,7 +2249,8 @@ const Cart = () => {
                   </span>
 
                   <strong>
-                    ₹{subtotal.toFixed(2)}
+                    ₹
+                    {subtotal.toFixed(2)}
                   </strong>
 
                 </div>
@@ -2125,7 +2276,8 @@ const Cart = () => {
                   </span>
 
                   <strong>
-                    ₹{total.toFixed(2)}
+                    ₹
+                    {total.toFixed(2)}
                   </strong>
 
                 </div>
@@ -2144,6 +2296,7 @@ const Cart = () => {
                   <span>
                     →
                   </span>
+
                 </button>
 
                 <div className="orya-whatsapp-note">
@@ -2154,7 +2307,7 @@ const Cart = () => {
 
                   Enter your details and
                   your bill will be generated
-                  as an image for WhatsApp.
+                  and shared through WhatsApp.
 
                 </div>
 
@@ -2238,8 +2391,13 @@ const Cart = () => {
               <div className="orya-form-group">
 
                 <label>
+
                   Full Name
-                  <span>*</span>
+
+                  <span>
+                    *
+                  </span>
+
                 </label>
 
                 <input
@@ -2262,8 +2420,13 @@ const Cart = () => {
               <div className="orya-form-group">
 
                 <label>
+
                   Mobile Number
-                  <span>*</span>
+
+                  <span>
+                    *
+                  </span>
+
                 </label>
 
                 <input
@@ -2276,8 +2439,14 @@ const Cart = () => {
 
                     const value =
                       e.target.value
-                        .replace(/\D/g, "")
-                        .slice(0, 10);
+                        .replace(
+                          /\D/g,
+                          ""
+                        )
+                        .slice(
+                          0,
+                          10
+                        );
 
                     setCustomer(
                       (prev) => ({
@@ -2299,8 +2468,13 @@ const Cart = () => {
               <div className="orya-form-group">
 
                 <label>
+
                   Email ID
-                  <span>*</span>
+
+                  <span>
+                    *
+                  </span>
+
                 </label>
 
                 <input
@@ -2323,8 +2497,13 @@ const Cart = () => {
               <div className="orya-form-group">
 
                 <label>
+
                   Place
-                  <span>*</span>
+
+                  <span>
+                    *
+                  </span>
+
                 </label>
 
                 <input
@@ -2365,7 +2544,8 @@ const Cart = () => {
                   </span>
 
                   <strong>
-                    ₹{total.toFixed(2)}
+                    ₹
+                    {total.toFixed(2)}
                   </strong>
 
                 </div>
@@ -2394,9 +2574,9 @@ const Cart = () => {
 
               <p className="orya-form-note">
 
-                Your customer and order
-                information will be included
-                inside the generated bill image.
+                Your details, order information,
+                and bill will be shared through
+                WhatsApp.
 
               </p>
 
