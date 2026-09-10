@@ -1178,7 +1178,17 @@ import "../../styling/products.css";
 // =====================================================
 
 const WHATSAPP_URL = "https://wa.me/917809903359";
-
+const WhatsAppIcon = ({ size = 25 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01a7.94 7.94 0 0 0 5.54-13.58zm-5.55 12.2h-.01a6.6 6.6 0 0 1-3.35-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.6 6.6 0 0 1 10.24-8.2 6.55 6.55 0 0 1 1.94 4.67 6.62 6.62 0 0 1-6.6 6.63zm3.6-4.95c-.2-.1-1.16-.57-1.34-.64-.18-.07-.31-.1-.44.1-.13.2-.5.63-.62.76-.11.13-.23.14-.42.05a5.4 5.4 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.07.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33h-.38c-.13 0-.34.05-.52.24-.18.2-.68.67-.68 1.62s.7 1.88.8 2.01c.1.13 1.38 2.1 3.34 2.95.47.2.83.32 1.12.41.47.15.9.13 1.24.08.38-.06 1.16-.47 1.32-.93.16-.46.16-.85.11-.93-.05-.09-.18-.14-.38-.24z"/>
+  </svg>
+);
 const Cart = () => {
   const {
     items,
@@ -1729,6 +1739,243 @@ Thank you.
   // PROCEED TO ORDER
   // =====================================================
 
+  // const proceedToOrder = async (e) => {
+  //   e.preventDefault();
+
+  //   // =====================================================
+  //   // VALIDATION
+  //   // =====================================================
+
+  //   if (!customer.fullName.trim()) {
+  //     alert(
+  //       "Please enter your full name."
+  //     );
+  //     return;
+  //   }
+
+  //   if (!customer.mobile.trim()) {
+  //     alert(
+  //       "Please enter your mobile number."
+  //     );
+  //     return;
+  //   }
+
+  //   if (
+  //     !/^[0-9]{10}$/.test(
+  //       customer.mobile.trim()
+  //     )
+  //   ) {
+  //     alert(
+  //       "Please enter a valid 10 digit mobile number."
+  //     );
+  //     return;
+  //   }
+
+  //   if (!customer.email.trim()) {
+  //     alert(
+  //       "Please enter your email address."
+  //     );
+  //     return;
+  //   }
+
+  //   if (!customer.place.trim()) {
+  //     alert(
+  //       "Please enter your place."
+  //     );
+  //     return;
+  //   }
+
+  //   try {
+  //     setIsGenerating(true);
+
+  //     // =====================================================
+  //     // GENERATE BILL
+  //     // =====================================================
+
+  //     const canvas =
+  //       await generateBillImage();
+
+  //     // =====================================================
+  //     // CREATE IMAGE DATA
+  //     // =====================================================
+
+  //     const imageData =
+  //       canvas.toDataURL(
+  //         "image/png"
+  //       );
+
+  //     // =====================================================
+  //     // CREATE WHATSAPP MESSAGE
+  //     // =====================================================
+
+  //     const message =
+  //       createWhatsAppMessage();
+
+  //     // =====================================================
+  //     // CREATE BILL FILE
+  //     // =====================================================
+
+  //     const blob =
+  //       await new Promise(
+  //         (resolve) => {
+  //           canvas.toBlob(
+  //             resolve,
+  //             "image/png"
+  //           );
+  //         }
+  //       );
+
+  //     if (!blob) {
+  //       throw new Error(
+  //         "Unable to create bill image."
+  //       );
+  //     }
+
+  //     const file = new File(
+  //       [blob],
+  //       `ORYA-Order-${Date.now()}.png`,
+  //       {
+  //         type: "image/png",
+  //       }
+  //     );
+
+  //     // =====================================================
+  //     // MOBILE SHARE
+  //     // =====================================================
+  //     //
+  //     // On supported mobile devices, share:
+  //     // 1. Bill image
+  //     // 2. WhatsApp message
+  //     //
+  //     // The user can select WhatsApp from
+  //     // the native share menu.
+  //     //
+  //     // =====================================================
+
+  //     if (
+  //       navigator.share &&
+  //       navigator.canShare &&
+  //       navigator.canShare({
+  //         files: [file],
+  //       })
+  //     ) {
+  //       try {
+
+  //         await navigator.share({
+  //           title:
+  //             "ORYA Order Bill",
+
+  //           text:
+  //             message,
+
+  //           files: [file],
+  //         });
+
+  //         setShowCustomerForm(false);
+  //         alert(
+  //           "Bill shared successfully! Please make sure to select 'ORYA Bio-Solutions' (+91 78099 03359) as the recipient in WhatsApp to complete your order."
+  //         );
+
+  //       } catch (shareError) {
+
+  //         if (
+  //           shareError.name ===
+  //           "AbortError"
+  //         ) {
+  //           console.log(
+  //             "User cancelled sharing."
+  //           );
+  //         } else {
+  //           throw shareError;
+  //         }
+  //       }
+
+  //       return;
+  //     }
+
+  //     // =====================================================
+  //     // DESKTOP
+  //     // =====================================================
+  //     //
+  //     // Browser cannot attach a local image directly
+  //     // to a wa.me URL.
+  //     //
+  //     // Therefore:
+  //     //
+  //     // 1. Download bill image
+  //     // 2. Open YOUR WhatsApp number
+  //     // 3. Pre-fill the complete order message
+  //     // 4. User attaches downloaded image
+  //     //
+  //     // =====================================================
+
+  //     const link =
+  //       document.createElement("a");
+
+  //     link.href =
+  //       imageData;
+
+  //     link.download =
+  //       `ORYA-Order-${Date.now()}.png`;
+
+  //     document.body.appendChild(link);
+
+  //     link.click();
+
+  //     document.body.removeChild(link);
+
+  //     // =====================================================
+  //     // OPEN YOUR SPECIFIC WHATSAPP NUMBER
+  //     // =====================================================
+
+  //     const whatsappUrl =
+  //       `${WHATSAPP_URL}?text=${encodeURIComponent(
+  //         message
+  //       )}`;
+
+  //   //   window.open(
+  //   //     whatsappUrl,
+  //   //     "_blank"
+  //   //   );
+  //       const whatsappLink = document.createElement("a");
+  //       whatsappLink.href = whatsappUrl;
+  //       whatsappLink.target = "_blank";
+  //       whatsappLink.rel = "noopener noreferrer";
+  //       document.body.appendChild(whatsappLink);
+  //       whatsappLink.click();
+  //       document.body.removeChild(whatsappLink);
+  //     // =====================================================
+  //     // USER MESSAGE
+  //     // =====================================================
+
+  //     alert(
+  //       "Your bill has been downloaded. WhatsApp has been opened with the order details. Please attach the downloaded bill image and send it."
+  //     );
+
+  //     setShowCustomerForm(false);
+
+  //   } catch (error) {
+
+  //     console.error(
+  //       "Order generation failed:",
+  //       error
+  //     );
+
+  //     if (
+  //       error.name !==
+  //       "AbortError"
+  //     ) {
+  //       alert(
+  //         "Unable to generate order. Please try again."
+  //       );
+  //     }
+
+  //   } finally {
+
+  //     setIsGenerating(false);
+
+  //   }
+  // };
   const proceedToOrder = async (e) => {
     e.preventDefault();
 
@@ -1737,41 +1984,27 @@ Thank you.
     // =====================================================
 
     if (!customer.fullName.trim()) {
-      alert(
-        "Please enter your full name."
-      );
+      alert("Please enter your full name.");
       return;
     }
 
     if (!customer.mobile.trim()) {
-      alert(
-        "Please enter your mobile number."
-      );
+      alert("Please enter your mobile number.");
       return;
     }
 
-    if (
-      !/^[0-9]{10}$/.test(
-        customer.mobile.trim()
-      )
-    ) {
-      alert(
-        "Please enter a valid 10 digit mobile number."
-      );
+    if (!/^[0-9]{10}$/.test(customer.mobile.trim())) {
+      alert("Please enter a valid 10 digit mobile number.");
       return;
     }
 
     if (!customer.email.trim()) {
-      alert(
-        "Please enter your email address."
-      );
+      alert("Please enter your email address.");
       return;
     }
 
     if (!customer.place.trim()) {
-      alert(
-        "Please enter your place."
-      );
+      alert("Please enter your place.");
       return;
     }
 
@@ -1779,194 +2012,34 @@ Thank you.
       setIsGenerating(true);
 
       // =====================================================
-      // GENERATE BILL
+      // CREATE WHATSAPP MESSAGE (TEXT ONLY)
       // =====================================================
 
-      const canvas =
-        await generateBillImage();
+      const message = createWhatsAppMessage();
 
       // =====================================================
-      // CREATE IMAGE DATA
+      // OPEN WHATSAPP WITH YOUR NUMBER + PRE-FILLED TEXT
       // =====================================================
 
-      const imageData =
-        canvas.toDataURL(
-          "image/png"
-        );
+      const whatsappUrl = `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
 
-      // =====================================================
-      // CREATE WHATSAPP MESSAGE
-      // =====================================================
-
-      const message =
-        createWhatsAppMessage();
-
-      // =====================================================
-      // CREATE BILL FILE
-      // =====================================================
-
-      const blob =
-        await new Promise(
-          (resolve) => {
-            canvas.toBlob(
-              resolve,
-              "image/png"
-            );
-          }
-        );
-
-      if (!blob) {
-        throw new Error(
-          "Unable to create bill image."
-        );
-      }
-
-      const file = new File(
-        [blob],
-        `ORYA-Order-${Date.now()}.png`,
-        {
-          type: "image/png",
-        }
-      );
-
-      // =====================================================
-      // MOBILE SHARE
-      // =====================================================
-      //
-      // On supported mobile devices, share:
-      // 1. Bill image
-      // 2. WhatsApp message
-      //
-      // The user can select WhatsApp from
-      // the native share menu.
-      //
-      // =====================================================
-
-      if (
-        navigator.share &&
-        navigator.canShare &&
-        navigator.canShare({
-          files: [file],
-        })
-      ) {
-        try {
-
-          await navigator.share({
-            title:
-              "ORYA Order Bill",
-
-            text:
-              message,
-
-            files: [file],
-          });
-
-          setShowCustomerForm(false);
-          alert(
-            "Bill shared successfully! Please make sure to select 'ORYA Bio-Solutions' (+91 78099 03359) as the recipient in WhatsApp to complete your order."
-          );
-
-        } catch (shareError) {
-
-          if (
-            shareError.name ===
-            "AbortError"
-          ) {
-            console.log(
-              "User cancelled sharing."
-            );
-          } else {
-            throw shareError;
-          }
-        }
-
-        return;
-      }
-
-      // =====================================================
-      // DESKTOP
-      // =====================================================
-      //
-      // Browser cannot attach a local image directly
-      // to a wa.me URL.
-      //
-      // Therefore:
-      //
-      // 1. Download bill image
-      // 2. Open YOUR WhatsApp number
-      // 3. Pre-fill the complete order message
-      // 4. User attaches downloaded image
-      //
-      // =====================================================
-
-      const link =
-        document.createElement("a");
-
-      link.href =
-        imageData;
-
-      link.download =
-        `ORYA-Order-${Date.now()}.png`;
-
-      document.body.appendChild(link);
-
-      link.click();
-
-      document.body.removeChild(link);
-
-      // =====================================================
-      // OPEN YOUR SPECIFIC WHATSAPP NUMBER
-      // =====================================================
-
-      const whatsappUrl =
-        `${WHATSAPP_URL}?text=${encodeURIComponent(
-          message
-        )}`;
-
-    //   window.open(
-    //     whatsappUrl,
-    //     "_blank"
-    //   );
-        const whatsappLink = document.createElement("a");
-        whatsappLink.href = whatsappUrl;
-        whatsappLink.target = "_blank";
-        whatsappLink.rel = "noopener noreferrer";
-        document.body.appendChild(whatsappLink);
-        whatsappLink.click();
-        document.body.removeChild(whatsappLink);
-      // =====================================================
-      // USER MESSAGE
-      // =====================================================
-
-      alert(
-        "Your bill has been downloaded. WhatsApp has been opened with the order details. Please attach the downloaded bill image and send it."
-      );
+      const whatsappLink = document.createElement("a");
+      whatsappLink.href = whatsappUrl;
+      whatsappLink.target = "_blank";
+      whatsappLink.rel = "noopener noreferrer";
+      document.body.appendChild(whatsappLink);
+      whatsappLink.click();
+      document.body.removeChild(whatsappLink);
 
       setShowCustomerForm(false);
 
     } catch (error) {
-
-      console.error(
-        "Order generation failed:",
-        error
-      );
-
-      if (
-        error.name !==
-        "AbortError"
-      ) {
-        alert(
-          "Unable to generate order. Please try again."
-        );
-      }
-
+      console.error("Order generation failed:", error);
+      alert("Unable to generate order. Please try again.");
     } finally {
-
       setIsGenerating(false);
-
     }
   };
-
   // =====================================================
   // UI
   // =====================================================
@@ -2353,13 +2426,9 @@ Thank you.
 
                 <div className="orya-whatsapp-note">
 
-                  <span>
-                    💬
-                  </span>
+                  <WhatsAppIcon size={25} />
 
-                  Enter your details and
-                  your bill will be generated
-                  and shared through WhatsApp.
+                  Your order details will be sent via WhatsApp. Download the bill image first if you'd like to attach it manually.
 
                 </div>
 

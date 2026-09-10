@@ -324,10 +324,10 @@
     gap: 15px;
   }
 
-  /* .dealer-button {
-    padding: 0 18px;
-    font-size: 14px;
-  } */
+  .dealer-button {
+   
+   font-size: 10px;
+  }
 }
 
 

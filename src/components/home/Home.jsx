@@ -30,22 +30,9 @@ import {
   Wheat,
   Package,
   PackagePlus,
-  ShoppingBag,
-  MessageCircle,
-  FileText,
 } from "lucide-react";
 import DealerBanner from "./DealerBanner";
-const WhatsAppIcon = ({ size = 18 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01a7.94 7.94 0 0 0 5.54-13.58zm-5.55 12.2h-.01a6.6 6.6 0 0 1-3.35-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.6 6.6 0 0 1 10.24-8.2 6.55 6.55 0 0 1 1.94 4.67 6.62 6.62 0 0 1-6.6 6.63zm3.6-4.95c-.2-.1-1.16-.57-1.34-.64-.18-.07-.31-.1-.44.1-.13.2-.5.63-.62.76-.11.13-.23.14-.42.05a5.4 5.4 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.07.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33h-.38c-.13 0-.34.05-.52.24-.18.2-.68.67-.68 1.62s.7 1.88.8 2.01c.1.13 1.38 2.1 3.34 2.95.47.2.83.32 1.12.41.47.15.9.13 1.24.08.38-.06 1.16-.47 1.32-.93.16-.46.16-.85.11-.93-.05-.09-.18-.14-.38-.24z"/>
-  </svg>
-);
+
 
 const Home = () => {
 const heroSlides = [
@@ -143,7 +130,12 @@ const certificates = [
       title: "Sustainable Sourcing",
       image: "https://images.pexels.com/photos/38384711/pexels-photo-38384711.jpeg",
       description: "Responsibly sourced for a better tomorrow.",
-    }
+    },
+    // {
+    //   title: "Agriculture & Value Chain",
+    //   image: Slide1,
+    //   description: "Connecting farmers to markets and beyond.",
+    // },
   ];
 
   const valueChain = [
@@ -194,7 +186,15 @@ const certificates = [
     },
   ];
 
-
+  const businessTypes = [
+    "Hotels",
+    "Restaurants",
+    "Catering",
+    "Retail",
+    "Corporates",
+    "Institutions",
+    "Food Businesses",
+  ];
 
   return (
     <div className="home">
@@ -247,24 +247,21 @@ const certificates = [
                 })}
             </div>
             <div className="hero-buttons">
-  <Link to="/products" className="btn btn-primary">
-    <ShoppingBag size={18} strokeWidth={2} />
-    Explore Products
-  </Link>
-  <a
-    href="https://wa.me/917809903359"
-    className="btn btn-whatsapp"
-    target="_blank"
-    rel="noreferrer"
-  >
-   <WhatsAppIcon size={25} />
-    Chat on WhatsApp
-  </a>
-  <Link to="/contact#send-requirement" className="btn btn-whatsapp">
-    <FileText size={18} strokeWidth={2} />
-    Request a Quote
-  </Link>
-</div>
+              <Link to="/products" className="btn btn-primary">
+                Explore Products
+              </Link>
+              <a
+                href="https://wa.me/917809903359"
+                className="btn btn-whatsapp"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Chat on WhatsApp
+              </a>
+              <Link to="/contact#send-requirement" className="btn btn-whatsapp">
+                Request a Quote
+              </Link>
+            </div>
           </div>
         </div>
       </SwiperSlide>
