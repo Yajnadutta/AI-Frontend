@@ -975,3 +975,7 @@
   align-items: center;
   gap: 8px;
 }
+
+#send-requirement {
+  scroll-margin-top: 90px; /* adjust to your header height */
+}

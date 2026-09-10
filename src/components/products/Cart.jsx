@@ -1862,6 +1862,9 @@ Thank you.
           });
 
           setShowCustomerForm(false);
+          alert(
+            "Bill shared successfully! Please make sure to select 'ORYA Bio-Solutions' (+91 78099 03359) as the recipient in WhatsApp to complete your order."
+          );
 
         } catch (shareError) {
 

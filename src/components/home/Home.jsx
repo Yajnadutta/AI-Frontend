@@ -30,37 +30,24 @@ import {
   Wheat,
   Package,
   PackagePlus,
+  ShoppingBag,
+  MessageCircle,
+  FileText,
 } from "lucide-react";
 import DealerBanner from "./DealerBanner";
-
+const WhatsAppIcon = ({ size = 18 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01a7.94 7.94 0 0 0 5.54-13.58zm-5.55 12.2h-.01a6.6 6.6 0 0 1-3.35-.92l-.24-.14-2.5.65.67-2.44-.16-.25a6.6 6.6 0 0 1 10.24-8.2 6.55 6.55 0 0 1 1.94 4.67 6.62 6.62 0 0 1-6.6 6.63zm3.6-4.95c-.2-.1-1.16-.57-1.34-.64-.18-.07-.31-.1-.44.1-.13.2-.5.63-.62.76-.11.13-.23.14-.42.05a5.4 5.4 0 0 1-2.7-2.36c-.2-.35.2-.32.58-1.07.06-.13.03-.24-.02-.34-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33h-.38c-.13 0-.34.05-.52.24-.18.2-.68.67-.68 1.62s.7 1.88.8 2.01c.1.13 1.38 2.1 3.34 2.95.47.2.83.32 1.12.41.47.15.9.13 1.24.08.38-.06 1.16-.47 1.32-.93.16-.46.16-.85.11-.93-.05-.09-.18-.14-.38-.24z"/>
+  </svg>
+);
 
 const Home = () => {
-  // const heroSlides = [
-  //   {
-  //     image: Slide1,
-  //     title: "Sustainable Solutions For a Better Planet",
-  //     description:
-  //       "Eco-friendly alternatives to plastic using bagasse, bamboo, banana fibre,coconut and other biodegradable materials.",
-  //   },
-  //   {
-  //     image: Slide2,
-  //     title: "Sustainable Hydration Without Plastic",
-  //     description:
-  //       "Discover thoughtfully designed alternatives to conventional plastic bottles using bamboo and natural materials, paper-based solutions and emerging plant-based materials.",
-  //   },
-  //   {
-  //     image: Slide3,
-  //     title: "From Nature, Crafted for a Sustainable Tomorrow.",
-  //     description:
-  //       "Transforming renewable and agricultural resources into useful, responsible products while supporting a more circular economy.",
-  //   },
-  //   {
-  //     image: Slide4,
-  //     title: "Natural Food",
-  //     description:
-  //       "Traditional and natural foods sourced responsibly and presented with sustainable packaging. ",
-  //   },
-  // ];
 const heroSlides = [
   {
     image: Slide1,
@@ -156,12 +143,7 @@ const certificates = [
       title: "Sustainable Sourcing",
       image: "https://images.pexels.com/photos/38384711/pexels-photo-38384711.jpeg",
       description: "Responsibly sourced for a better tomorrow.",
-    },
-    // {
-    //   title: "Agriculture & Value Chain",
-    //   image: Slide1,
-    //   description: "Connecting farmers to markets and beyond.",
-    // },
+    }
   ];
 
   const valueChain = [
@@ -212,15 +194,7 @@ const certificates = [
     },
   ];
 
-  const businessTypes = [
-    "Hotels",
-    "Restaurants",
-    "Catering",
-    "Retail",
-    "Corporates",
-    "Institutions",
-    "Food Businesses",
-  ];
+
 
   return (
     <div className="home">
@@ -231,92 +205,6 @@ const certificates = [
 
       {/* ================= HERO CAROUSEL ================= */}
 
-      {/* <section className="hero-section">
-
-        <Swiper
-          modules={[Autoplay, Pagination, Navigation]}
-          spaceBetween={0}
-          slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-          className="hero-swiper"
-        >
-          {heroSlides.map((slide, index) => (
-            <SwiperSlide key={index}>
-
-              <div
-                className="hero-slide"
-                style={{
-                  backgroundImage: `url(${slide.image})`,
-                }}
-              >
-
-                <div className="hero-overlay"></div>
-
-                <div className="hero-content">
-
-               <div className="hero-highlights">
-  {product_categories
-    .find((category) => category.id === slide.categoryId)
-    ?.highlights.map((item, index) => {
-      const Icon = item.icon;
-
-      return (
-        <div className="hero-highlight" key={index}>
-          <Icon size={22} strokeWidth={1.8} />
-          <span>{item.text}</span>
-        </div>
-      );
-    })}
-</div>
-
-                  <h1>{slide.title}</h1>
-
-                  <p className="hero-description">
-                    {slide.description}
-                  </p>
-
-                  <div className="hero-buttons">
-
-                    <Link
-                      to="/products"
-                      className="btn btn-primary"
-                    >
-                      Explore Products
-                    </Link>
-
-                    <Link
-                      to="/partner"
-                      className="btn btn-outline"
-                    >
-                      Partner With ORYA
-                    </Link>
-
-                    <a
-                      href="https://wa.me/917809903359"
-                      className="btn btn-whatsapp"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      WhatsApp
-                    </a>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-      </section> */}
       <section className="hero-section">
   <Swiper
     modules={[Autoplay, Pagination, Navigation]}
@@ -359,21 +247,24 @@ const certificates = [
                 })}
             </div>
             <div className="hero-buttons">
-              <Link to="/products" className="btn btn-primary">
-                Explore Products
-              </Link>
-              <a
-                href="https://wa.me/917809903359"
-                className="btn btn-whatsapp"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Chat on WhatsApp
-              </a>
-               <Link to="/partner" className="btn btn-outline">
-                Request a Quote
-              </Link>
-            </div>
+  <Link to="/products" className="btn btn-primary">
+    <ShoppingBag size={18} strokeWidth={2} />
+    Explore Products
+  </Link>
+  <a
+    href="https://wa.me/917809903359"
+    className="btn btn-whatsapp"
+    target="_blank"
+    rel="noreferrer"
+  >
+   <WhatsAppIcon size={25} />
+    Chat on WhatsApp
+  </a>
+  <Link to="/contact#send-requirement" className="btn btn-whatsapp">
+    <FileText size={18} strokeWidth={2} />
+    Request a Quote
+  </Link>
+</div>
           </div>
         </div>
       </SwiperSlide>
@@ -381,125 +272,7 @@ const certificates = [
   </Swiper>
 </section>
 
-{/* ================= WHO WE ARE ================= */}
 
-{/* <AnimatedSection
-  as="section"
-  className="who-we-are-section"
-  animation="fade-up"
->
- <section class="who-we-are-section">
- 
-  <div class="who-we-are-container">
- 
-    <div class="who-we-are-content">
- 
-      <div class="who-we-are-label">
-        <span class="who-leaf">&#127811;</span>
-        <span>WHO WE ARE</span>
-      </div>
- 
-      <span class="who-we-are-title">
-        Connecting Nature,
-        <br />
-        Innovation &amp; Opportunity
-      </span>
- 
-      <p>
-        ORYA BIO-SOLUTIONS is a sustainability-focused enterprise working
-        across sustainable packaging, natural food, circular/agri-waste
-        products and responsible sourcing.
-      </p>
- 
-      <p>
-        We connect nature, innovation and agriculture to create practical
-        solutions that reduce dependence on conventional plastic and
-        build stronger sustainable value chains.
-      </p>
- 
-      <div class="who-we-are-features">
- 
-        <div class="who-feature">
-          <div class="who-feature-icon">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <path d="M16 18h22l10 8v22H16z" />
-              <path d="M16 18l10 8h22" />
-              <path d="M26 26v22" />
-              <path d="M48 26v22" />
-              <path d="M42 38h8" />
-              <path d="M46 34v8" />
-            </svg>
-          </div>
-          <span>Sustainable<br />Packaging</span>
-        </div>
- 
-        <div class="who-feature">
-          <div class="who-feature-icon">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <path d="M32 48V28" />
-              <path d="M32 38c-10-1-16-7-15-16 9 0 15 5 15 16z" />
-              <path d="M32 43c10-1 16-7 15-16-9 0-15 5-15 16z" />
-              <circle cx="32" cy="20" r="4" />
-              <path d="M32 7v5M22 10l3 4M42 10l-3 4" />
-            </svg>
-          </div>
-          <span>Natural<br />Food</span>
-        </div>
- 
-        <div class="who-feature">
-          <div class="who-feature-icon">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <circle cx="32" cy="32" r="20" />
-              <path d="M32 18c7 5 7 11 0 14-7-3-7-9 0-14z" />
-              <path d="M18 32c5-7 11-7 14 0-3 7-9 7-14 0z" />
-              <path d="M32 46c-7-5-7-11 0-14 7 3 7 9 0 14z" />
-              <path d="M46 32c-5 7-11 7-14 0 3-7 9-7 14 0z" />
-            </svg>
-          </div>
-          <span>Circular<br />Products</span>
-        </div>
- 
-        <div class="who-feature">
-          <div class="who-feature-icon">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <path d="M32 49V25" />
-              <path d="M32 34c-9-1-14-6-14-14 9 0 14 5 14 14z" />
-              <path d="M32 29c9-1 14-6 14-14-9 0-14 5-14 14z" />
-              <path d="M20 49h24" />
-              <path d="M24 49c0-8 3-13 8-17" />
-              <path d="M40 49c0-8-3-13-8-17" />
-            </svg>
-          </div>
-          <span>Agriculture &amp;<br />Value Chain</span>
-        </div>
- 
-        <div class="who-feature">
-          <div class="who-feature-icon">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <path d="M48 14C31 15 19 23 18 39c11 2 22-4 30-25z" />
-              <path d="M18 48c7-11 14-18 25-25" />
-              <path d="M29 38l-1-8" />
-              <path d="M37 30l-7-1" />
-            </svg>
-          </div>
-          <span>Responsible<br />Sourcing</span>
-        </div>
- 
-      </div>
-    </div>
- 
-    <div class="who-we-are-image">
-      <img
-        src={WhoWeAreImage}
-        alt="ORYA sustainable agriculture"
-      />
-    </div>
- 
-  </div>
- 
-</section>
- 
-</AnimatedSection> */}
       {/* ================= WHAT ORYA DOES ================= */}
 <AnimatedSection as="section" className="section" animation="fade-up">
  <section className="section">
@@ -646,58 +419,6 @@ const certificates = [
      
 
 
-      {/* ================= BUSINESS ================= */}
-{/* <AnimatedSection as="section" className="business-section" animation="fade-left">
-
-   <section className="business-section">
-
-        <div className="business-content">
-
-          <div className="business-left">
-
-            <h2>For Businesses</h2>
-
-            <p>
-              Sustainable solutions for every need
-            </p>
-
-            <div className="business-types">
-
-              {businessTypes.map((type, index) => (
-                <div className="business-type" key={index}>
-
-                  <div className="business-icon">
-                    {["🏨", "🍴", "☕", "🛒", "🏢", "🏛️", "🌱"][index]}
-                  </div>
-
-                  <span>{type}</span>
-
-                </div>
-              ))}
-
-            </div>
-
-          </div>
-
-
-          <div className="business-right">
-
-            <h3>Bulk Enquiries & Business Orders</h3>
-
-            <p>
-              Partner with ORYA for quality, sustainable and reliable solutions.
-            </p>
-
-            <Link to="/contact" className="business-btn">
-              Request an Enquiry
-            </Link>
-
-          </div>
-
-        </div>
-
-      </section>
-</AnimatedSection> */}
    
 <BusinessBanner/>
 

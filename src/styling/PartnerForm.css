@@ -1,0 +1,662 @@
+* {
+  box-sizing: border-box;
+}
+
+.partner-page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #edf4ef,
+      #f7f8f6
+    );
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+.partner-container {
+  width: 100%;
+  max-width: 1450px;
+
+  min-height: 850px;
+
+  display: grid;
+  grid-template-columns: 38% 62%;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 15px 60px
+    rgba(25, 69, 48, 0.12);
+}
+
+
+/* =========================
+   LEFT SIDE
+========================= */
+
+.partner-left {
+  width: 100%;
+  height: 100%;
+
+  min-height: 850px;
+
+  overflow: hidden;
+
+  background: #dfeedd;
+}
+
+.partner-left img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.partner-right {
+  position: relative;
+
+  padding:
+    55px
+    65px
+    25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #f8fbf8
+    );
+}
+
+.close-btn {
+  position: absolute;
+
+  top: 22px;
+  right: 25px;
+
+  border: none;
+  background: transparent;
+
+  color: #1c5c3b;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  transform: rotate(90deg);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.form-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 16px;
+
+  margin-bottom: 28px;
+}
+
+.header-icon {
+  color: #17613e;
+
+  margin-top: 2px;
+}
+
+.form-header h1 {
+  margin: 0;
+
+  font-size: 32px;
+
+  color: #285e43;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+}
+
+.form-header p {
+  margin: 8px 0 0;
+
+  color: #64706c;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   FORM GRID
+========================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 18px;
+}
+
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.form-group label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #35544a;
+}
+
+.form-group label svg {
+  color: #216b47;
+}
+
+.form-group label span,
+.selection-title span {
+  color: #d73b3b;
+}
+
+.form-group input {
+  width: 100%;
+
+  height: 52px;
+
+  border: 1px solid #d8e0dc;
+
+  border-radius: 10px;
+
+  padding: 0 16px;
+
+  font-size: 14px;
+
+  outline: none;
+
+  color: #2f3f38;
+
+  background: #ffffff;
+
+  transition: 0.3s;
+}
+
+.form-group input::placeholder {
+  color: #9aa5a0;
+}
+
+.form-group input:focus {
+  border-color: #28784f;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(40, 120, 79, 0.1);
+}
+
+.full-width {
+  margin-bottom: 18px;
+}
+
+
+/* =========================
+   SELECTION BOX
+========================= */
+
+.selection-box {
+  padding: 17px 20px;
+
+  margin-bottom: 16px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(237, 246, 240, 0.9),
+      rgba(247, 250, 248, 0.9)
+    );
+
+  border:
+    1px solid
+    rgba(214, 229, 220, 0.8);
+}
+
+.selection-title {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 14px;
+
+  color: #216b47;
+}
+
+.selection-title strong {
+  display: block;
+
+  color: #36564a;
+
+  font-size: 14px;
+}
+
+.selection-title small {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 12px;
+
+  color: #7a8983;
+}
+
+
+/* =========================
+   RADIO BUTTONS
+========================= */
+
+.radio-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 14px 20px;
+}
+
+.custom-radio,
+.custom-checkbox {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+
+  color: #51645c;
+
+  font-size: 14px;
+}
+
+.custom-radio input,
+.custom-checkbox input {
+  appearance: none;
+
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+
+  border:
+    1.5px solid
+    #9dacA5;
+
+  background: #ffffff;
+
+  cursor: pointer;
+}
+
+
+/* RADIO */
+
+.custom-radio input {
+  border-radius: 50%;
+}
+
+.custom-radio input:checked {
+  border: 5px solid #25744d;
+}
+
+
+/* CHECKBOX */
+
+.custom-checkbox input {
+  border-radius: 4px;
+}
+
+.custom-checkbox input:checked {
+  background: #25744d;
+
+  border-color: #25744d;
+
+  position: relative;
+}
+
+.custom-checkbox input:checked::after {
+  content: "✓";
+
+  color: white;
+
+  position: absolute;
+
+  top: -4px;
+  left: 2px;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   CHECKBOX GRID
+========================= */
+
+.checkbox-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 15px 35px;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.partner-submit-btn {
+  width: 100%;
+
+  height: 58px;
+
+  border: none;
+
+  border-radius: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #17653f,
+      #2d8756
+    );
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  box-shadow:
+    0 8px 20px
+    rgba(29, 103, 63, 0.2);
+}
+
+.partner-submit-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px
+    rgba(29, 103, 63, 0.3);
+}
+
+.partner-submit-btn span {
+  font-size: 22px;
+
+  margin-left: 4px;
+}
+
+
+/* =========================
+   PRIVACY TEXT
+========================= */
+
+.privacy-text {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 18px;
+
+  color: #718078;
+
+  font-size: 11px;
+}
+
+.privacy-text svg {
+  color: #2d7b51;
+}
+
+
+/* =========================
+   LAPTOP
+========================= */
+
+@media screen and (max-width: 1200px) {
+
+  .partner-container {
+    grid-template-columns: 35% 65%;
+  }
+
+  .partner-right {
+    padding:
+      50px
+      35px
+      25px;
+  }
+
+  .radio-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media screen and (max-width: 900px) {
+
+  .partner-page {
+    padding: 15px;
+  }
+
+  .partner-container {
+    grid-template-columns: 1fr;
+
+    max-width: 750px;
+  }
+
+  .partner-left {
+    min-height: 450px;
+
+    max-height: 500px;
+  }
+
+  .partner-left img {
+    object-position: center;
+  }
+
+  .partner-right {
+    padding: 50px 35px 30px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media screen and (max-width: 600px) {
+
+  .partner-page {
+    padding: 0;
+
+    align-items: flex-start;
+  }
+
+  .partner-container {
+    width: 100%;
+
+    border-radius: 0;
+
+    min-height: 100vh;
+  }
+
+  .partner-left {
+    min-height: 340px;
+
+    max-height: 380px;
+  }
+
+  .partner-right {
+    padding:
+      55px
+      20px
+      30px;
+  }
+
+  .close-btn {
+    top: 18px;
+    right: 15px;
+  }
+
+  .form-header {
+    gap: 10px;
+
+    margin-bottom: 25px;
+  }
+
+  .form-header h1 {
+    font-size: 25px;
+  }
+
+  .form-header p {
+    font-size: 13px;
+  }
+
+  .header-icon svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+  }
+
+  .form-group input {
+    height: 50px;
+  }
+
+  .radio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .selection-box {
+    padding: 16px;
+  }
+
+  .partner-submit-btn {
+    height: 55px;
+
+    font-size: 14px;
+  }
+
+  .privacy-text {
+    text-align: center;
+
+    font-size: 10px;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media screen and (max-width: 380px) {
+
+  .partner-left {
+    min-height: 280px;
+  }
+
+  .partner-right {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .form-header h1 {
+    font-size: 22px;
+  }
+
+  .form-header p {
+    font-size: 12px;
+  }
+
+}

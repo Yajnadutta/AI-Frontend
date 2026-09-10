@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import "swiper/css";
@@ -54,13 +54,25 @@ const initialForm = {
   message: "",
 };
  
-// const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// const phonePattern = /^[+\d][\d\s-]{6,}$/;
 const Contact = ( {
   mapSrc = MAP_EMBED_SRC,
   directionsUrl = DIRECTIONS_URL,
   whatsappUrl = WHATSAPP_URL,
 }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        // slight delay ensures the DOM/layout (images, sections) has settled
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 150);
+      }
+    }
+  }, [location]);
 const [form, setForm] = useState(initialForm);
 const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -278,9 +290,9 @@ const opportunities = [
           ))}
         </ul>
  
-        <a href="#enquiry" className="connect-banner-cta">
-          Send an enquiry <ArrowDown size={16} strokeWidth={2} />
-        </a>
+      <a href="#send-requirement" className="connect-banner-cta">
+        Send an enquiry <ArrowDown size={16} strokeWidth={2} />
+      </a>
       </div>
     </section>
 {/* ================= How can we help you? ================= */}
@@ -308,7 +320,7 @@ const opportunities = [
             </div>
             <h3 className="help-card-title">{title}</h3>
             <p className="help-card-body">{body}</p>
-            <a href="#enquire" className="help-card-link">
+            <a href="#send-requirement" className="help-card-link">
               Enquire <ArrowRight size={15} strokeWidth={2} className="link-arrow" />
             </a>
           </div>
@@ -395,7 +407,7 @@ const opportunities = [
         </div>
  
         {/* right: enquiry form */}
-        <div className="form-card">
+        <div className="form-card" id="send-requirement">
           <h2 className="panel-heading">Send us your requirement</h2>
           <span className="panel-underline" />
           <p className="form-intro">
@@ -614,7 +626,7 @@ const opportunities = [
               distributors and other organisations.
             </p>
             <div className="business-actions">
-              <a href="#quote" className="btn btn-solid">
+              <a href="#send-requirement" className="btn btn-solid">
                 Request a Business Quote
               </a>
               <a href="#partner" className="btn btn-outline">

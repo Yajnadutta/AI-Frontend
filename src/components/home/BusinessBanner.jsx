@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Building2,
   Utensils,
@@ -21,7 +22,7 @@ const CATEGORIES = [
   { label: "Food Businesses", Icon: Store },
 ];
 
-export default function BusinessBanner({ onEnquiryClick }) {
+export default function BusinessBanner() {
   return (
     <section className="biz-banner">
       <div className="biz-banner__content">
@@ -59,13 +60,9 @@ export default function BusinessBanner({ onEnquiryClick }) {
             Partner with ORYA for quality, sustainable and reliable
             solutions.
           </p>
-          <button
-            type="button"
-            className="biz-banner__cta"
-            onClick={onEnquiryClick}
-          >
+          <Link to="/contact#send-requirement" className="biz-banner__cta">
             Request an Enquiry
-          </button>
+          </Link>
         </div>
       </div>
     </section>

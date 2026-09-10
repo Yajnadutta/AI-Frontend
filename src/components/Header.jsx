@@ -3,9 +3,10 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import "../styling/Header.css";
 import { useCart } from "../components/context/CartContext";
 import oryaLogo from "../assets/orya-logo.jpeg";
-
+import PartnerForm from "../components/home/PartnerForm";
 const Header = () => {
- const [mobileMenu, setMobileMenu] = useState(false);
+const [mobileMenu, setMobileMenu] = useState(false);
+const [showPartnerModal, setShowPartnerModal] = useState(false);
   const location = useLocation();
   const { cartCount } = useCart();
 
@@ -67,38 +68,7 @@ const Header = () => {
               >
                 Solutions
               </NavLink>
-          {/* <div className="nav-dropdown">
-            <span
-              className={`dropdown-title ${isSectionActive("/solutions") ? "nav-active" : ""}`}
-            >
-              Solutions 
-              <span>⌄</span> 
-            </span>
-
-            <div className="dropdown-menu">
-              <NavLink to="/solutions/hotels" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-                Hotels
-              </NavLink>
-              <NavLink to="/solutions/hospitality" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-                Hospitality
-              </NavLink>
-              <NavLink to="/solutions/restaurant-hotels-catering" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-                Restaurants & Hotels Catering
-              </NavLink>
-              <NavLink to="/solutions/retail-ecommerce" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-                Retail & E-commerce
-              </NavLink>
-              <NavLink to="/solutions/corporates-institutions" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-                Corporates & Institutions
-              </NavLink>
-              <NavLink to="/solutions/bulk-wholesale" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-                Bulk & Wholesale
-              </NavLink>
-              <NavLink to="/solutions/custom-solutions" className={({ isActive }) => (isActive ? "nav-active" : "")}>
-                Custom Solutions
-              </NavLink>
-            </div> 
-          </div> */}
+        
 
           <NavLink
             to="/sustainability"
@@ -108,15 +78,7 @@ const Header = () => {
             Sustainability
           </NavLink>
 
-          {/* RESOURCES DROPDOWN */}
-          {/*
-            These four items all live as sections on the single /resources
-            page (see Resources.jsx), so they link to in-page anchors
-            (/resources#id) instead of separate routes. ScrollToHashElement
-            (rendered inside Resources.jsx) handles the actual scrolling,
-            including when you're already on /resources and just switching
-            anchors.
-          */}
+         
           <div className="nav-dropdown">
             <span
               className={`dropdown-title ${isSectionActive("/resources") ? "nav-active" : ""}`}
@@ -173,9 +135,16 @@ const Header = () => {
             <span className="cart-count">{cartCount}</span>
           </Link>
 
-          <Link to="/dealer" className="dealer-button">
+         <button
+            type="button"
+            className="dealer-button"
+            onClick={() => {
+              setShowPartnerModal(true);
+              setMobileMenu(false);
+            }}
+          >
             Become a Partner
-          </Link>
+          </button>
 
           <button
             className="mobile-menu-button"
@@ -186,6 +155,21 @@ const Header = () => {
         </div>
 
       </div>
+      {showPartnerModal && (
+  <div
+    className="partner-modal-overlay"
+    onClick={() => setShowPartnerModal(false)}
+  >
+    <div
+      className="partner-modal-content"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <PartnerForm
+        onClose={() => setShowPartnerModal(false)}
+      />
+    </div>
+  </div>
+)}
     </header>
   );
 };
