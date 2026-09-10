@@ -1976,70 +1976,174 @@ Thank you.
 
   //   }
   // };
+  // const proceedToOrder = async (e) => {
+  //   e.preventDefault();
+
+  //   // =====================================================
+  //   // VALIDATION
+  //   // =====================================================
+
+  //   if (!customer.fullName.trim()) {
+  //     alert("Please enter your full name.");
+  //     return;
+  //   }
+
+  //   if (!customer.mobile.trim()) {
+  //     alert("Please enter your mobile number.");
+  //     return;
+  //   }
+
+  //   if (!/^[0-9]{10}$/.test(customer.mobile.trim())) {
+  //     alert("Please enter a valid 10 digit mobile number.");
+  //     return;
+  //   }
+
+  //   if (!customer.email.trim()) {
+  //     alert("Please enter your email address.");
+  //     return;
+  //   }
+
+  //   if (!customer.place.trim()) {
+  //     alert("Please enter your place.");
+  //     return;
+  //   }
+
+  //   try {
+  //     setIsGenerating(true);
+
+  //     // =====================================================
+  //     // CREATE WHATSAPP MESSAGE (TEXT ONLY)
+  //     // =====================================================
+
+  //     const message = createWhatsAppMessage();
+
+  //     // =====================================================
+  //     // OPEN WHATSAPP WITH YOUR NUMBER + PRE-FILLED TEXT
+  //     // =====================================================
+
+  //     const whatsappUrl = `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
+
+  //     const whatsappLink = document.createElement("a");
+  //     whatsappLink.href = whatsappUrl;
+  //     whatsappLink.target = "_blank";
+  //     whatsappLink.rel = "noopener noreferrer";
+  //     document.body.appendChild(whatsappLink);
+  //     whatsappLink.click();
+  //     document.body.removeChild(whatsappLink);
+
+  //     setShowCustomerForm(false);
+
+  //   } catch (error) {
+  //     console.error("Order generation failed:", error);
+  //     alert("Unable to generate order. Please try again.");
+  //   } finally {
+  //     setIsGenerating(false);
+  //   }
+  // };
   const proceedToOrder = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+
+  // =====================================================
+  // VALIDATION
+  // =====================================================
+
+  if (!customer.fullName.trim()) {
+    alert("Please enter your full name.");
+    return;
+  }
+
+  if (!customer.mobile.trim()) {
+    alert("Please enter your mobile number.");
+    return;
+  }
+
+  if (!/^[0-9]{10}$/.test(customer.mobile.trim())) {
+    alert("Please enter a valid 10 digit mobile number.");
+    return;
+  }
+
+  if (!customer.email.trim()) {
+    alert("Please enter your email address.");
+    return;
+  }
+
+  if (!customer.place.trim()) {
+    alert("Please enter your place.");
+    return;
+  }
+
+  try {
+    setIsGenerating(true);
 
     // =====================================================
-    // VALIDATION
+    // 1. GENERATE BILL IMAGE CANVAS
     // =====================================================
-
-    if (!customer.fullName.trim()) {
-      alert("Please enter your full name.");
-      return;
+    const canvas = await generateBillImage();
+    if (!canvas) {
+      throw new Error("Unable to create bill image.");
     }
 
-    if (!customer.mobile.trim()) {
-      alert("Please enter your mobile number.");
-      return;
+    // =====================================================
+    // 2. CONVERT CANVAS TO CLEAN BASE64 DATA
+    // =====================================================
+    const imageData = canvas.toDataURL("image/png");
+    
+    // Extract only the raw base64 string after the comma
+    const base64String = imageData.split(',')[1]; 
+
+    // =====================================================
+    // 3. UPLOAD TO GOOGLE DRIVE VIA YOUR WEB APP
+    // =====================================================
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbyYn10Vexzhdw1OM18VRLbZqEIL-mHjF-ZcIBbaTTskc_td8XoZ4bYT2HsdMsqyJA9u6w/exec";
+
+    const payload = {
+      base64String: base64String,
+      mimeType: "image/png",
+      fileName: `ORYA-Order-${Date.now()}.png`
+    };
+
+    const response = await fetch(webAppUrl, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+
+    const uploadResult = await response.json();
+    
+    if (uploadResult.status !== "success") {
+      throw new Error(uploadResult.message || "Google Drive upload failed.");
     }
 
-    if (!/^[0-9]{10}$/.test(customer.mobile.trim())) {
-      alert("Please enter a valid 10 digit mobile number.");
-      return;
-    }
+    const driveImageUrl = uploadResult.url;
 
-    if (!customer.email.trim()) {
-      alert("Please enter your email address.");
-      return;
-    }
+    // =====================================================
+    // 4. CREATE WHATSAPP MESSAGE WITH THE LINK INCLUDED
+    // =====================================================
+    let message = createWhatsAppMessage(); 
+    message += `\n\n📄 View/Download Bill: ${driveImageUrl}`;
 
-    if (!customer.place.trim()) {
-      alert("Please enter your place.");
-      return;
-    }
+    // =====================================================
+    // 5. OPEN WHATSAPP WITH COMBINED TEXT & LINK
+    // =====================================================
+    const whatsappUrl = `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
 
-    try {
-      setIsGenerating(true);
+    const whatsappLink = document.createElement("a");
+    whatsappLink.href = whatsappUrl;
+    whatsappLink.target = "_blank";
+    whatsappLink.rel = "noopener noreferrer";
+    document.body.appendChild(whatsappLink);
+    whatsappLink.click();
+    document.body.removeChild(whatsappLink);
 
-      // =====================================================
-      // CREATE WHATSAPP MESSAGE (TEXT ONLY)
-      // =====================================================
+    setShowCustomerForm(false);
 
-      const message = createWhatsAppMessage();
+  } catch (error) {
+    console.error("Order generation or upload failed:", error);
+    alert("Unable to generate order or process bill link. Please try again.");
+  } finally {
+    setIsGenerating(false);
+  }
+};
 
-      // =====================================================
-      // OPEN WHATSAPP WITH YOUR NUMBER + PRE-FILLED TEXT
-      // =====================================================
-
-      const whatsappUrl = `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
-
-      const whatsappLink = document.createElement("a");
-      whatsappLink.href = whatsappUrl;
-      whatsappLink.target = "_blank";
-      whatsappLink.rel = "noopener noreferrer";
-      document.body.appendChild(whatsappLink);
-      whatsappLink.click();
-      document.body.removeChild(whatsappLink);
-
-      setShowCustomerForm(false);
-
-    } catch (error) {
-      console.error("Order generation failed:", error);
-      alert("Unable to generate order. Please try again.");
-    } finally {
-      setIsGenerating(false);
-    }
-  };
   // =====================================================
   // UI
   // =====================================================
