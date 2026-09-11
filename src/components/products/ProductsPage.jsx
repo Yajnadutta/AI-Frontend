@@ -5,80 +5,109 @@ import Footer from "../Footer";
 import { Link } from "react-router-dom";
 import { useCart } from "../../components/context/CartContext";
 import "../../styling/products.css";
- 
+import juteBagImage from "../../assets/jute_bag.png";
+import biodegradable_bag from "../../assets/biodegradable_bag.jpg";
+import paper_bag from "../../assets/paper_bag.jpg";
+import cloth_bag from "../../assets/cloth_bag.jpg";
+/* ================= TOP-LEVEL CATEGORY TABS ================= */
 
-const CATEGORIES = [
-  { id: "all", label: "All Products" },
-  { id: "packaging", label: "Sustainable Packaging" },
-  { id: "food", label: "Natural & Traditional Food" },
-  { id: "hydration", label: "Sustainable Hydration" },
-  { id: "special", label: "Special Collection" },
-  { id: "agri", label: "Agri-Waste Products" },
+const CATEGORY_TABS = [
+  { id: "packaging", label: "Sustainable Packaging", icon: "leaf" },
+  { id: "food", label: "Natural & Traditional Food", icon: "grain" },
+  { id: "hydration", label: "Sustainable Hydration", icon: "bottle" },
+  { id: "special", label: "Special Collection", icon: "star" },
+  { id: "agri", label: "Agri-Waste Products", icon: "recycle" },
+  { id: "custom", label: "Custom Packaging Solutions", icon: "box" },
 ];
- 
+
+const TAB_ICONS = {
+  leaf: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M12 21c-4-2-8-6-8-11a8 8 0 0 1 16 0c0 5-4 9-8 11Z" />
+      <path d="M12 21V10" />
+    </svg>
+  ),
+  grain: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M12 2c3 2 3 6 0 8-3-2-3-6 0-8Z" />
+      <path d="M12 10v12" />
+      <path d="M8 14c1.5 1 2.5 2 4 2M16 14c-1.5 1-2.5 2-4 2" />
+    </svg>
+  ),
+  bottle: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M10 2h4v3l2 2v13a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V7l2-2V2Z" />
+      <path d="M9 12h6" />
+    </svg>
+  ),
+  star: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="m12 2 2.9 6.3 6.9.7-5.1 4.7 1.5 6.8L12 17l-6.2 3.5 1.5-6.8L2.2 9l6.9-.7L12 2Z" />
+    </svg>
+  ),
+  recycle: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M7 19H4.8a2 2 0 0 1-1.7-3L6 11" />
+      <path d="M17 5h2.2a2 2 0 0 1 1.7 3L18 13" />
+      <path d="M8 5h8l3 5-3 5H8l-3-5 3-5Z" />
+    </svg>
+  ),
+  box: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M21 8 12 3 3 8l9 5 9-5Z" />
+      <path d="M3 8v9l9 5 9-5V8" />
+      <path d="M12 13v9" />
+    </svg>
+  ),
+};
+
+/* ================= SUB-CATEGORIES ================= */
+
+const SUBCATEGORIES = {
+  packaging: [
+    { name: "Bags & Carry Solutions", items: ["Jute Bags", "Paper Bags", "Kraft Paper Bags", "Biodegradable Bags"] },
+    { name: "Bagasse Tableware & Food Service", items: ["Plates", "Bowls", "Trays", "Food Containers", "Meal Boxes", "Cups", "Spoon & Fork"] },
+    { name: "Areca Tableware", items: ["Plates", "Bowls", "Trays", "Platters"] },
+    { name: "Food & Takeaway Packaging", items: ["Paper Ziplock Pouches", "Paper Window Ziplock Pouches", "Food Wrapping Paper", "Butter Paper", "Cake Boxes", "Pizza Boxes", "Burger Boxes"] },
+    { name: "Retail & Shipping Packaging", items: ["Honeycomb Paper Wrap", "Paper Bubble Wrap", "Paper Tape"] },
+    { name: "Gift & Premium Packaging", items: ["Premium Gift Bags", "Hamper Boxes", "Corporate Gift Packaging"] },
+  ],
+  hydration: [
+    { name: "Sustainable Drinkware", items: ["Bamboo Bottles", "Paper Bottles", "Plant-Based Bottles", "Bamboo Cups", "Bamboo Travel Mugs"] },
+    { name: "Sustainable Straws", items: ["Coconut Straws", "Bamboo Straws", "Paper Straws", "Other Natural Straws"] },
+  ],
+  agri: [
+    { name: "Banana Fibre", items: ["Banana Fibre Plates", "Banana Fibre Trays"] },
+    { name: "Coconut Waste Products", items: ["Coconut Bowl", "Coconut Coir Scrubber", "Coconut Spoon", "Coconut Candle"] },
+  ],
+  food: [],
+  special: [],
+  custom: [],
+};
+
+/* ================= PRODUCTS ================= */
+
 const PRODUCTS = [
-  {
-    id: "bagasse-container",
-    name: "Bagasse Food Container",
-    desc: "Sturdy, biodegradable and compostable food containers. Perfect for restaurants, cafés and takeaways.",
-    price: 120,
-    unit: "pack",
-    category: "packaging",
-    tone: "clay",
-    icon: "container",
-  },
-  {
-    id: "bamboo-cutlery",
-    name: "Bamboo Cutlery Set",
-    desc: "Natural bamboo cutlery — strong, reusable and eco-friendly. Ideal for home, cafés and events.",
-    price: 80,
-    unit: "pack",
-    category: "packaging",
-    tone: "sand",
-    icon: "cutlery",
-  },
-  {
-    id: "banana-plates",
-    name: "Banana Fibre Plates",
-    desc: "Strong, lightweight and sustainable plates made from banana fibre.",
-    price: 150,
-    unit: "pack",
-    category: "agri",
-    tone: "olive",
-    icon: "plate",
-  },
-  {
-    id: "coconut-bowls",
-    name: "Coconut Bowl Set",
-    desc: "Natural coconut shell bowls — stylish, durable and eco-friendly.",
-    price: 250,
-    unit: "set",
-    category: "hydration",
-    tone: "walnut",
-    icon: "bowl",
-  },
-  {
-    id: "kraft-bag",
-    name: "Kraft Paper Carry Bag",
-    desc: "Recyclable kraft paper bags with reinforced handles, built for daily grocery and retail use.",
-    price: 60,
-    unit: "pack of 25",
-    category: "packaging",
-    tone: "sand",
-    icon: "bag",
-  },
-  {
-    id: "jute-pouch",
-    name: "Jute Mesh Produce Bag",
-    desc: "Breathable jute mesh bags that keep fruit and vegetables fresher, longer — reusable season after season.",
-    price: 95,
-    unit: "pack of 5",
-    category: "special",
-    tone: "olive",
-    icon: "mesh",
-  },
+  { id: "jute-bag", name: "Jute Bag", desc: "Strong, reusable and 100% natural jute bags.", price: 40, unit: "pc", category: "packaging", sub: "Bags & Carry Solutions", cta: "cart", icon: "bag",image: juteBagImage },
+  { id: "biodegradable-carry-bag", name: "Biodegradable Carry Bag", desc: "Compostable, eco-friendly and safe for the planet.", price: 12, unit: "pc", category: "packaging", sub: "Bags & Carry Solutions", cta: "cart", icon: "bag" ,image: biodegradable_bag},
+  { id: "paper-bag", name: "Paper Bag", desc: "Recyclable and sturdy paper bags for everyday use.", price: 15, unit: "pc", category: "packaging", sub: "Bags & Carry Solutions", cta: "cart", icon: "bag" ,image: paper_bag},
+  { id: "clothes-bag", name: "Clothes Bag", desc: "Reusable cotton / canvas bags for clothing and more.", price: 60, unit: "pc", category: "packaging", sub: "Bags & Carry Solutions", cta: "cart", icon: "bag",image: cloth_bag },
+  { id: "printed-jute-bag", name: "Printed Jute Bag", desc: "Custom printed jute bags for your brand.", price: 50, unit: "pc", category: "packaging", sub: "Bags & Carry Solutions", cta: "enquire", icon: "bag",image: juteBagImage },
+  { id: "coloured-biodegradable-bag", name: "Coloured Biodegradable Bag", desc: "Stylish, strong and eco-friendly.", price: 15, unit: "pc", category: "packaging", sub: "Bags & Carry Solutions", cta: "enquire", icon: "bag",image: juteBagImage },
+  { id: "kraft-paper-bag", name: "Kraft Paper Bag", desc: "Premium quality kraft bags for retail & gifting.", price: 18, unit: "pc", category: "packaging", sub: "Bags & Carry Solutions", cta: "enquire", icon: "bag",image: juteBagImage },
+  { id: "drawstring-bag", name: "Drawstring Bag", desc: "Eco-friendly fabric bags with drawstring closure.", price: 45, unit: "pc", category: "packaging", sub: "Bags & Carry Solutions", cta: "enquire", icon: "bag",image: juteBagImage },
+
+  { id: "bagasse-plate", name: "Bagasse Plate", desc: "Compostable plates made from sugarcane fibre.", price: 8, unit: "pc", category: "packaging", sub: "Bagasse Tableware & Food Service", cta: "cart", icon: "plate" ,image: juteBagImage},
+  { id: "bagasse-bowl", name: "Bagasse Bowl", desc: "Sturdy, leak-resistant compostable bowls.", price: 6, unit: "pc", category: "packaging", sub: "Bagasse Tableware & Food Service", cta: "cart", icon: "bowl" ,image: juteBagImage},
+  { id: "bagasse-container", name: "Bagasse Food Container", desc: "Sturdy, biodegradable and compostable food containers.", price: 12, unit: "pc", category: "packaging", sub: "Bagasse Tableware & Food Service", cta: "cart", icon: "container" ,image: juteBagImage},
+  { id: "bagasse-cup", name: "Bagasse Cup", desc: "Compostable cups for hot and cold beverages.", price: 5, unit: "pc", category: "packaging", sub: "Bagasse Tableware & Food Service", cta: "enquire", icon: "bowl" ,image: juteBagImage},
+
+  { id: "bamboo-bottle", name: "Bamboo Bottle", desc: "Natural bamboo-wrapped bottles, reusable and stylish.", price: 350, unit: "pc", category: "hydration", sub: "Sustainable Drinkware", cta: "cart", icon: "bowl" ,image: juteBagImage},
+  { id: "bamboo-cup", name: "Bamboo Cup", desc: "Lightweight, durable bamboo cups.", price: 150, unit: "pc", category: "hydration", sub: "Sustainable Drinkware", cta: "cart", icon: "bowl" ,image: juteBagImage},
+  { id: "coconut-bowl", name: "Coconut Bowl", desc: "Natural coconut shell bowls — stylish and durable.", price: 250, unit: "pc", category: "agri", sub: "Coconut Waste Products", cta: "cart", icon: "bowl" ,image: juteBagImage},
+  { id: "coconut-scrubber", name: "Coconut Coir Scrubber", desc: "Biodegradable kitchen scrubber from coconut coir.", price: 30, unit: "pc", category: "agri", sub: "Coconut Waste Products", cta: "enquire", icon: "bowl" ,image: juteBagImage},
 ];
- 
+
 const ICONS = {
   container: (
     <svg viewBox="0 0 48 48" fill="none">
@@ -112,165 +141,346 @@ const ICONS = {
       <path d="M18 16 v-3 a6 6 0 0 1 12 0 v3" stroke="currentColor" strokeWidth="2.2" />
     </svg>
   ),
-  mesh: (
-    <svg viewBox="0 0 48 48" fill="none">
-      <path d="M14 12 h20 l3 26 h-26 Z" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" />
-      <path d="M18 16 l3 20 M24 16 v20 M30 16 l-3 20 M15 22 h18 M16 30 h16" stroke="currentColor" strokeWidth="1.3" />
-    </svg>
-  ),
 };
 
+/* ================= PRODUCT CARD ================= */
 
 function ProductCard({ product }) {
-  const [qty, setQty] = useState(1);
-  const [saved, setSaved] = useState(false);
+  const [wishlisted, setWishlisted] = useState(false);
   const { addToCart, isInCart } = useCart();
-
   const inCart = isInCart(product.id);
 
   const handleAddToCart = () => {
-    addToCart(
-      { id: product.id, name: product.name, price: product.price, unit: product.unit },
-      qty
-    );
+    addToCart({ id: product.id, name: product.name, price: product.price, unit: product.unit }, 1);
   };
 
   return (
-    <article className="orya-card" data-tone={product.tone}>
-      {/* ...media block unchanged... */}
+    // <article className="orya-card" data-tone={product.tone || "sand"}>
+    //   <div className="orya-card__media">
+    //     {ICONS[product.icon] || ICONS.bag}
+    //     <button
+    //       type="button"
+    //       className={`orya-card__wish${wishlisted ? " is-active" : ""}`}
+    //       aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+    //       onClick={() => setWishlisted((w) => !w)}
+    //     >
+    //       <svg viewBox="0 0 24 24" width="16" height="16" fill={wishlisted ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8">
+    //         <path d="M12 20s-7-4.4-9.5-8.6C.7 8 2 4.5 5.4 3.6 7.6 3 9.9 3.9 12 6.5 14.1 3.9 16.4 3 18.6 3.6 22 4.5 23.3 8 21.5 11.4 19 15.6 12 20 12 20Z" />
+    //       </svg>
+    //     </button>
+    //   </div>
 
-      <div className="orya-card__body">
-        <h3 className="orya-card__name">{product.name}</h3>
-        <p className="orya-card__desc">{product.desc}</p>
-        <p className="orya-card__price">
-          ₹{product.price} <span>/ {product.unit}</span>
-        </p>
+    //   <div className="orya-card__body">
+    //     <h3 className="orya-card__name">{product.name}</h3>
+    //     <p className="orya-card__desc">{product.desc}</p>
+    //     <p className="orya-card__price">
+    //       ₹{product.price} <span>/ {product.unit} onwards</span>
+    //     </p>
 
-        {/* <div className="orya-card__stepper" role="group" aria-label={`Quantity for ${product.name}`}>
-          <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Decrease quantity">
-            −
-          </button>
-          <span>{qty}</span>
-          <button type="button" onClick={() => setQty((q) => q + 1)} aria-label="Increase quantity">
-            +
-          </button>
-        </div> */}
+    //     <div className="orya-card__actions">
+    //       {inCart ? (
+    //         <Link to="/cart" className="orya-btn orya-btn--solid">
+    //           Go to Cart
+    //         </Link>
+    //       ) : product.cta === "cart" ? (
+    //         <button type="button" className="orya-btn orya-btn--solid" onClick={handleAddToCart}>
+    //           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
+    //             <circle cx="9" cy="21" r="1.4" />
+    //             <circle cx="18" cy="21" r="1.4" />
+    //             <path d="M2 3h2l2.6 12.6a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6" />
+    //           </svg>
+    //           Add to Cart
+    //         </button>
+    //       ) : (
+    //         <a
+    //           className="orya-btn orya-btn--outline"
+    //           href={`https://wa.me/?text=${encodeURIComponent(`Hi ORYA, I'd like to enquire about ${product.name}.`)}`}
+    //           target="_blank"
+    //           rel="noreferrer"
+    //         >
+    //           Enquire Now
+    //         </a>
+    //       )}
+    //     </div>
+    //   </div>
+    // </article>
+    <div className="orya-card">
 
-        <div className="orya-card__actions">
-          {inCart ? (
-            <Link to="/cart" className="orya-btn orya-btn--whatsapp">
-              Go to Cart
-            </Link>
-          ) : (
-            <>
-              <button type="button" className="orya-btn orya-btn--ghost" onClick={handleAddToCart}>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  <circle cx="9" cy="21" r="1.4" />
-                  <circle cx="18" cy="21" r="1.4" />
-                  <path d="M2 3h2l2.6 12.6a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6" />
-                </svg>
-                Add to Cart
-              </button>
-              {/* <a
-                className="orya-btn orya-btn--whatsapp"
-                href={`https://wa.me/?text=${encodeURIComponent(
-                  `Hi ORYA, I'd like to order ${qty} x ${product.name} (${product.unit}).`
-                )}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Order on WhatsApp
-              </a> */}
-            </>
-          )}
-        </div>
-      </div>
-    </article>
+  {/* Heart at top of entire card */}
+  <button
+    type="button"
+    className={`orya-card__wish${wishlisted ? " is-active" : ""}`}
+    aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+    onClick={() => setWishlisted((w) => !w)}
+  >
+    <svg
+      viewBox="0 0 24 24"
+      fill={wishlisted ? "currentColor" : "none"}
+      stroke="currentColor"
+      strokeWidth="1.8"
+    >
+      <path d="M12 20s-7-4.4-9.5-8.6C.7 8 2 4.5 5.4 3.6 7.6 3 9.9 3.9 12 6.5 14.1 3.9 16.4 3 18.6 3.6 22 4.5 23.3 8 21.5 11.4 19 15.6 12 20 12 20Z" />
+    </svg>
+  </button>
+
+  {/* Product image */}
+  <div className="orya-card__media">
+    <img
+      src={product.image}
+      alt={product.name}
+      className="orya-card__image"
+    />
+  </div>
+
+  {/* Product information */}
+  <div className="orya-card__body">
+    <h3 className="orya-card__name">
+      {product.name}
+    </h3>
+
+    <p className="orya-card__desc">
+      {product.desc}
+    </p>
+
+    <p className="orya-card__price">
+      ₹ {product.price} / {product.unit} onwards
+    </p>
+
+<div className="orya-card__actions">
+  {inCart ? (
+    <Link to="/cart" className=" orya-btn--cart">
+      <span>Go to Cart</span>
+      <span className="orya-cart-arrow">→</span>
+    </Link>
+  ) : product.cta === "cart" ? (
+    <button
+      type="button"
+      className="orya-btn orya-btn--solid"
+      onClick={handleAddToCart}
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      >
+        <circle cx="9" cy="21" r="1.4" />
+        <circle cx="18" cy="21" r="1.4" />
+        <path d="M2 3h2l2.6 12.6a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6" />
+      </svg>
+      Add to Cart
+    </button>
+  ) : (
+    <a
+      className="orya-btn orya-btn--outline"
+      href={`https://wa.me/?text=${encodeURIComponent(
+        `Hi ORYA, I'd like to enquire about ${product.name}.`
+      )}`}
+      target="_blank"
+      rel="noreferrer"
+    >
+      Enquire Now
+    </a>
+  )}
+</div>
+
+
+  </div>
+
+</div>
   );
 }
- 
+
+/* ================= PAGE ================= */
 
 const ProductPage = () => {
-const [query, setQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
- 
-  const filtered = useMemo(() => {
-    return PRODUCTS.filter((p) => {
-      const matchesCategory = activeCategory === "all" || p.category === activeCategory;
-      const matchesQuery = p.name.toLowerCase().includes(query.trim().toLowerCase());
-      return matchesCategory && matchesQuery;
+  const [activeTab, setActiveTab] = useState("packaging");
+  const [activeSub, setActiveSub] = useState(null);
+  const [query, setQuery] = useState("");
+  const [sortBy, setSortBy] = useState("popularity");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openGroups, setOpenGroups] = useState(() => new Set([0]));
+
+  const subGroups = SUBCATEGORIES[activeTab] || [];
+
+  const toggleGroup = (idx) => {
+    setOpenGroups((prev) => {
+      const next = new Set(prev);
+      next.has(idx) ? next.delete(idx) : next.add(idx);
+      return next;
     });
-  }, [query, activeCategory]);
+  };
+
+  const handleTabClick = (id) => {
+    setActiveTab(id);
+    setActiveSub(null);
+    setSidebarOpen(false);
+  };
+
+  const handleSubClick = (name) => {
+    setActiveSub((cur) => (cur === name ? null : name));
+    setSidebarOpen(false);
+  };
+
+  const filtered = useMemo(() => {
+    let list = PRODUCTS.filter((p) => p.category === activeTab);
+    if (activeSub) list = list.filter((p) => p.sub === activeSub);
+    if (query.trim()) {
+      const q = query.trim().toLowerCase();
+      list = list.filter((p) => p.name.toLowerCase().includes(q));
+    }
+    if (sortBy === "price-low") list = [...list].sort((a, b) => a.price - b.price);
+    if (sortBy === "price-high") list = [...list].sort((a, b) => b.price - a.price);
+    if (sortBy === "name") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+    return list;
+  }, [activeTab, activeSub, query, sortBy]);
+
+  const activeTabLabel = CATEGORY_TABS.find((t) => t.id === activeTab)?.label || "";
 
   return (
     <div className="home">
+      <Header />
 
-        {/* ================= HEADER ================= */}
-
-    <Header />
-
-   <div className="orya-root">
-     
- 
-      <div className="orya-search">
-        <div className="orya-search__field">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="7" />
-            <line x1="21" y1="21" x2="16.6" y2="16.6" />
-          </svg>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search products..."
-            aria-label="Search products"
-          />
-          {query && (
-            <button type="button" className="orya-search__clear" onClick={() => setQuery("")} aria-label="Clear search">
-              ×
+      <div className="orya-root">
+        {/* ================= TOP CATEGORY TABS ================= */}
+        <div className="orya-tabs" role="tablist" aria-label="Product categories">
+          {CATEGORY_TABS.map((t) => (
+            <button
+              key={t.id}
+              role="tab"
+              aria-selected={activeTab === t.id}
+              className={`orya-tab${activeTab === t.id ? " is-active" : ""}`}
+              onClick={() => handleTabClick(t.id)}
+            >
+              <span className="orya-tab__icon">{TAB_ICONS[t.icon]}</span>
+              <span className="orya-tab__label">{t.label}</span>
             </button>
-          )}
-        </div>
-      </div>
- 
-      <div className="orya-chips" role="tablist" aria-label="Product categories">
-        {CATEGORIES.map((c) => (
-          <button
-            key={c.id}
-            role="tab"
-            aria-selected={activeCategory === c.id}
-            className={`orya-chip${activeCategory === c.id ? " is-active" : ""}`}
-            onClick={() => setActiveCategory(c.id)}
-          >
-            {c.label}
-          </button>
-        ))}
-      </div>
- 
-      <div className="orya-section-head">
-        <div>
-          <h2>Sustainable Packaging</h2>
-          <p>Eco-friendly packaging solutions for a cleaner, greener tomorrow.</p>
-        </div>
-        <span className="orya-result-count">{filtered.length} product{filtered.length !== 1 ? "s" : ""}</span>
-      </div>
- 
-      {filtered.length > 0 ? (
-        <div className="orya-grid">
-          {filtered.map((p) => (
-            <ProductCard key={p.id} product={p} />
           ))}
         </div>
-      ) : (
-        <div className="orya-empty">No products match your search. Try a different term or category.</div>
-      )}
-    </div>
 
+        <div className="orya-layout">
+          {/* ================= MOBILE SUBCATEGORY TOGGLE ================= */}
+          {subGroups.length > 0 && (
+            <button
+              type="button"
+              className="orya-subtoggle"
+              onClick={() => setSidebarOpen((s) => !s)}
+              aria-expanded={sidebarOpen}
+            >
+              <span>🍃 Sub Categories</span>
+              <span className={`orya-subtoggle__chev${sidebarOpen ? " is-open" : ""}`}>⌄</span>
+            </button>
+          )}
 
+          {/* ================= SIDEBAR ================= */}
+          {subGroups.length > 0 && (
+            <aside className={`orya-sidebar${sidebarOpen ? " is-open" : ""}`}>
+              <h4 className="orya-sidebar__title">🍃 Sub Categories</h4>
+              {subGroups.map((group, idx) => (
+                <div className="orya-sidebar__group" key={group.name}>
+                  <button
+                    type="button"
+                    className="orya-sidebar__group-title"
+                    onClick={() => toggleGroup(idx)}
+                    aria-expanded={openGroups.has(idx)}
+                  >
+                    {group.name}
+                    <span className={`orya-sidebar__chev${openGroups.has(idx) ? " is-open" : ""}`}>⌄</span>
+                  </button>
+                  {openGroups.has(idx) && (
+                    <ul className="orya-sidebar__items">
+                      {group.items.map((item) => (
+                        <li key={item}>
+                          <button
+                            type="button"
+                            className={`orya-sidebar__item${activeSub === item ? " is-active" : ""}`}
+                            onClick={() => handleSubClick(item)}
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </aside>
+          )}
 
-        {/* ================= FOOTER ================= */}
+          {/* ================= MAIN CONTENT ================= */}
+          <div className="orya-main">
+            <div className="orya-section-head">
+              <div>
+                <h2>
+                  <span className="orya-leaf">🍃</span> {activeSub || activeTabLabel}
+                </h2>
+                <p>Durable · Biodegradable · Sustainable</p>
+              </div>
 
-            <Footer />
+              <div className="orya-controls">
+               <div className="orya-search">
+  <svg
+    viewBox="0 0 24 24"
+    width="22"
+    height="22"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <circle cx="11" cy="11" r="7" />
+    <line x1="21" y1="21" x2="16.6" y2="16.6" />
+  </svg>
+
+  <input
+    type="text"
+    value={query}
+    onChange={(e) => setQuery(e.target.value)}
+    placeholder={`Search in ${activeTabLabel.split(" ")[0]} products...`}
+    aria-label="Search products"
+  />
+
+  {query && (
+    <button
+      type="button"
+      className="orya-search__clear"
+      onClick={() => setQuery("")}
+      aria-label="Clear search"
+    >
+      ×
+    </button>
+  )}
+</div>
+
+                <select
+                  className="orya-sort"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  aria-label="Sort products"
+                >
+                  <option value="popularity">Sort by: Popularity</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="name">Name: A–Z</option>
+                </select>
+              </div>
+            </div>
+
+            {filtered.length > 0 ? (
+              <div className="orya-grid">
+                {filtered.map((p) => (
+                  <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
+            ) : (
+              <div className="orya-empty">No products match your search. Try a different term or category.</div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 };
