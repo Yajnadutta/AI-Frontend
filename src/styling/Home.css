@@ -580,17 +580,17 @@ html, body {
 /* ================= RESPONSIVE ================= */
 
 /* Tablet: keep 3-column but shrink the middle circle + gaps */
-@media (max-width: 1100px) {
+/* @media (max-width: 1100px) {
   .what-orya {
     grid-template-columns: 1fr 110px 1fr;
     gap: 16px;
   }
 
   .orya-logo-circle {
-    /* width: 100px;
-    height: 100px; */
-            margin-top: 3%;
-        margin-bottom: 4%;
+    width: 120px;
+    height: 120px;
+    margin-top: 3%;
+    margin-bottom: 4%;
   }
 
   .orya-logo-circle span {
@@ -601,8 +601,33 @@ html, body {
     padding: 18px;
     min-height: auto;
   }
-}
+} */
+@media (max-width: 1180px) {
+  .what-orya {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
+  .orya-logo-circle {
+    width: 100px;
+    height: 100px;
+    order: 2;
+      margin-top: 3%;
+    margin-bottom: 4%;
+  }
+
+  .packaging-card {
+    order: 1;
+  }
+
+  .food-card {
+    order: 3;
+  }
+
+  .what-card {
+    min-height: auto;
+  }
+}
 /* Small tablet / large phone: stack everything vertically */
 @media (max-width: 860px) {
   .what-orya {

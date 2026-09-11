@@ -483,8 +483,15 @@
   .connect-row {
     flex-wrap: wrap;
   }
+  .connect-icon {
+    margin: auto;
+  }
   .connect-btn {
-    margin-left: 58px;
+       margin: auto;
+  }
+  .connect-details {
+    flex: 1 1 100%;
+     text-align: center;
   }
 }
 .find-orya {

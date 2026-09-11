@@ -219,7 +219,7 @@
 }
 
 .cart-symbol {
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .cart-count {
@@ -297,9 +297,9 @@
 
 @media (max-width: 1200px) {
 
-  .header-container {
+  /* .header-container {
     padding: 0 20px;
-  }
+  } */
 
   .orya-logo {
   width: 190px;
@@ -309,10 +309,11 @@
 .orya-logo-image {
   width: 175px;
   max-height: 70px;
+  margin-top: 1em;
 }
 
   .header-nav {
-    gap: 18px;
+    gap: 10px;
   }
 
   .header-nav > a,
@@ -321,7 +322,8 @@
   }
 
   .header-right {
-    gap: 15px;
+    gap: 5px;
+    margin-left: 0px;
   }
 
   .dealer-button {
@@ -473,7 +475,7 @@
 }
 
   .cart-symbol {
-    font-size: 24px;
+    font-size: 35px;
   }
 
   .mobile-menu-button {

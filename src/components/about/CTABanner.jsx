@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Handshake } from "lucide-react";
 import ctabanner from "../../assets/ctabanner.jpg";
+import PartnerForm from "../../components/home/PartnerForm"; // adjust path to match where PartnerForm actually lives relative to CTABanner
+import { Link } from "react-router-dom";
 export default function CTABanner() {
+  const [showPartnerModal, setShowPartnerModal] = useState(false);
+
   return (
     <section className="cta-section">
       <div className="cta-image-wrap">
@@ -22,18 +26,38 @@ export default function CTABanner() {
         </p>
 
         <div className="cta-actions">
-          <button className="cta-btn cta-btn-light">Explore Our Products</button>
-          <button className="cta-btn cta-btn-outline">
+          <Link to="/products" className="cta-btn cta-btn-light">
+          Explore Our Products
+        </Link>
+          <button
+            type="button"
+            className="cta-btn cta-btn-outline"
+            onClick={() => setShowPartnerModal(true)}
+          >
             <Handshake size={18} strokeWidth={1.8} />
             Become a Partner
           </button>
         </div>
       </div>
 
+      {showPartnerModal && (
+        <div
+          className="partner-modal-overlay"
+          onClick={() => setShowPartnerModal(false)}
+        >
+          <div
+            className="partner-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <PartnerForm onClose={() => setShowPartnerModal(false)} />
+          </div>
+        </div>
+      )}
+
       <style>{`
        .cta-section {
-    --cta-green-dark: #1b3519; /* Matched to the darker shades on the left/edges */
-    --cta-green: #254d23;      /* Matched to the mid-tones on the right */
+    --cta-green-dark: #1b3519;
+    --cta-green: #254d23;
 
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
             Helvetica, Arial, sans-serif;
@@ -101,6 +125,7 @@ export default function CTABanner() {
           gap: 8px;
           transition: transform 0.25s ease, background 0.25s ease;
           border: none;
+          text-decoration: none;
         }
 
         .cta-btn-light {

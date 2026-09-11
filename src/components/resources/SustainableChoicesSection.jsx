@@ -1,6 +1,6 @@
 import React from "react";
 import { Leaf, Recycle, Globe, ArrowRight, MessageCircle } from "lucide-react";
-
+import { Link } from "react-router-dom";
 // Keep this image next to the component (or update the path)
 import sustainableBg from "../../assets/sustainable_choices_bg.png";
 
@@ -135,6 +135,7 @@ export default function SustainableChoicesSection() {
           background: #fff;
           color: var(--green-700);
           border: none;
+          text-decoration: none;
         }
         .cta-btn--solid:hover { background: #eef3e3; }
  
@@ -142,6 +143,7 @@ export default function SustainableChoicesSection() {
           background: transparent;
           color: #fff;
           border: 1.5px solid rgba(255, 255, 255, 0.7);
+          text-decoration: none;
         }
         .cta-btn--outline:hover {
           background: rgba(255, 255, 255, 0.12);
@@ -177,12 +179,18 @@ export default function SustainableChoicesSection() {
           </div>
  
           <div className="cta__actions">
-            <button className="cta-btn cta-btn--solid">
+            <Link to="/contact#send-requirement" className="cta-btn cta-btn--solid">
               Send an Enquiry <ArrowRight />
-            </button>
-            <button className="cta-btn cta-btn--outline">
+            </Link>
+             <a
+                href="https://wa.me/917809903359"
+               className="cta-btn cta-btn--outline"
+                target="_blank"
+                rel="noreferrer"
+              > 
+
               <MessageCircle /> Chat on WhatsApp
-            </button>
+            </a>
           </div>
         </div>
       </div>

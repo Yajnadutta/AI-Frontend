@@ -1,8 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -84,28 +80,7 @@ const certificates = [
       subtitle: "",
     },
   ];
-const categories = [
-    {
-      title: "Sustainable Packaging",
-      image: "https://images.pexels.com/photos/12725398/pexels-photo-12725398.jpeg",
-      description: "Eco-friendly packaging for a plastic-free future.",
-    },
-    {
-      title: "Natural Food",
-      image: "https://images.pexels.com/photos/35974369/pexels-photo-35974369.jpeg",
-      description: "Natural, healthy and traditional food products.",
-    },
-    {
-      title: "Agri-Waste Products",
-      image: "https://images.pexels.com/photos/32405786/pexels-photo-32405786.jpeg",
-      description: "Turning agricultural waste into valuable products.",
-    },
-    {
-      title: "Sustainable Sourcing",
-      image: "https://images.pexels.com/photos/38384711/pexels-photo-38384711.jpeg",
-      description: "Responsibly sourced for a better tomorrow.",
-    },
-  ];
+
 
 
   return (

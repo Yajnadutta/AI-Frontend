@@ -44,9 +44,9 @@ const Footer = () => {
               in
             </a>
 
-            <a href="#" aria-label="YouTube">
+            {/* <a href="#" aria-label="YouTube">
               ▶
-            </a>
+            </a> */}
 
           </div>
 
@@ -75,29 +75,18 @@ const Footer = () => {
 
           <h3>Our Products</h3>
 
-          <Link to="/products/packaging">
+          <Link to="/products">
             Sustainable Packaging
           </Link>
 
-          <Link to="/products/food">
+          <Link to="/products">
             Natural Food
           </Link>
 
-          <Link to="/products/agri-waste">
+          <Link to="/products">
             Agri-Waste Products
           </Link>
 
-          {/* <Link to="/products/biodegradable-bags">
-            Biodegradable Bags
-          </Link>
-
-          <Link to="/products/bamboo">
-            Bamboo Products
-          </Link>
-
-          <Link to="/products/bagasse">
-            Bagasse Products
-          </Link> */}
 
           <Link to="/products/sustainable-sourcing">
             Sustainable Sourcing
@@ -111,23 +100,20 @@ const Footer = () => {
 
           <h3>For Businesses</h3>
 
-          <Link to="/bulk-orders">
+          <Link to="/contact#send-requirement">
             Bulk Orders
           </Link>
 
-          {/* <Link to="/dealer">
-            Dealer Enquiry
-          </Link> */}
 
-          <Link to="/wholesale">
+          <Link to="/contact#send-requirement">
             Wholesale
           </Link>
 
-          <Link to="/custom-solutions">
+         <Link to="/contact#send-requirement">
             Custom Solutions
           </Link>
 
-          <Link to="/partner">
+          <Link to="/contact#send-requirement">
             Partnerships
           </Link>
 

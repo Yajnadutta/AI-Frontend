@@ -1,11 +1,11 @@
-import React from "react";
+import React,{useState} from "react";
 import "../../styling/DealerBanner.css";
 
 // Replace these with your actual asset paths
 import leafLeft from "../../assets/leaf-left.png";
 import leafRight from "../../assets/leaf-right.png";
 import peopleIcon from "../../assets/people-icon.png";
-
+import PartnerForm from "../../components/home/PartnerForm";
 const benefits = [
   "Attractive Dealer Benefits",
   "Wide Product Range",
@@ -21,7 +21,7 @@ export default function DealerBanner({
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     whatsappMessage
   )}`;
-
+const [showPartnerModal, setShowPartnerModal] = useState(false);
   return (
     <section className="dealer-banner">
       <img
@@ -56,7 +56,19 @@ export default function DealerBanner({
         </div>
 
         <div className="dealer-banner__divider" aria-hidden="true" />
-
+    {showPartnerModal && (
+        <div
+          className="partner-modal-overlay"
+          onClick={() => setShowPartnerModal(false)}
+        >
+          <div
+            className="partner-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <PartnerForm onClose={() => setShowPartnerModal(false)} />
+          </div>
+        </div>
+      )}
         {/* Middle: benefits checklist */}
         <ul className="dealer-banner__benefits">
           {benefits.map((benefit) => (
@@ -76,7 +88,7 @@ export default function DealerBanner({
           <button
             type="button"
             className="dealer-banner__btn dealer-banner__btn--solid"
-            onClick={onBecomeDealer}
+            onClick={() => setShowPartnerModal(true)}
           >
             Become a Partner
           </button>

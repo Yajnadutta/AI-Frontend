@@ -30,6 +30,7 @@ import imgAgriculture from '../../assets/agriculture.jpg';
 import imgECommerce from '../../assets/ecommerce.jpg';
 import imgIndustries from '../../assets/industries.jpg';
 import bannerBg from '../../assets/banner-clean.jpg';
+import PartnerForm from "../../components/home/PartnerForm";
 import { 
  ArrowRight,
   Leaf, 
@@ -253,7 +254,7 @@ const Solutions = ( {
   whatsappUrl = "https://wa.me/917809903359",
   ctaHref = "#business-solution"
 }) => {
-
+const [showPartnerModal, setShowPartnerModal] = useState(false);
 
   return (
     <div className="home">
@@ -286,9 +287,9 @@ const Solutions = ( {
         </p>
 
         <div className="solutions-actions">
-          <a href={exploreHref} className="solutions-btn solutions-btn--solid">
+          <Link to="/solutions" className="solutions-btn solutions-btn--solid">
             Explore Our Solutions <ArrowRight size={17} strokeWidth={2} />
-          </a>
+          </Link>
           <a
             href={whatsappUrl}
             target="_blank"
@@ -370,9 +371,9 @@ const Solutions = ( {
             Every business has unique requirements. ORYA works with you to
             provide the right sustainable products and sourcing solutions.
           </p>
-          <a href={ctaHref} className="cbs-cta">
+          <Link to="/contact#send-requirement" className="cbs-cta">
             Request a Business Solution <ArrowRight size={16} strokeWidth={2} />
-          </a>
+          </Link>
         </div>
 
         <ol className="cbs-steps">
@@ -477,7 +478,7 @@ const Solutions = ( {
           </div>
 
           <div className="business-banner-actions-side">
-            <button className="business-banner-btn" onClick={() => alert('Partner flow')}>
+            <button className="business-banner-btn" onClick={() => setShowPartnerModal(true)}>
               <svg className="business-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
@@ -487,19 +488,31 @@ const Solutions = ( {
               Become a Partner
             </button>
             
-            <button className="business-banner-btn" onClick={() => alert('Enquiry flow')}>
+            <Link to="/contact#send-requirement" className="business-banner-btn">
               <svg className="business-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
               Request an Enquiry
-            </button>
+            </Link>
           </div>
 
         </div>
       </div>
     </section>
  </AnimatedSection>
-
+ {showPartnerModal && (
+        <div
+          className="partner-modal-overlay"
+          onClick={() => setShowPartnerModal(false)}
+        >
+          <div
+            className="partner-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <PartnerForm onClose={() => setShowPartnerModal(false)} />
+          </div>
+        </div>
+      )}
   {/* ================= BUSINESS FEATURES ================= */}
  <AnimatedSection as="section" animation="fade-up">
 

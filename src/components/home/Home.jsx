@@ -579,57 +579,10 @@ const certificates = [
     </section>
 </section>
 
-      {/* ================= DEALER ================= */}
-{/* <AnimatedSection as="section" className="dealer-section" animation="fade-up"> */}
-
-   {/* <section className="dealer-section">
-
-        <div className="dealer-icon">
-          👥
-        </div>
-
-        <div className="dealer-text">
-
-          <h2>Become a Partner</h2>
-
-          <p>
-            Join ORYA's growing network and be a part of the
-            sustainable revolution.
-          </p>
-
-        </div>
-
-        <div className="dealer-benefits">
-
-          <span>✓ Attractive Dealer Benefits</span>
-          <span>✓ Wide Product Range</span>
-          <span>✓ Growing Market Demand</span>
-          <span>✓ Marketing & Support</span>
-
-        </div>
-
-        <div className="dealer-buttons">
-
-          <Link to="/dealer" className="btn btn-primary">
-            Become a Partner
-          </Link>
-
-          <a
-            href="https://wa.me/917809903359"
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-outline"
-          >
-            WhatsApp
-          </a>
-
-        </div>
-
-      </section> */}
+     
 <DealerBanner/>
 
 
-{/* </AnimatedSection> */}
    
         {/* ================= FOOTER ================= */}
 
