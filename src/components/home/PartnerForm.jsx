@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import {
   X,
   User,
@@ -15,17 +16,22 @@ import {
 import "../../styling/PartnerForm.css";
 import partnerImage from "../../assets/orya-partner-left-panel.png";
 
-const PartnerForm = ({ onClose }) => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    companyName: "",
-    mobile: "",
-    email: "",
-    city: "",
-    partnershipType: "",
-    interests: [],
-  });
+const GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLScJD3ApVJoa-ABgC-Y3n1CS7W3_0sqEPdC75InfTL9IcFEkMw/formResponse";
 
+const initialFormData = {
+  fullName: "",
+  companyName: "",
+  mobile: "",
+  email: "",
+  city: "",
+  partnershipType: "",
+  interests: [],
+};
+
+const PartnerForm = ({ onClose }) => {
+  const [formData, setFormData] = useState(initialFormData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -54,12 +60,49 @@ const PartnerForm = ({ onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Partner Form Data:", formData);
+    setIsSubmitting(true);
 
-    alert("Partnership request submitted successfully!");
+    const data = new FormData();
+    data.append("entry.828808488", formData.fullName);
+    data.append("entry.2084519654", formData.companyName);
+    data.append("entry.21919194", formData.mobile);
+    data.append("entry.1361118522", formData.email);
+    data.append("entry.1902201760", formData.city);
+    data.append("entry.994220341", formData.partnershipType);
+    formData.interests.forEach((interest) => {
+      data.append("entry.115254695", interest);
+    });
+
+    try {
+      await fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: data,
+      });
+
+    await Swal.fire({
+      icon: "success",
+      title: "Thank You!",
+      text: "Thank you for your interest in partnering with ORYA. Your partnership request has been submitted successfully. Our team will get back to you soon.",
+      confirmButtonColor: "#2e7d32",
+    });
+
+      setFormData(initialFormData);
+
+      if (onClose) onClose();
+    } catch (error) {
+      console.error("Partner form submission failed:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong",
+        text: "Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -156,6 +199,7 @@ const PartnerForm = ({ onClose }) => {
                   value={formData.mobile}
                   onChange={handleChange}
                   required
+                  maxLength={10}
                 />
               </div>
 
@@ -214,6 +258,7 @@ const PartnerForm = ({ onClose }) => {
                     type="radio"
                     name="partnershipType"
                     value="Distributor"
+                    checked={formData.partnershipType === "Distributor"}
                     onChange={handleChange}
                     required
                   />
@@ -226,6 +271,7 @@ const PartnerForm = ({ onClose }) => {
                     type="radio"
                     name="partnershipType"
                     value="Dealer"
+                    checked={formData.partnershipType === "Dealer"}
                     onChange={handleChange}
                   />
 
@@ -237,6 +283,7 @@ const PartnerForm = ({ onClose }) => {
                     type="radio"
                     name="partnershipType"
                     value="Retailer"
+                    checked={formData.partnershipType === "Retailer"}
                     onChange={handleChange}
                   />
 
@@ -248,6 +295,7 @@ const PartnerForm = ({ onClose }) => {
                     type="radio"
                     name="partnershipType"
                     value="Business Partner / Others"
+                    checked={formData.partnershipType === "Business Partner / Others"}
                     onChange={handleChange}
                   />
 
@@ -280,6 +328,7 @@ const PartnerForm = ({ onClose }) => {
                   <input
                     type="checkbox"
                     value="Sustainable Packaging"
+                    checked={formData.interests.includes("Sustainable Packaging")}
                     onChange={handleInterestChange}
                   />
 
@@ -290,6 +339,7 @@ const PartnerForm = ({ onClose }) => {
                   <input
                     type="checkbox"
                     value="Agri-Waste Products"
+                    checked={formData.interests.includes("Agri-Waste Products")}
                     onChange={handleInterestChange}
                   />
 
@@ -300,7 +350,8 @@ const PartnerForm = ({ onClose }) => {
                   <input
                     type="checkbox"
                     value="Natural & Traditional Food"
-                                       onChange={handleInterestChange}
+                    checked={formData.interests.includes("Natural & Traditional Food")}
+                    onChange={handleInterestChange}
                   />
 
                   <span>Natural & Traditional Food</span>
@@ -310,6 +361,7 @@ const PartnerForm = ({ onClose }) => {
                   <input
                     type="checkbox"
                     value="Special Collection"
+                    checked={formData.interests.includes("Special Collection")}
                     onChange={handleInterestChange}
                   />
 
@@ -320,6 +372,7 @@ const PartnerForm = ({ onClose }) => {
                   <input
                     type="checkbox"
                     value="Sustainable Hydration"
+                    checked={formData.interests.includes("Sustainable Hydration")}
                     onChange={handleInterestChange}
                   />
 
@@ -330,6 +383,7 @@ const PartnerForm = ({ onClose }) => {
                   <input
                     type="checkbox"
                     value="Custom Packaging Solutions"
+                    checked={formData.interests.includes("Custom Packaging Solutions")}
                     onChange={handleInterestChange}
                   />
 
@@ -340,10 +394,19 @@ const PartnerForm = ({ onClose }) => {
             </div>
 
             {/* SUBMIT */}
-            <button type="submit" className="partner-submit-btn">
-              <Send size={20} />
-              Submit Partnership Request
-              <span>→</span>
+            <button type="submit" className="partner-submit-btn" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <span className="spinner" aria-hidden="true" />
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  <Send size={20} />
+                  Submit Partnership Request
+                  <span>→</span>
+                </>
+              )}
             </button>
 
             {/* SECURITY TEXT */}

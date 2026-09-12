@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import PrivacyPolicyModal from "./PrivacyPolicyModal";
+import TermsConditionsModal from "./TermsConditionsModal";
 import "../styling/Footer.css";
 
 import oryaLogo from "../assets/footer-logo.png";
 
 const Footer = () => {
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
+
   return (
     <footer className="footer">
 
@@ -32,21 +37,17 @@ const Footer = () => {
           {/* SOCIAL MEDIA */}
           <div className="footer-social">
 
-            <a href="#" aria-label="Facebook">
+            <a href="#" aria-label="Facebook" target="_blank" rel="noreferrer">
               f
             </a>
 
-            <a href="#" aria-label="Instagram">
+            <a href="https://www.instagram.com/oryabio?stkn=dDlqOWQxOGFpdzY4" aria-label="Instagram" target="_blank" rel="noreferrer">
               ◎
             </a>
 
-            <a href="#" aria-label="LinkedIn">
+            <a href="#" aria-label="LinkedIn" target="_blank" rel="noreferrer">
               in
             </a>
-
-            {/* <a href="#" aria-label="YouTube">
-              ▶
-            </a> */}
 
           </div>
 
@@ -61,10 +62,9 @@ const Footer = () => {
           <Link to="/">Home</Link>
           <Link to="/about">About ORYA</Link>
           <Link to="/products">Products</Link>
-          <Link to="/solutions">Solutions</Link> 
-          <Link to="/sustainability">Sustainability</Link> 
-          {/* <Link to="/value-chain">Value Chain</Link> */}
-         <Link to="/resources">Resources</Link>
+          <Link to="/solutions">Solutions</Link>
+          <Link to="/sustainability">Sustainability</Link>
+          <Link to="/resources">Resources</Link>
           <Link to="/contact">Contact</Link>
 
         </div>
@@ -87,7 +87,6 @@ const Footer = () => {
             Agri-Waste Products
           </Link>
 
-
           <Link to="/products/sustainable-sourcing">
             Sustainable Sourcing
           </Link>
@@ -104,12 +103,11 @@ const Footer = () => {
             Bulk Orders
           </Link>
 
-
           <Link to="/contact#send-requirement">
             Wholesale
           </Link>
 
-         <Link to="/contact#send-requirement">
+          <Link to="/contact#send-requirement">
             Custom Solutions
           </Link>
 
@@ -126,41 +124,24 @@ const Footer = () => {
           <h3>Contact Us</h3>
 
           <div className="contact-item">
-
-            <span className="contact-icon">
-              📍
-            </span>
-
+            <span className="contact-icon">📍</span>
             <p>
-             
               Naranpur, Keonjhar -
               758014,
               <br />
               Odisha, India
             </p>
-
           </div>
 
-
           <div className="contact-item">
-
-            <span className="contact-icon">
-              ✉
-            </span>
-
+            <span className="contact-icon">✉</span>
             <a href="mailto:Hello@oryabio.in">
               Hello@oryabio.in
             </a>
-
           </div>
 
-
           <div className="contact-item">
-
-            <span className="contact-icon">
-              🌐
-            </span>
-
+            <span className="contact-icon">🌐</span>
             <a
               href="https://www.oryabio.in"
               target="_blank"
@@ -168,20 +149,13 @@ const Footer = () => {
             >
               www.oryabio.in
             </a>
-
           </div>
 
-
           <div className="contact-item">
-
-            <span className="contact-icon">
-              📞
-            </span>
-
+            <span className="contact-icon">📞</span>
             <a href="tel:+917809903359">
               7809903359
             </a>
-
           </div>
 
         </div>
@@ -199,17 +173,37 @@ const Footer = () => {
 
         <div className="footer-bottom-links">
 
-          <Link to="/privacy-policy">
+          <Link
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   setPrivacyOpen(true);
+            // }}
+          >
             Privacy Policy
           </Link>
 
           <span>|</span>
 
-          <Link to="/terms">
-            Terms & Conditions
+          <Link
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   setTermsOpen(true);
+            // }}
+          >
+            Terms &amp; Conditions
           </Link>
 
         </div>
+
+        <PrivacyPolicyModal
+          isOpen={privacyOpen}
+          onClose={() => setPrivacyOpen(false)}
+        />
+
+        <TermsConditionsModal
+          isOpen={termsOpen}
+          onClose={() => setTermsOpen(false)}
+        />
 
       </div>
 

@@ -32,6 +32,7 @@ import {
   PackagePlus,
 } from "lucide-react";
 import DealerBanner from "./DealerBanner";
+import ProductCategories from "./ProductCategories";
 
 
 const Home = () => {
@@ -420,8 +421,9 @@ const certificates = [
 <BusinessBanner/>
 
       {/* ================= PRODUCT CATEGORIES ================= */}
+      <ProductCategories/>
 
- <section className="section">
+ {/* <section className="section">
 
         <div className="section-heading">
           <span className="leaf">🍃</span>
@@ -459,7 +461,7 @@ const certificates = [
 
         </div>
 
-      </section>
+      </section> */}
 
      
 
