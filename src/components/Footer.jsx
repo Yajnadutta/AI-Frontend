@@ -174,10 +174,10 @@ const Footer = () => {
         <div className="footer-bottom-links">
 
           <Link
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   setPrivacyOpen(true);
-            // }}
+            onClick={(e) => {
+              e.preventDefault();
+              setPrivacyOpen(true);
+            }}
           >
             Privacy Policy
           </Link>
@@ -185,10 +185,10 @@ const Footer = () => {
           <span>|</span>
 
           <Link
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   setTermsOpen(true);
-            // }}
+            onClick={(e) => {
+              e.preventDefault();
+              setTermsOpen(true);
+            }}
           >
             Terms &amp; Conditions
           </Link>
