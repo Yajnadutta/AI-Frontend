@@ -1,38 +1,47 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Leaf, Box, Soup, Sprout, Droplet, ArrowRight } from "lucide-react";
 import sustainable_packaging from "../../assets/sustainable-packaging.PNG"
 import natural_food from "../../assets/natural-food.PNG"
 import agri_waste from "../../assets/agri-waste.PNG"
 import sustainable_hydration from "../../assets/sustainable-hydration.PNG"
-
 const categories = [
   {
     image: sustainable_packaging,
     icon: Box,
     title: "Sustainable Packaging",
     desc: "Eco-friendly packaging for a plastic-free future.",
+    categoryId: "packaging", // matches CATEGORY_TABS id in ProductPage
   },
   {
     image: natural_food,
     icon: Soup,
     title: "Natural Food",
     desc: "Natural, healthy and traditional food products.",
+    categoryId: "food",
   },
   {
     image: agri_waste,
     icon: Sprout,
     title: "Agri-Waste Products",
     desc: "Turning agricultural waste into valuable products.",
+    categoryId: "agri",
   },
   {
     image: sustainable_hydration,
     icon: Droplet,
     title: "Sustainable Hydration",
     desc: "Eco-friendly hydration solutions for a healthier tomorrow.",
+    categoryId: "hydration",
   },
 ];
 
 export default function ProductCategories() {
+  const navigate = useNavigate();
+
+  const handleExplore = (categoryId) => {
+    navigate(`/products?tab=${categoryId}`);
+  };
   return (
     <div className="pc-wrap">
       <style>{`
@@ -198,6 +207,7 @@ export default function ProductCategories() {
         <hr className="pc-rule" />
       </div>
 
+    
       <div className="pc-grid">
         {categories.map((c) => {
           const Icon = c.icon;
@@ -213,7 +223,10 @@ export default function ProductCategories() {
               <div className="pc-body">
                 <h3 className="pc-card-title">{c.title}</h3>
                 <p className="pc-card-desc">{c.desc}</p>
-                <button className="pc-explore">
+                <button
+                  className="pc-explore"
+                  onClick={() => handleExplore(c.categoryId)}
+                >
                   Explore <ArrowRight />
                 </button>
               </div>

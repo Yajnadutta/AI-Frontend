@@ -1,66 +1,38 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import "../../styling/Home.css";
 import Header from "../Header";
 import Footer from "../Footer";
-import { Link } from "react-router-dom";
 import { useCart } from "../../components/context/CartContext";
 import "../../styling/products.css";
 import juteBagImage from "../../assets/jute_bag.png";
 import biodegradable_bag from "../../assets/biodegradable_bag.jpg";
 import paper_bag from "../../assets/paper_bag.jpg";
 import cloth_bag from "../../assets/cloth_bag.jpg";
+
+import leafIcon from "../../assets/leaf.png";
+import grainIcon from "../../assets/grain.png";
+import bottleIcon from "../../assets/bottle.png";
+import starIcon from "../../assets/star.png";
+import recycleIcon from "../../assets/recycle.png";
 /* ================= TOP-LEVEL CATEGORY TABS ================= */
 
 const CATEGORY_TABS = [
   { id: "packaging", label: "Sustainable Packaging", icon: "leaf" },
   { id: "food", label: "Natural & Traditional Food", icon: "grain" },
   { id: "hydration", label: "Sustainable Hydration", icon: "bottle" },
-  { id: "special", label: "Special Collection", icon: "star" },
   { id: "agri", label: "Agri-Waste Products", icon: "recycle" },
-  { id: "custom", label: "Custom Packaging Solutions", icon: "box" },
+    { id: "special", label: "Special Collection", icon: "star" },
+  // { id: "custom", label: "Custom Packaging Solutions", icon: "box" },
 ];
 
-const TAB_ICONS = {
-  leaf: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M12 21c-4-2-8-6-8-11a8 8 0 0 1 16 0c0 5-4 9-8 11Z" />
-      <path d="M12 21V10" />
-    </svg>
-  ),
-  grain: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M12 2c3 2 3 6 0 8-3-2-3-6 0-8Z" />
-      <path d="M12 10v12" />
-      <path d="M8 14c1.5 1 2.5 2 4 2M16 14c-1.5 1-2.5 2-4 2" />
-    </svg>
-  ),
-  bottle: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M10 2h4v3l2 2v13a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V7l2-2V2Z" />
-      <path d="M9 12h6" />
-    </svg>
-  ),
-  star: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="m12 2 2.9 6.3 6.9.7-5.1 4.7 1.5 6.8L12 17l-6.2 3.5 1.5-6.8L2.2 9l6.9-.7L12 2Z" />
-    </svg>
-  ),
-  recycle: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M7 19H4.8a2 2 0 0 1-1.7-3L6 11" />
-      <path d="M17 5h2.2a2 2 0 0 1 1.7 3L18 13" />
-      <path d="M8 5h8l3 5-3 5H8l-3-5 3-5Z" />
-    </svg>
-  ),
-  box: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M21 8 12 3 3 8l9 5 9-5Z" />
-      <path d="M3 8v9l9 5 9-5V8" />
-      <path d="M12 13v9" />
-    </svg>
-  ),
+const TAB_ICON_IMAGES = {
+  leaf: leafIcon,
+  grain: grainIcon,
+  bottle: bottleIcon,
+  star: starIcon,
+  recycle: recycleIcon,
 };
-
 /* ================= SUB-CATEGORIES ================= */
 
 const SUBCATEGORIES = {
@@ -155,55 +127,7 @@ function ProductCard({ product }) {
   };
 
   return (
-    // <article className="orya-card" data-tone={product.tone || "sand"}>
-    //   <div className="orya-card__media">
-    //     {ICONS[product.icon] || ICONS.bag}
-    //     <button
-    //       type="button"
-    //       className={`orya-card__wish${wishlisted ? " is-active" : ""}`}
-    //       aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-    //       onClick={() => setWishlisted((w) => !w)}
-    //     >
-    //       <svg viewBox="0 0 24 24" width="16" height="16" fill={wishlisted ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8">
-    //         <path d="M12 20s-7-4.4-9.5-8.6C.7 8 2 4.5 5.4 3.6 7.6 3 9.9 3.9 12 6.5 14.1 3.9 16.4 3 18.6 3.6 22 4.5 23.3 8 21.5 11.4 19 15.6 12 20 12 20Z" />
-    //       </svg>
-    //     </button>
-    //   </div>
-
-    //   <div className="orya-card__body">
-    //     <h3 className="orya-card__name">{product.name}</h3>
-    //     <p className="orya-card__desc">{product.desc}</p>
-    //     <p className="orya-card__price">
-    //       ₹{product.price} <span>/ {product.unit} onwards</span>
-    //     </p>
-
-    //     <div className="orya-card__actions">
-    //       {inCart ? (
-    //         <Link to="/cart" className="orya-btn orya-btn--solid">
-    //           Go to Cart
-    //         </Link>
-    //       ) : product.cta === "cart" ? (
-    //         <button type="button" className="orya-btn orya-btn--solid" onClick={handleAddToCart}>
-    //           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
-    //             <circle cx="9" cy="21" r="1.4" />
-    //             <circle cx="18" cy="21" r="1.4" />
-    //             <path d="M2 3h2l2.6 12.6a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6" />
-    //           </svg>
-    //           Add to Cart
-    //         </button>
-    //       ) : (
-    //         <a
-    //           className="orya-btn orya-btn--outline"
-    //           href={`https://wa.me/?text=${encodeURIComponent(`Hi ORYA, I'd like to enquire about ${product.name}.`)}`}
-    //           target="_blank"
-    //           rel="noreferrer"
-    //         >
-    //           Enquire Now
-    //         </a>
-    //       )}
-    //     </div>
-    //   </div>
-    // </article>
+    
     <div className="orya-card">
 
   {/* Heart at top of entire card */}
@@ -296,13 +220,23 @@ function ProductCard({ product }) {
 /* ================= PAGE ================= */
 
 const ProductPage = () => {
-  const [activeTab, setActiveTab] = useState("packaging");
+ const [activeTab, setActiveTab] = useState("packaging");
   const [activeSub, setActiveSub] = useState(null);
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState("popularity");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [openGroups, setOpenGroups] = useState(() => new Set([0]));
-
+  const [searchParams] = useSearchParams();
+   useEffect(() => {
+    const tabFromUrl = searchParams.get("tab");
+    const isValidTab = CATEGORY_TABS.some((t) => t.id === tabFromUrl);
+    if (isValidTab) {
+      setActiveTab(tabFromUrl);
+      setActiveSub(null);
+      setOpenGroups(new Set([0])); // reset sidebar accordion for the new tab
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [searchParams]);
   const subGroups = SUBCATEGORIES[activeTab] || [];
 
   const toggleGroup = (idx) => {
@@ -345,7 +279,7 @@ const ProductPage = () => {
 
       <div className="orya-root">
         {/* ================= TOP CATEGORY TABS ================= */}
-        <div className="orya-tabs" role="tablist" aria-label="Product categories">
+        {/* <div className="orya-tabs" role="tablist" aria-label="Product categories">
           {CATEGORY_TABS.map((t) => (
             <button
               key={t.id}
@@ -358,8 +292,27 @@ const ProductPage = () => {
               <span className="orya-tab__label">{t.label}</span>
             </button>
           ))}
-        </div>
-
+        </div> */}
+<div className="orya-tabs" role="tablist" aria-label="Product categories">
+  {CATEGORY_TABS.map((t) => (
+    <button
+      key={t.id}
+      role="tab"
+      aria-selected={activeTab === t.id}
+      className={`orya-tab${activeTab === t.id ? " is-active" : ""}`}
+      onClick={() => handleTabClick(t.id)}
+    >
+      <span
+        className="orya-tab__icon"
+        style={{
+          WebkitMaskImage: `url(${TAB_ICON_IMAGES[t.icon]})`,
+          maskImage: `url(${TAB_ICON_IMAGES[t.icon]})`,
+        }}
+      />
+      <span className="orya-tab__label">{t.label}</span>
+    </button>
+  ))}
+</div>
         <div className="orya-layout">
           {/* ================= MOBILE SUBCATEGORY TOGGLE ================= */}
           {subGroups.length > 0 && (

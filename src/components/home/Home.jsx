@@ -66,6 +66,13 @@ const heroSlides = [
     categoryId: "natural-food",
   },
 ];
+// Maps hero slide categoryId -> ProductPage CATEGORY_TABS id
+const HERO_TO_TAB_MAP = {
+  "plastic-alternatives": "packaging",
+  "bottles": "hydration",
+  "circular-materials": "agri",
+  "natural-food": "food",
+};
 const product_categories = [
   {
     id: "plastic-alternatives",
@@ -111,34 +118,7 @@ const certificates = [
   { id: 3, image: Certification_03, alt: "Certification 3" },
   { id: 4, image: Certification_04, alt: "Certification 4" },
 ];
-  const categories = [
-    {
-      title: "Sustainable Packaging",
-      image: "https://images.pexels.com/photos/12725398/pexels-photo-12725398.jpeg",
-      description: "Eco-friendly packaging for a plastic-free future.",
-    },
-    {
-      title: "Natural Food",
-      image: "https://images.pexels.com/photos/35974369/pexels-photo-35974369.jpeg",
-      description: "Natural, healthy and traditional food products.",
-    },
-    {
-      title: "Agri-Waste Products",
-      image: "https://images.pexels.com/photos/32405786/pexels-photo-32405786.jpeg",
-      description: "Turning agricultural waste into valuable products.",
-    },
-    {
-      title: "Sustainable Sourcing",
-      image: "https://images.pexels.com/photos/38384711/pexels-photo-38384711.jpeg",
-      description: "Responsibly sourced for a better tomorrow.",
-    },
-    // {
-    //   title: "Agriculture & Value Chain",
-    //   image: Slide1,
-    //   description: "Connecting farmers to markets and beyond.",
-    // },
-  ];
-
+ 
   const valueChain = [
     {
       icon: "🌱",
@@ -217,56 +197,53 @@ const certificates = [
     loop={true}
     className="hero-swiper"
   >
-    {heroSlides.map((slide, index) => (
-      <SwiperSlide key={index}>
-        <div className="hero-slide">
-          <img
-            src={slide.image}
-            alt={slide.title}
-            className="hero-image"
-          />
+   {heroSlides.map((slide, index) => {
+  const tabId = HERO_TO_TAB_MAP[slide.categoryId] || "packaging"; // fallback
+  return (
+    <SwiperSlide key={index}>
+      <div className="hero-slide">
+        <img src={slide.image} alt={slide.title} className="hero-image" />
+        <div className="hero-overlay"></div>
 
-          <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <h1>{slide.title}</h1>
+          <p className="hero-description">{slide.description}</p>
 
-          <div className="hero-content">
-            
+          <div className="hero-highlights">
+            {product_categories
+              .find((category) => category.id === slide.categoryId)
+              ?.highlights.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div className="hero-highlight" key={i}>
+                    <Icon size={22} strokeWidth={1.8} />
+                    <span>{item.text}</span>
+                  </div>
+                );
+              })}
+          </div>
 
-            <h1>{slide.title}</h1>
-
-            <p className="hero-description">{slide.description}</p>
-<div className="hero-highlights">
-              {product_categories
-                .find((category) => category.id === slide.categoryId)
-                ?.highlights.map((item, i) => {
-                  const Icon = item.icon;
-                  return (
-                    <div className="hero-highlight" key={i}>
-                      <Icon size={22} strokeWidth={1.8} />
-                      <span>{item.text}</span>
-                    </div>
-                  );
-                })}
-            </div>
-            <div className="hero-buttons">
-              <Link to="/products" className="btn btn-primary">
-                Explore Products
-              </Link>
-              <a
-                href="https://wa.me/917809903359"
-                className="btn btn-whatsapp"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Chat on WhatsApp
-              </a>
-              <Link to="/contact#send-requirement" className="btn btn-whatsapp">
-                Request a Quote
-              </Link>
-            </div>
+          <div className="hero-buttons">
+            <Link to={`/products?tab=${tabId}`} className="btn btn-primary">
+              Explore Products
+            </Link>
+            <a
+              href="https://wa.me/917809903359"
+              className="btn btn-whatsapp"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Chat on WhatsApp
+            </a>
+            <Link to="/contact#send-requirement" className="btn btn-whatsapp">
+              Request a Quote
+            </Link>
           </div>
         </div>
-      </SwiperSlide>
-    ))}
+      </div>
+    </SwiperSlide>
+  );
+})}
   </Swiper>
 </section>
 
