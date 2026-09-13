@@ -15,6 +15,16 @@ import blogImage1 from "../../assets/blog1.png";
 import blogImage2 from "../../assets/material_03.png";
 import blogImage3 from "../../assets/blog3.png";
 
+// ---- PDF documents ----
+// Place these PDFs in src/assets/documents/ (or update the path below to match
+// wherever you saved them). Importing them lets the bundler fingerprint/hash
+// the filenames and gives you a working URL to link to.
+import productCataloguePdf from "../../assets/documents/ORYA_Product_Catalogue_R0.pdf";
+import productBrochuresPdf from "../../assets/documents/ORYA_Product_Brochures_R0.pdf";
+import sustainabilityInfoPdf from "../../assets/documents/ORYA_Sustainability_Information_R0.pdf";
+import dealerPartnershipPdf from "../../assets/documents/ORYA_Dealer_Partnership_Information_R0.pdf";
+import specSheetsPdf from "../../assets/documents/ORYA_Product_Specification_Sheets_R0.pdf";
+
 /* ------------------------------------------------------------------ */
 /* Data                                                                 */
 /* ------------------------------------------------------------------ */
@@ -49,11 +59,46 @@ const BLOG_POSTS = [
 
 const DOWNLOADS = [
   // { icon: Building2, color: "#64748b", bg: "#eef1f4", title: "Company Profile" },
-  { icon: FileText, color: "#ea8a1f", bg: "#fdf0e2", title: "Product Catalogue" },
-  { icon: FileText, color: "#2563eb", bg: "#e8eefd", title: "Product Brochures" },
-  { icon: FileText, color: "#16a34a", bg: "#e8f5ec", title: "Sustainability Information" },
-  { icon: FileText, color: "#7c3aed", bg: "#f0e9fd", title: "Dealer / Partnership Information" },
-  { icon: FileText, color: "#c2410c", bg: "#fbe9de", title: "Product Specification Sheets" },
+  {
+    icon: FileText,
+    color: "#ea8a1f",
+    bg: "#fdf0e2",
+    title: "Product Catalogue",
+    file: productCataloguePdf,
+    fileName: "ORYA_Product_Catalogue_R0.pdf",
+  },
+  {
+    icon: FileText,
+    color: "#2563eb",
+    bg: "#e8eefd",
+    title: "Product Brochures",
+    file: productBrochuresPdf,
+    fileName: "ORYA_Product_Brochures_R0.pdf",
+  },
+  {
+    icon: FileText,
+    color: "#16a34a",
+    bg: "#e8f5ec",
+    title: "Sustainability Information",
+    file: sustainabilityInfoPdf,
+    fileName: "ORYA_Sustainability_Information_R0.pdf",
+  },
+  {
+    icon: FileText,
+    color: "#7c3aed",
+    bg: "#f0e9fd",
+    title: "Dealer / Partnership Information",
+    file: dealerPartnershipPdf,
+    fileName: "ORYA_Dealer_Partnership_Information_R0.pdf",
+  },
+  {
+    icon: FileText,
+    color: "#c2410c",
+    bg: "#fbe9de",
+    title: "Product Specification Sheets",
+    file: specSheetsPdf,
+    fileName: "ORYA_Product_Specification_Sheets_R0.pdf",
+  },
 ];
 
 const FAQS = [
@@ -227,6 +272,7 @@ export default function ResourcesSection() {
           border-radius: 7px;
           border: none;
           cursor: pointer;
+          text-decoration: none;
           transition: background 0.2s ease, transform 0.15s ease;
         }
         .featured__cta:hover { background: #0f2b19; }
@@ -494,9 +540,15 @@ export default function ResourcesSection() {
                   </li>
                 ))}
               </ul>
-              <button className="featured__cta">
+              <a
+                className="featured__cta"
+                href={productCataloguePdf}
+                download="ORYA_Product_Catalogue_R0.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Download Catalogue <ArrowRight />
-              </button>
+              </a>
             </div>
             <div className="featured__media">
               <img src={catalogueCover} alt="ORYA Bio-Solutions product catalogue" />
@@ -538,15 +590,21 @@ export default function ResourcesSection() {
               Access useful documents and information about ORYA products,
               solutions and business opportunities.
             </p>
-            {DOWNLOADS.map(({ icon: Icon, color, bg, title }) => (
+            {DOWNLOADS.map(({ icon: Icon, color, bg, title, file, fileName }) => (
               <div className="download-row" key={title}>
                 <div className="download-row__icon" style={{ background: bg }}>
                   <Icon style={{ color }} />
                 </div>
                 <span className="download-row__title">{title}</span>
-                <button className="download-row__action">
+                <a
+                  className="download-row__action"
+                  href={file}
+                  download={fileName}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <span>Download PDF</span> <Download />
-                </button>
+                </a>
               </div>
             ))}
           </div>

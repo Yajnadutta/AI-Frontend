@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PrivacyPolicyModal from "./PrivacyPolicyModal";
 import TermsConditionsModal from "./TermsConditionsModal";
 import "../styling/Footer.css";
-
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import oryaLogo from "../assets/footer-logo.png";
 
 const Footer = () => {
@@ -35,7 +35,7 @@ const Footer = () => {
           </p>
 
           {/* SOCIAL MEDIA */}
-          <div className="footer-social">
+          {/* <div className="footer-social">
 
             <a href="#" aria-label="Facebook" target="_blank" rel="noreferrer">
               f
@@ -49,8 +49,22 @@ const Footer = () => {
               in
             </a>
 
-          </div>
-
+          </div> */}
+{/* SOCIAL MEDIA */}
+<div className="footer-social">
+  <a href="#" aria-label="Facebook" target="_blank" rel="noreferrer">
+    <FaFacebookF size={16} />
+  </a>
+  <a href="https://www.instagram.com/oryabio?stkn=dDlqOWQxOGFpdzY4" aria-label="Instagram" target="_blank" rel="noreferrer">
+    <FaInstagram size={16} />
+  </a>
+  <a href="#" aria-label="LinkedIn" target="_blank" rel="noreferrer">
+    <FaLinkedinIn size={16} />
+  </a>
+  <a href="#" aria-label="YouTube" target="_blank" rel="noreferrer">
+    <FaYoutube size={16} />
+  </a>
+</div>
         </div>
 
 

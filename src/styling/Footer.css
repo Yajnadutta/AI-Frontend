@@ -97,7 +97,7 @@
    SOCIAL MEDIA
 ========================================= */
 
-.footer-social {
+/* .footer-social {
   display: flex;
 
   align-items: center;
@@ -135,9 +135,44 @@
   transform: translateY(-3px);
 
   background: #dcefd9;
+} */
+
+
+
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
 }
 
+.footer-social a {
+  width: 34px;
+  height: 34px;
 
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #00552b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.footer-social a svg {
+  display: block;
+}
+
+.footer-social a:hover {
+  transform: translateY(-3px);
+  background: #dcefd9;
+}
 /* =========================================
    FOOTER COLUMNS
 ========================================= */
